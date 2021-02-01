@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace GraduationProject.Editor
+namespace Delirium.Editor
 {
 	public class uGUITools : MonoBehaviour
 	{

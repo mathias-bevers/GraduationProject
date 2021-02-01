@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GraduationProject.Tools
+namespace Delirium.Tools
 {
 	/// <summary>
 	/// When there should only be one instance of a MonoBehaviourExtensions class it can inherit from Singleton.

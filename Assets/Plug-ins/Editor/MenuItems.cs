@@ -1,11 +1,11 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace GraduationProject.Editor
+namespace HBO_Intake.Editor
 {
 	public class MenuItems : MonoBehaviour
 	{
-		[MenuItem("GameObject/HBO Intake/UI/Menu", false, 10)]
+		[MenuItem("GameObject/Delirium/UI/Menu", false, 10)]
 		private static void CreateMenuObject(MenuCommand menuCommand)
 		{
 			var menuRoot = new GameObject("Menu");
