@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Delirium.Editor
 {
-	public class QuickTools : EditorWindow
+	public class 
+		QuickTools : EditorWindow
 	{
 		private Color color;
 		private string emptyName;
@@ -25,24 +26,6 @@ namespace Delirium.Editor
 				foreach (GameObject gameObject in Selection.gameObjects) { gameObject.transform.SetParent(parentObject.transform); }
 
 				groupName = string.Empty;
-			}
-
-			EditorGUILayout.EndHorizontal();
-			#endregion
-
-			#region Apply color.
-			EditorGUILayout.BeginHorizontal();
-
-			color = EditorGUILayout.ColorField("Color", color);
-
-			if (GUILayout.Button("Apply"))
-			{
-				foreach (GameObject gameObject in Selection.gameObjects)
-				{
-					Renderer renderer = gameObject.GetComponent<MeshRenderer>();
-
-					if (renderer != null) { renderer.material.color = color; }
-				}
 			}
 
 			EditorGUILayout.EndHorizontal();
@@ -93,6 +76,20 @@ namespace Delirium.Editor
 
 					gameObject.name = $"{gameObjects[i].name}_{i}";
 					gameObject.transform.SetAsLastSibling();
+				}
+			}
+
+			EditorGUILayout.EndHorizontal();
+			#endregion
+			
+			#region Log components
+			EditorGUILayout.BeginHorizontal();
+
+			if (GUILayout.Button("Log components on GameObject"))
+			{
+				foreach (Component component in Selection.activeGameObject.GetComponents<Component>())
+				{
+					Debug.Log(component.GetType().Name);
 				}
 			}
 

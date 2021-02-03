@@ -8,14 +8,13 @@ namespace Delirium.Tools
 	{
 		private readonly List<Menu> menus = new List<Menu>();
 
-		public int OpenMenus => menus.Count(menu => menu.IsOpen);
-		
+		public int OpenMenuCount => menus.Count(menu => menu.IsOpen && !menu.IsHUD);
+
 		public void RegisterMenu(Menu menu)
 		{
 			if (menus.Contains(menu)) { return; }
 
 			menus.Add(menu);
-			Debug.Log($"Registered {menu.GetType().Name}");
 		}
 
 		public T OpenMenu<T>() where T : Menu
@@ -44,6 +43,27 @@ namespace Delirium.Tools
 			foreach (T menuOfTypeT in menusOfTypeT)
 			{
 				if (!menuOfTypeT.IsOpen) { continue; }
+
+				menuOfTypeT.Close();
+				return menuOfTypeT;
+			}
+
+			return null;
+		}
+
+		public T ToggleMenu<T>() where T : Menu
+		{
+			T[] menusOfTypeT = menus.OfType<T>().ToArray();
+
+			if (menusOfTypeT.Length == 0) { return null; }
+
+			foreach (T menuOfTypeT in menusOfTypeT)
+			{
+				if (!menuOfTypeT.IsOpen)
+				{
+					menuOfTypeT.Open();
+					return menuOfTypeT;
+				}
 
 				menuOfTypeT.Close();
 				return menuOfTypeT;
