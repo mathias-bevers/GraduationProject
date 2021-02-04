@@ -36,17 +36,14 @@ namespace Delirium
 			Rotate();
 		}
 
-		private void FixedUpdate()
-		{
-			Move();
-		}
+		private void FixedUpdate() { Move(); }
 
 
 		private void Move()
 		{
 			Vector3 movement = cachedTransform.right * Input.GetAxis("Horizontal") + cachedTransform.forward * Input.GetAxis("Vertical");
 			movement.Normalize();
-			
+
 			rigidbody.position += movement * Time.deltaTime * movementSpeed;
 
 			if (Input.GetAxis("Jump") > 0 && IsGrounded) { rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); }
