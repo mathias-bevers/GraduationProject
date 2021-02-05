@@ -3,7 +3,7 @@
 namespace Delirium
 {
 	[CreateAssetMenu(fileName = "Inventory item", menuName = "Delirium/Inventory item", order = 0)]
-	public class InventoryItemTemplate : ScriptableObject
+	public class InventoryItemData : ScriptableObject
 	{
 		[SerializeField] private new string name;
 		[SerializeField] private Sprite sprite;

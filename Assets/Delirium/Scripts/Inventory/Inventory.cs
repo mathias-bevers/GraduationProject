@@ -5,9 +5,9 @@ namespace Delirium
 {
 	public class Inventory
 	{
-		public Dictionary<InventoryItemTemplate, int> Items { get; } = new Dictionary<InventoryItemTemplate, int>();
+		public Dictionary<InventoryItemData, int> Items { get; } = new Dictionary<InventoryItemData, int>();
 
-		public void AddItem(InventoryItemTemplate item)
+		public void AddItem(InventoryItemData item)
 		{
 			if (!Items.ContainsKey(item))
 			{
@@ -23,6 +23,6 @@ namespace Delirium
 			Items[item]++;
 		}
 
-		public void RemoveItems(InventoryItemTemplate item) { }
+		public void RemoveItems(InventoryItemData item) { }
 	}
 }

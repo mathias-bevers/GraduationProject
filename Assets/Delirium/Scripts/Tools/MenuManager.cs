@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Delirium.Tools
 {
@@ -71,5 +70,7 @@ namespace Delirium.Tools
 
 			return null;
 		}
+
+		public T GetMenu<T>() where T : Menu => menus.OfType<T>().First();
 	}
 }

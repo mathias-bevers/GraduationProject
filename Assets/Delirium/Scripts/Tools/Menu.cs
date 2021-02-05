@@ -10,9 +10,9 @@ namespace Delirium.Tools
 		private Transform content;
 
 		protected virtual void Start()
-		{ 
+		{
 			content = transform.GetChild(0);
-			Close();
+			if (!IsHUD) { Close(); }
 
 			MenuManager.Instance.RegisterMenu(this);
 		}

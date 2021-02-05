@@ -1,4 +1,6 @@
-﻿using Delirium.Tools;
+﻿using Delirium.Exceptions;
+using Delirium.Interfaces;
+using Delirium.Tools;
 using UnityEngine;
 
 namespace Delirium
@@ -8,6 +10,7 @@ namespace Delirium
 		[SerializeField] private float pickupReach = 1.5f;
 
 		public Inventory Inventory { get; } = new Inventory();
+		private IHighlightable currentHighlightable;
 
 		private Transform cameraTransform;
 
@@ -17,18 +20,44 @@ namespace Delirium
 		{
 			if (Input.GetKeyUp(KeyCode.Tab)) { MenuManager.Instance.ToggleMenu<InventoryMenu>(); }
 
-			if (Input.GetMouseButtonUp(0))
+			RaycastCheck();
+		}
+
+		private void RaycastCheck()
+		{
+			Debug.DrawRay(cameraTransform.position, cameraTransform.forward * pickupReach, Color.green);
+			if (!Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, pickupReach))
 			{
-				Debug.DrawRay(cameraTransform.position, cameraTransform.forward, Color.green, 0.5f);
-				if (!Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, pickupReach)) { return; }
-				
-				var inventoryItem = hit.transform.gameObject.GetComponent<InventoryItem>();
+				currentHighlightable?.EndHighlight();
+				currentHighlightable = null;
+				return;
+			}
 
-				if (inventoryItem == null) { return; }
+			var highlightable = hit.transform.gameObject.GetComponent<IHighlightable>();
 
+			if (highlightable != null)
+			{
+				highlightable.Highlight();
+				currentHighlightable = highlightable;
+			}
+			else
+			{
+				currentHighlightable?.EndHighlight();
+				currentHighlightable = null;
+			}
+
+			if (!Input.GetMouseButtonUp(0)) { return; }
+
+			var inventoryItem = hit.transform.gameObject.GetComponent<InventoryItemBehaviour>();
+
+			if (inventoryItem == null) { return; }
+
+			try
+			{
 				Inventory.AddItem(inventoryItem.Data);
 				Destroy(inventoryItem.gameObject);
 			}
+			catch (AddingItemFailed) { MenuManager.Instance.GetMenu<GeneralHudMenu>()?.ShowPopup($"Reached max capacity of {inventoryItem.Data.Name}", GeneralHudMenu.PopupLevel.Waring); }
 		}
 	}
 }

@@ -27,7 +27,7 @@ namespace Delirium
 
 			foreach (Transform child in grid) { Destroy(child.gameObject); }
 
-			foreach (KeyValuePair<InventoryItemTemplate, int> kvp in inventory.Items)
+			foreach (KeyValuePair<InventoryItemData, int> kvp in inventory.Items)
 			{
 				GameObject inventoryObject = Instantiate(uiItemPrefab, grid, true);
 

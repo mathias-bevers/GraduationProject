@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace HBO_Intake.Editor
+namespace Delirium.Editor
 {
 	public class MenuItems : MonoBehaviour
 	{
@@ -21,8 +21,9 @@ namespace HBO_Intake.Editor
 			var contentRectTransform = menuContent.AddComponent<RectTransform>();	
 			contentRectTransform.anchorMin = Vector2.zero;
 			contentRectTransform.anchorMax = Vector2.one;
-			contentRectTransform.sizeDelta = Vector2.zero;
+			contentRectTransform.sizeDelta = Vector2.one;
 			contentRectTransform.anchoredPosition = Vector2.zero;
+			contentRectTransform.localScale = Vector3.one;
 			
 			Selection.activeObject = menuRoot;
 		}
