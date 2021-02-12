@@ -20,7 +20,7 @@ public class PopupMenu : Menu
 
 	public void ShowPopup(string message, PopupLevel level)
 	{
-		GameObject popupGameObject = Instantiate(popupPrefab, transform);
+		GameObject popupGameObject = Instantiate(popupPrefab, grid);
 
 		var textMeshProUGUI = popupGameObject.GetComponentInChildren<TextMeshProUGUI>();
 		textMeshProUGUI.SetText(message);

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Delirium.Tools;
+using UnityEngine;
 
 namespace Delirium
 {
@@ -25,14 +26,12 @@ namespace Delirium
 			cameraTransform = GetComponentInChildren<Camera>().transform;
 			rigidbody = GetComponent<Rigidbody>();
 			collider = GetComponent<Collider>();
-
-			Cursor.visible = false;
-			Cursor.lockState = CursorLockMode.Locked;
 		}
 
 		private void Update()
 		{
-			//TODO: Add a can move 
+			if (MenuManager.Instance.IsAnyOpen) { return; }
+
 			Rotate();
 		}
 

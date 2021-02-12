@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Delirium/Scenes/MainMenu.unity
+    guid: 1ea6f04c96242384d8c2c5623f99e450
+  - enabled: 1
+    path: Assets/Delirium/Scenes/GameScene.unity
+    guid: 780048d0ff2b9ef4091c8a3e8af5ffb7
   m_configObjects: {}

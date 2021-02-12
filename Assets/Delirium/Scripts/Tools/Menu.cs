@@ -7,12 +7,13 @@ namespace Delirium.Tools
 		public bool IsOpen { get; private set; }
 		public bool IsHUD { get; protected set; }
 
-		private Transform content;
+		protected Transform Content { get; private set; }
 
 		protected virtual void Start()
 		{
-			content = transform.GetChild(0);
-			if (!IsHUD) { Close(); }
+			Content = transform.GetChild(0);
+			if (IsHUD) { Open(); }
+			else { Close(); }
 
 			MenuManager.Instance.RegisterMenu(this);
 		}
@@ -28,7 +29,7 @@ namespace Delirium.Tools
 				return;
 			}
 
-			content.gameObject.SetActive(true);
+			Content.gameObject.SetActive(true);
 			IsOpen = true;
 		}
 
@@ -40,7 +41,7 @@ namespace Delirium.Tools
 				return;
 			}
 
-			content.gameObject.SetActive(false);
+			Content.gameObject.SetActive(false);
 			IsOpen = false;
 		}
 	}

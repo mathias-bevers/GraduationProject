@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Delirium
 {
-	public class InventoryItemBehaviour : MonoBehaviour, IHighlightable
+	public class InventoryWorldItem : MonoBehaviour, IHighlightable
 	{
 		private static readonly int _outline = Shader.PropertyToID("_Outline");
 

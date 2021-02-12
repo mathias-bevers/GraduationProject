@@ -1,4 +1,5 @@
-﻿using Delirium.Exceptions;
+﻿using System;
+using Delirium.Exceptions;
 using Delirium.Interfaces;
 using Delirium.Tools;
 using UnityEngine;
@@ -14,18 +15,29 @@ namespace Delirium
 
 		private Transform cameraTransform;
 
-		private void Awake() { cameraTransform = GetComponentInChildren<Camera>().transform; }
+		private void Awake()
+		{
+			cameraTransform = GetComponentInChildren<Camera>().transform;
+			Inventory.UnlockedRecipes.Add(Resources.Load("RecipeTest0") as CraftingRecipeData);
+		}
+
+		private void Start() { EventCollection.Instance.UpdateInventoryEvent?.Invoke(Inventory); }
 
 		private void Update()
 		{
-			if (Input.GetKeyUp(KeyCode.Tab)) { MenuManager.Instance.ToggleMenu<InventoryMenu>(); }
+			if (Input.GetKeyUp(KeyCode.Tab))
+			{
+				MenuManager.Instance.ToggleMenu<InventoryMenu>();
+				MenuManager.Instance.ToggleMenu<GeneralHudMenu>();
+			}
+
+			if (MenuManager.Instance.IsAnyOpen) { return; }
 
 			RaycastCheck();
 		}
 
 		private void RaycastCheck()
 		{
-			Debug.DrawRay(cameraTransform.position, cameraTransform.forward * pickupReach, Color.green);
 			if (!Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, pickupReach))
 			{
 				currentHighlightable?.EndHighlight();
@@ -48,16 +60,17 @@ namespace Delirium
 
 			if (!Input.GetMouseButtonUp(0)) { return; }
 
-			var inventoryItem = hit.transform.gameObject.GetComponent<InventoryItemBehaviour>();
+			var inventoryItem = hit.transform.gameObject.GetComponent<InventoryWorldItem>();
 
 			if (inventoryItem == null) { return; }
 
 			try
 			{
 				Inventory.AddItem(inventoryItem.Data);
+				MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup($"Picked up {inventoryItem.Data.Name}", PopupMenu.PopupLevel.Info);
 				Destroy(inventoryItem.gameObject);
 			}
-			catch (AddingItemFailed) { MenuManager.Instance.GetMenu<GeneralHudMenu>()?.ShowPopup($"Reached max capacity of {inventoryItem.Data.Name}", GeneralHudMenu.PopupLevel.Waring); }
+			catch (AddingInventoryItemFailed e) { MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup(e.Message, PopupMenu.PopupLevel.Waring); }
 		}
 	}
 }
