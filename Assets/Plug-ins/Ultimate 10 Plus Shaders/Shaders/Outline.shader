@@ -44,6 +44,7 @@ Shader "Ultimate 10+ Shaders/Outline"
     SubShader
     {
         Tags { "RenderType"="Geometry" "Queue"="Transparent" }
+        
         LOD 200
         Cull [_Cull]
 
