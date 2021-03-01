@@ -1,44 +1,47 @@
-﻿using Delirium;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class FieldOfView : MonoBehaviour
+namespace Delirium.AI
 {
-	[SerializeField] private float viewRadius;
-	[SerializeField, Range(0.0f, 360.0f)] private float viewAngle;
-	[SerializeField] private LayerMask targetMask;
-	[SerializeField] private LayerMask obstacleMask;
-
-	public float ViewRadius => viewRadius;
-	public float ViewAngle => viewAngle;
-
-	public Player FindPlayer()
+	public class FieldOfView : MonoBehaviour
 	{
-		Collider[] targets = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+		[SerializeField] private float viewRadius;
+		[SerializeField, Range(0.0f, 360.0f)] private float viewAngle;
+		[SerializeField] private LayerMask targetMask;
+		[SerializeField] private LayerMask obstacleMask;
 
-		foreach (Collider target in targets)
+		public Player TargetPlayer { get; set; }
+		public float ViewRadius => viewRadius;
+		public float ViewAngle => viewAngle;
+
+		public Player FindPlayer()
 		{
-			Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
+			Collider[] targets = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
-			if (Vector3.Angle(transform.forward, directionToTarget) > viewAngle / 2) { continue; }
+			foreach (Collider target in targets)
+			{
+				Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
 
-			float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
+				if (Vector3.Angle(transform.forward, directionToTarget) > viewAngle / 2) { continue; }
 
-			if (Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask)) { continue; }
+				float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
-			var player = target.GetComponent<Player>();
+				if (Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask)) { continue; }
 
-			if (player == null) { continue; }
+				var player = target.GetComponent<Player>();
 
-			return player;
+				if (player == null) { continue; }
+
+				return player;
+			}
+
+			return null;
 		}
 
-		return null;
-	}
+		public Vector3 DirectionFormAngle(float angleInDegrees, bool isGlobal)
+		{
+			if (!isGlobal) { angleInDegrees += transform.eulerAngles.y; }
 
-	public Vector3 DirectionFormAngle(float angleInDegrees, bool isGlobal)
-	{
-		if (!isGlobal) { angleInDegrees += transform.eulerAngles.y; }
-
-		return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+			return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+		}
 	}
 }

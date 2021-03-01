@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using Delirium.AI;
+using UnityEditor;
 using UnityEngine;
 
 namespace Delirium.Editor
@@ -23,7 +24,7 @@ namespace Delirium.Editor
 			if (player == null) { return; }
 
 			Handles.color = Color.red;
-			Handles.DrawLine(fieldOfView.transform.position, player.transform.position);
+			Handles.DrawLine(fieldOfView.transform.position, fieldOfView.TargetPlayer.transform.position);
 		}
 	}
 }
