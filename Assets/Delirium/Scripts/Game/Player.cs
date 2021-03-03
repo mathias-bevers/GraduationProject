@@ -24,6 +24,12 @@ namespace Delirium
 				MenuManager.Instance.ToggleMenu<InventoryMenu>();
 				MenuManager.Instance.ToggleMenu<GeneralHudMenu>();
 			}
+
+			if (Input.GetKeyUp(KeyCode.Escape))
+			{
+				MenuManager.Instance.CloseMenu<GeneralHudMenu>();
+				MenuManager.Instance.OpenMenu<PauseMenu>();
+			}
 		}
 	}
 }

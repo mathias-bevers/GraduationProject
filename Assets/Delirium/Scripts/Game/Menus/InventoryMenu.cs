@@ -24,7 +24,7 @@ namespace Delirium
 		private void Awake() { EventCollection.Instance.UpdateInventoryEvent.AddListener(OnUpdateInventory); }
 
 		public override bool CanBeClosed() => true;
-		public override bool CanBeOpened() => true;
+		public override bool CanBeOpened() => !MenuManager.Instance.IsAnyOpen;
 
 		public override void Open()
 		{
