@@ -24,7 +24,7 @@ namespace Delirium.Editor
 			if (player == null) { return; }
 
 			Handles.color = Color.red;
-			Handles.DrawLine(fieldOfView.transform.position, fieldOfView.TargetPlayer.transform.position);
+			Handles.DrawLine(fieldOfView.transform.position, player.transform.position);
 		}
 	}
 }

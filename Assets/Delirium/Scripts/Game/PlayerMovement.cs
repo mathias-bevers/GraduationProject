@@ -16,6 +16,7 @@ namespace Delirium
 
 		private new Collider collider;
 		private float cameraRotationX;
+		private float cameraRotationY;
 		private new Rigidbody rigidbody;
 		private Transform cachedTransform;
 		private Transform cameraTransform;
@@ -40,7 +41,7 @@ namespace Delirium
 
 		private void Move()
 		{
-			Vector3 movement = cachedTransform.right * Input.GetAxis("Horizontal") + cachedTransform.forward * Input.GetAxis("Vertical");
+			Vector3 movement = cameraTransform.right * Input.GetAxis("Horizontal") + cameraTransform.forward * Input.GetAxis("Vertical");
 			movement.Normalize();
 
 			rigidbody.position += movement * Time.deltaTime * movementSpeed;
@@ -50,11 +51,11 @@ namespace Delirium
 
 		private void Rotate()
 		{
-			transform.Rotate(Vector3.up * (Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime));
-
+			cameraRotationY += Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
 			cameraRotationX -= Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 			cameraRotationX = Mathf.Clamp(cameraRotationX, -90.0f, 90.0f);
-			cameraTransform.localRotation = Quaternion.Euler(cameraRotationX, 0f, 0f);
+			
+			cameraTransform.localRotation = Quaternion.Euler(cameraRotationX, cameraRotationY, 0f);
 		}
 	}
 }

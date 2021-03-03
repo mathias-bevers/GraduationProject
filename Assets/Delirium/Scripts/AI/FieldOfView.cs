@@ -8,8 +8,7 @@ namespace Delirium.AI
 		[SerializeField, Range(0.0f, 360.0f)] private float viewAngle;
 		[SerializeField] private LayerMask targetMask;
 		[SerializeField] private LayerMask obstacleMask;
-
-		public Player TargetPlayer { get; set; }
+		
 		public float ViewRadius => viewRadius;
 		public float ViewAngle => viewAngle;
 

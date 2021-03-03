@@ -14,7 +14,7 @@ namespace Delirium
 		{
 			if (!holdingInventory.CanBeCrafted(data))
 			{
-				MenuManager.Instance.GetMenu<PopupMenu>().ShowPopup("You don't have enough items to craft this", PopupMenu.PopupLevel.Error);
+				MenuManager.Instance.GetMenu<PopupMenu>().ShowPopup($"You don't have enough items to craft {data.Result.Name}", PopupMenu.PopupLevel.Error);
 				return;
 			}
 

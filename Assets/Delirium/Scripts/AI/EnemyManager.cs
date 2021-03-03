@@ -9,6 +9,8 @@ namespace Delirium.AI
 	{
 		private List<EnemyAI> registeredEnemies = new List<EnemyAI>();
 
+		private void Start() { StartCoroutine(UpdateEnemyStates(0.25f)); }
+
 		public void RegisterEnemy(EnemyAI enemy)
 		{
 			if (registeredEnemies.Contains(enemy))
@@ -16,13 +18,8 @@ namespace Delirium.AI
 				Debug.Log("This enemy already exists");
 				return;
 			}
-			
-			registeredEnemies.Add(enemy);
-		}
 
-		private void Start()
-		{
-			StartCoroutine(UpdateEnemyStates(0.25f));
+			registeredEnemies.Add(enemy);
 		}
 
 		private IEnumerator UpdateEnemyStates(float delay)
@@ -30,10 +27,7 @@ namespace Delirium.AI
 			while (true)
 			{
 				yield return new WaitForSeconds(delay);
-				foreach (EnemyAI registeredEnemy in registeredEnemies)
-				{
-					registeredEnemy.UpdateState();
-				}
+				foreach (EnemyAI registeredEnemy in registeredEnemies) { registeredEnemy.UpdateState(); }
 			}
 		}
 	}
