@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f803d2c32f07402a98c92e8142dfbc10
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - uiItemPrefab: {fileID: 1037121257600542537, guid: b196fba6e32240b469118a95dc7f5d3e,
+      type: 3}
+  - itemGrid: {instanceID: 0}
+  - recipeGrid: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
