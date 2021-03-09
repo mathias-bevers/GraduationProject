@@ -9,7 +9,7 @@ namespace Delirium
 		public Inventory Inventory { get; } = new Inventory();
 		public Health Health { get; } = new Health(100);
 
-		private void Awake() { Inventory.UnlockedRecipes.Add(Resources.Load("RecipeTest0") as CraftingRecipeData); }
+		private void Awake() { Inventory.UnlockedRecipes.Add(AssetManager.Instance.StartRecipe); }
 
 		private void Start()
 		{

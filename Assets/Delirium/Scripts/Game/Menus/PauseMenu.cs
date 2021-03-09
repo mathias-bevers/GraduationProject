@@ -17,8 +17,8 @@ namespace Delirium
 			continueButton.onClick.AddListener(
 				() =>
 				{
-					MenuManager.Instance.OpenMenu<GeneralHudMenu>();
 					Close();
+					MenuManager.Instance.OpenMenu<GeneralHudMenu>();
 				}
 			);
 		}
