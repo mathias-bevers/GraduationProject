@@ -11,6 +11,7 @@ namespace Delirium
 		[SerializeField] private float movementSpeed;
 		[SerializeField] private float jumpForce;
 		[SerializeField] private float mouseSensitivity;
+		[SerializeField, Range(1.0f, 2.0f)] private float sprintMultiplier;
 
 		private bool IsGrounded => Physics.Raycast(cachedTransform.position, Vector3.down, collider.bounds.extents.y + 0.01f);
 
@@ -44,7 +45,7 @@ namespace Delirium
 			Vector3 movement = cameraTransform.right * Input.GetAxis("Horizontal") + cameraTransform.forward * Input.GetAxis("Vertical");
 			movement.Normalize();
 
-			rigidbody.position += movement * Time.deltaTime * movementSpeed;
+			rigidbody.position += movement * Time.deltaTime * movementSpeed * (Input.GetAxis("Sprint") > 0 ? sprintMultiplier : 1);
 
 			if (Input.GetAxis("Jump") > 0 && IsGrounded) { rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); }
 		}
@@ -54,7 +55,7 @@ namespace Delirium
 			cameraRotationY += Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
 			cameraRotationX -= Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 			cameraRotationX = Mathf.Clamp(cameraRotationX, -90.0f, 90.0f);
-			
+
 			cameraTransform.localRotation = Quaternion.Euler(cameraRotationX, cameraRotationY, 0f);
 		}
 	}
