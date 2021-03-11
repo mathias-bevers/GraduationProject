@@ -1,4 +1,5 @@
-﻿using Delirium.Events;
+﻿using System;
+using Delirium.Events;
 using Delirium.Tools;
 using UnityEngine;
 
@@ -8,8 +9,13 @@ namespace Delirium
 	{
 		public Inventory Inventory { get; } = new Inventory();
 		public Health Health { get; } = new Health(100);
-
-		private void Awake() { Inventory.UnlockedRecipes.Add(AssetManager.Instance.StartRecipe); }
+		public Sanity Sanity { get; private set; }
+		
+		private void Awake()
+		{
+			Inventory.UnlockedRecipes.Add(AssetManager.Instance.StartRecipe);
+			Sanity = GetComponent<Sanity>();
+		}
 
 		private void Start()
 		{
@@ -31,5 +37,7 @@ namespace Delirium
 				MenuManager.Instance.OpenMenu<PauseMenu>();
 			}
 		}
+
+		
 	}
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Delirium.Events;
+﻿using Delirium.Events;
 using Delirium.Tools;
 using TMPro;
 using UnityEngine;
@@ -10,10 +9,12 @@ namespace Delirium
 	public class GeneralHudMenu : Menu
 	{
 		[SerializeField] private GameObject healthBar;
+		[SerializeField] private GameObject sanityBar;
 
 		private void Awake()
 		{
 			EventCollection.Instance.HealthChangedEvent.AddListener(OnHealthChanged);
+			EventCollection.Instance.SanityChangedEvent.AddListener(OnSanityChanged);
 		}
 
 		protected override void Start()
@@ -21,6 +22,7 @@ namespace Delirium
 			IsHUD = true;
 			base.Start();
 		}
+
 		public override bool CanBeOpened() => !MenuManager.Instance.IsAnyOpen;
 		public override bool CanBeClosed() => true;
 
@@ -38,6 +40,15 @@ namespace Delirium
 
 			var text = healthBar.GetComponentInChildren<TextMeshProUGUI>();
 			text.SetText(health.CurrentHealth.ToString());
+		}
+
+		private void OnSanityChanged(Sanity sanity)
+		{
+			var fill = sanityBar.transform.Find("Fill").GetComponent<Image>();
+			fill.fillAmount = (float) sanity.CurrentSanity / Sanity.MAX_SANITY;
+
+			var text = sanityBar.GetComponentInChildren<TextMeshProUGUI>();
+			text.SetText(sanity.CurrentSanity.ToString());
 		}
 	}
 }

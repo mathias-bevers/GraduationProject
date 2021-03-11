@@ -64,12 +64,6 @@ namespace Delirium.AI
 			}
 		}
 
-		private void OnGUI()
-		{
-			GUI.Label(new Rect(10, 10, 150, 50), State.ToString());
-			GUI.Label(new Rect(10, 60, 150, 50), navMeshAgent.destination.ToString());
-		}
-
 		public void UpdateState()
 		{
 			Player newTarget = fieldOfView.FindPlayer();

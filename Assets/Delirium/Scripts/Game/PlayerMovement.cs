@@ -15,10 +15,10 @@ namespace Delirium
 
 		private bool IsGrounded => Physics.Raycast(cachedTransform.position, Vector3.down, collider.bounds.extents.y + 0.01f);
 
-		private Collider collider;
+		private new Collider collider;
 		private float cameraRotationX;
 		private float cameraRotationY;
-		private Rigidbody rigidbody;
+		private new Rigidbody rigidbody;
 		private Transform cachedTransform;
 		private Transform cameraTransform;
 
