@@ -13,7 +13,7 @@ namespace Delirium
 
 		private void Awake()
 		{
-			EventCollection.Instance.HealthChangedEvent.AddListener(OnHealthChanged);
+			GameManager.Instance.Player.Health.HealthChangedEvent += OnHealthChanged;
 			EventCollection.Instance.SanityChangedEvent.AddListener(OnSanityChanged);
 		}
 
