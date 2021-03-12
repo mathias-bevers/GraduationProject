@@ -20,7 +20,6 @@ namespace Delirium
 		private void Start()
 		{
 			EventCollection.Instance.UpdateInventoryEvent?.Invoke(Inventory);
-			EventCollection.Instance.HealthChangedEvent?.Invoke(Health);
 		}
 
 		private void Update()
@@ -37,7 +36,5 @@ namespace Delirium
 				MenuManager.Instance.OpenMenu<PauseMenu>();
 			}
 		}
-
-		
 	}
 }

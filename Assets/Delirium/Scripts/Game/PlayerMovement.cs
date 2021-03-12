@@ -6,8 +6,6 @@ namespace Delirium
 	[RequireComponent(typeof(Rigidbody))]
 	public class PlayerMovement : MonoBehaviour
 	{
-		//TODO: Add sprint modifier.
-
 		[SerializeField] private float movementSpeed;
 		[SerializeField] private float jumpForce;
 		[SerializeField] private float mouseSensitivity;
