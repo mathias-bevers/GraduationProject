@@ -1,15 +1,19 @@
-﻿using Delirium.Interfaces;
+﻿using Delirium.AbstractClasses;
+using Delirium.Events;
 using UnityEngine;
 
 namespace Delirium
 {
-	public class InventoryWorldItem : MonoBehaviour, IHighlightable
+	public class InventoryWorldItem : Pickupable
 	{
 		[SerializeField] private InventoryItemData data;
 		public InventoryItemData Data => data;
 
-		public void Highlight() { }
+		private void OnMouseOver()
+		{
+			if (!InReach) { return; }
 
-		public void EndHighlight() { }
+			EventCollection.Instance.ItemHoverEvent?.Invoke(Data);
+		}
 	}
 }

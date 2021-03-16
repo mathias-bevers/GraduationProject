@@ -11,9 +11,10 @@ namespace Delirium.AI
 		public List<Vector3> idlePathPoints;
 
 		public EnemyAIState State { get; private set; } = EnemyAIState.Idle;
+		public Health Health { get; } = new Health(25);
+		
 		private FieldOfView fieldOfView;
 		private float searchTimer = 5.0f;
-
 		private int pathPointIndex;
 		private NavMeshAgent navMeshAgent;
 		private Player target;

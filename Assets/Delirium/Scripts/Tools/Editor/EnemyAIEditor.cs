@@ -11,7 +11,7 @@ namespace Delirium.Editor
 		{
 			var enemyAI = target as EnemyAI;
 
-			if (enemyAI == null) { return; }
+			if (enemyAI == null || enemyAI.idlePathPoints == null) { return; }
 
 			Handles.color = Color.magenta;
 

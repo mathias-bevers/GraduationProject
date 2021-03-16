@@ -1,4 +1,5 @@
-﻿using Delirium.Events;
+﻿using System;
+using Delirium.Events;
 using Delirium.Tools;
 using TMPro;
 using UnityEngine;
@@ -10,17 +11,23 @@ namespace Delirium
 	{
 		[SerializeField] private GameObject healthBar;
 		[SerializeField] private GameObject sanityBar;
+		[SerializeField] private TextMeshProUGUI pickupText;
 
-		private void Awake()
-		{
-			GameManager.Instance.Player.Health.HealthChangedEvent += OnHealthChanged;
-			EventCollection.Instance.SanityChangedEvent.AddListener(OnSanityChanged);
-		}
+		private void Awake() { IsHUD = true; }
 
 		protected override void Start()
 		{
-			IsHUD = true;
 			base.Start();
+
+			Health playerHealth = GameManager.Instance.Player.Health;
+			playerHealth.HealthChangedEvent += OnHealthChanged;
+			OnHealthChanged(playerHealth);
+
+			OnSanityChanged(GameManager.Instance.Player.Sanity);
+			EventCollection.Instance.SanityChangedEvent.AddListener(OnSanityChanged);
+			
+			EventCollection.Instance.ItemHoverEvent.AddListener(OnItemHoverEnter);
+			EventCollection.Instance.ItemHoverExitEvent.AddListener(() => pickupText.gameObject.SetActive(false));
 		}
 
 		public override bool CanBeOpened() => !MenuManager.Instance.IsAnyOpen;
@@ -49,6 +56,22 @@ namespace Delirium
 
 			var text = sanityBar.GetComponentInChildren<TextMeshProUGUI>();
 			text.SetText(sanity.CurrentSanity.ToString());
+		}
+
+		private void OnItemHoverEnter(ScriptableObject data)
+		{
+			pickupText.gameObject.SetActive(true);
+
+			switch (data)
+			{
+				case InventoryItemData item:
+					pickupText.SetText($"Press <color=red>E</color> to pick up {item.Name}");
+					break;
+				case CraftingRecipeData craftingRecipe:
+					pickupText.SetText($"Press <color=red>E</color> to pick up {craftingRecipe.Result.Name} blueprint");
+					break;
+				default: throw new NotSupportedException();
+			}
 		}
 	}
 }

@@ -11,7 +11,10 @@ namespace Delirium
 		public int CurrentSanity { get; private set; } = 100;
 		public bool IsHoldingTorch { get; set; } = false;
 
-		private void Start() { StartCoroutine(UpdateSanity(-2)); }
+		private void Start()
+		{
+			StartCoroutine(UpdateSanity(-2));
+		}
 
 		private void OnTriggerEnter(Collider other)
 		{

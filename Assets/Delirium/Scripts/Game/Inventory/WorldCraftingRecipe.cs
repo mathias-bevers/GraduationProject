@@ -1,15 +1,20 @@
-﻿using Delirium.Interfaces;
+﻿using System;
+using Delirium.AbstractClasses;
+using Delirium.Events;
 using UnityEngine;
 
 namespace Delirium
 {
-	public class WorldCraftingRecipe : MonoBehaviour, IHighlightable
+	public class WorldCraftingRecipe : Pickupable
 	{
 		[SerializeField] private CraftingRecipeData data;
 		public CraftingRecipeData Data => data;
 
-		public void Highlight() { }
+		private void OnMouseOver()
+		{
+			if (!InReach) { return; }
 
-		public void EndHighlight() { }
+			EventCollection.Instance.ItemHoverEvent?.Invoke(Data);
+		}
 	}
 }
