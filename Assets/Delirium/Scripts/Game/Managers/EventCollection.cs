@@ -10,6 +10,8 @@ namespace Delirium.Events
 	public class SanityChangedEvent : UnityEvent<Sanity> { }
 
 	public class ItemHoverEvent : UnityEvent<ScriptableObject> { }
+
+	public class TorchDecayEvent : UnityEvent<float> { }
 	#endregion
 
 	public class EventCollection : Singleton<EventCollection>
@@ -18,5 +20,6 @@ namespace Delirium.Events
 		public SanityChangedEvent SanityChangedEvent { get; } = new SanityChangedEvent();
 		public ItemHoverEvent ItemHoverEvent { get; } = new ItemHoverEvent();
 		public UnityEvent ItemHoverExitEvent { get; } = new UnityEvent();
+		public TorchDecayEvent TorchDecayEvent { get; } = new TorchDecayEvent();
 	}
 }

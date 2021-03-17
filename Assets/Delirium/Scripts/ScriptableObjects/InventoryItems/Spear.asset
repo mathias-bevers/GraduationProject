@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Spear
   m_EditorClassIdentifier: 
   name: Spear
-  sprite: {fileID: 0}
-  worldItem: {fileID: 0}
-  canHold: 1
+  sprite: {fileID: 21300000, guid: 0986af6134d422d45ab213b0d07537ce, type: 3}
+  worldItem: {fileID: 919132149155446097, guid: 72802d824961bdb49bac2b359a2258ab,
+    type: 3}

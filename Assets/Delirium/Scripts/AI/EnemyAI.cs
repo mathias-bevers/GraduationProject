@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace Delirium.AI
 {
 	[RequireComponent(typeof(NavMeshAgent))]
 	public class EnemyAI : MonoBehaviour
 	{
+		[SerializeField] private int damage;
 		public List<Vector3> idlePathPoints;
 
 		public EnemyAIState State { get; private set; } = EnemyAIState.Idle;
@@ -15,6 +17,7 @@ namespace Delirium.AI
 
 		private FieldOfView fieldOfView;
 		private float searchTimer = 5.0f;
+		private Image healthBarImage;
 		private int pathPointIndex;
 		private NavMeshAgent navMeshAgent;
 		private Player target;
@@ -25,6 +28,18 @@ namespace Delirium.AI
 			EnemyManager.Instance.RegisterEnemy(this);
 			navMeshAgent = GetComponent<NavMeshAgent>();
 			fieldOfView = GetComponent<FieldOfView>();
+
+			healthBarImage = GetComponentInChildren<Image>();
+		}
+
+		private void Start()
+		{
+			Health.HealthChangedEvent += health => { healthBarImage.fillAmount = health.Health01; };
+			Health.DiedEvent += () =>
+			{
+				EnemyManager.Instance.UnregisterEnemy(this);
+				Destroy(gameObject);
+			};
 		}
 
 		private void Update()
@@ -63,6 +78,12 @@ namespace Delirium.AI
 					break;
 				default: throw new ArgumentOutOfRangeException();
 			}
+		}
+
+		private void OnTriggerEnter(Collider other)
+		{
+			Health collisionHealth = other.gameObject.GetComponent<Player>()?.Health;
+			collisionHealth?.TakeDamage(damage);
 		}
 
 		public void UpdateState()

@@ -11,7 +11,10 @@ namespace Delirium
 	{
 		[SerializeField] private GameObject healthBar;
 		[SerializeField] private GameObject sanityBar;
+		[SerializeField] private Image torchDurabilityBar;
 		[SerializeField] private TextMeshProUGUI pickupText;
+
+		public GameObject TorchDurabilityBar => torchDurabilityBar.gameObject;
 
 		private void Awake() { IsHUD = true; }
 
@@ -28,6 +31,8 @@ namespace Delirium
 
 			EventCollection.Instance.ItemHoverEvent.AddListener(OnItemHoverEnter);
 			EventCollection.Instance.ItemHoverExitEvent.AddListener(() => pickupText.gameObject.SetActive(false));
+
+			EventCollection.Instance.TorchDecayEvent.AddListener(fillAmount => torchDurabilityBar.fillAmount = fillAmount);
 		}
 
 		public override bool CanBeOpened() => !MenuManager.Instance.IsAnyOpen;

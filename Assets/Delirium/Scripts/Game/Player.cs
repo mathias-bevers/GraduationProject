@@ -8,9 +8,6 @@ namespace Delirium
 {
 	public class Player : MonoBehaviour
 	{
-		[SerializeField] private GameObject spear;
-		[SerializeField] private GameObject torch;
-
 		public Inventory Inventory { get; } = new Inventory();
 		public Health Health { get; } = new Health(100);
 		public Sanity Sanity { get; private set; }
@@ -24,7 +21,11 @@ namespace Delirium
 			cameraTransform = GetComponentInChildren<Camera>().transform;
 		}
 
-		private void Start() { EventCollection.Instance.UpdateInventoryEvent?.Invoke(Inventory); }
+		private void Start()
+		{
+			EventCollection.Instance.UpdateInventoryEvent?.Invoke(Inventory);
+			ToggleHeldItems(1);
+		}
 
 		private void Update()
 		{
@@ -51,6 +52,7 @@ namespace Delirium
 		{
 			void DisableTools()
 			{
+				MenuManager.Instance.GetMenu<GeneralHudMenu>()?.TorchDurabilityBar.SetActive(false);
 				foreach (Transform child in cameraTransform) { child.gameObject.SetActive(false); }
 			}
 
@@ -63,14 +65,21 @@ namespace Delirium
 
 				case 2:
 					InventoryItemData torchData = Inventory.Items.FirstOrDefault(x => x.Key.Name == "Torch").Key;
+
+					if (torchData == null) { return; }
+
 					if (!Inventory.Items.ContainsKey(torchData) || Inventory.Items[torchData] == 0) { return; }
 
 					DisableTools();
+					MenuManager.Instance.GetMenu<GeneralHudMenu>()?.TorchDurabilityBar.SetActive(true);
 					cameraTransform.GetChild(1).gameObject.SetActive(true);
 					break;
 
 				case 3:
 					InventoryItemData spearData = Inventory.Items.FirstOrDefault(x => x.Key.Name == "Spear").Key;
+
+					if (spearData == null) { return; }
+
 					if (!Inventory.Items.ContainsKey(spearData)) { return; }
 
 					DisableTools();

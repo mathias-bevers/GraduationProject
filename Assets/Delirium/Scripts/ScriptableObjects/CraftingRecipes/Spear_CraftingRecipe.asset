@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d840d591eda94769a1f97a93fc10552d, type: 3}
+  m_Name: Spear_CraftingRecipe
+  m_EditorClassIdentifier: 
+  result: {fileID: 11400000, guid: 35015c112b3ed3d4d978776701fef727, type: 2}
+  neededItems:
+  - inventoryItemData: {fileID: 11400000, guid: 3cdf8fc628cbf3941b1078be97e04989,
+      type: 2}
+    amount: 2
+  - inventoryItemData: {fileID: 11400000, guid: c4c595820c90d6f418ea3757d0c5a83f,
+      type: 2}
+    amount: 2
+  - inventoryItemData: {fileID: 11400000, guid: 0653531eaeedcde44bd8977cbf403cfa,
+      type: 2}
+    amount: 1

@@ -1,27 +1,28 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Delirium.Events;
 using UnityEngine;
 
 namespace Delirium
 {
 	public class Torch : MonoBehaviour
 	{
-		[SerializeField] private float maxLightTimeInSeconds;
+		[SerializeField] private float maxLitTimeInSeconds;
 
 		private bool hasBeenLit;
 		private float litTimeLeft;
 		private Player parentPlayer;
 
-		private void Start() { parentPlayer = SearchForParentPlayer(); }
+		private void Awake() { parentPlayer = SearchForParentPlayer(); }
 
 		private void Update()
 		{
 			if (!gameObject.activeInHierarchy) { return; }
 
 			litTimeLeft -= Time.deltaTime;
+			EventCollection.Instance.TorchDecayEvent.Invoke(litTimeLeft / maxLitTimeInSeconds);
 
 			if (litTimeLeft > 0.0f) { return; }
-
-			Debug.Log("Torch died!");
 
 			hasBeenLit = false;
 			parentPlayer.ToggleHeldItems(1);
@@ -32,11 +33,15 @@ namespace Delirium
 
 		private void OnEnable()
 		{
+			parentPlayer.Sanity.IsHoldingTorch = true;
+			
 			if (hasBeenLit) { return; }
 
-			litTimeLeft = maxLightTimeInSeconds;
+			litTimeLeft = maxLitTimeInSeconds;
 			hasBeenLit = true;
 		}
+
+		private void OnDisable() { parentPlayer.Sanity.IsHoldingTorch = false; }	
 
 		private Player SearchForParentPlayer()
 		{

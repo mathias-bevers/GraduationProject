@@ -20,7 +20,13 @@ namespace Delirium.Combat
 			if (!Input.GetMouseButtonDown(0) || !animator.GetCurrentAnimatorStateInfo(0).IsName("SpearIdle") || MenuManager.Instance.IsAnyOpen) { return; }
 
 			animator.SetTrigger(_attack);
-			enemyHealth?.TakeDamage(damage);
+
+
+			try { enemyHealth?.TakeDamage(damage); }
+			catch (MissingReferenceException e)
+			{
+				enemyHealth = null;
+			}
 		}
 
 		private void OnTriggerEnter(Collider other)
