@@ -3,6 +3,7 @@ using System.Linq;
 using Delirium.Events;
 using Delirium.Tools;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Delirium
 {
@@ -23,6 +24,14 @@ namespace Delirium
 
 		private void Start()
 		{
+			Health.DiedEvent += () =>
+			{
+				Cursor.visible = true;
+				Cursor.lockState = CursorLockMode.None;
+
+				SceneManager.LoadScene(0);
+			};
+
 			EventCollection.Instance.UpdateInventoryEvent?.Invoke(Inventory);
 			ToggleHeldItems(1);
 		}
