@@ -1,5 +1,4 @@
-﻿using System;
-using Delirium.AbstractClasses;
+﻿using Delirium.AbstractClasses;
 using Delirium.Events;
 using UnityEngine;
 

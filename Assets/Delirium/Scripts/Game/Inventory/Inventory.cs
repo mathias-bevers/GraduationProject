@@ -10,14 +10,11 @@ namespace Delirium
 	{
 		public Dictionary<InventoryItemData, int> Items { get; } = new Dictionary<InventoryItemData, int>();
 		public List<CraftingRecipeData> UnlockedRecipes { get; } = new List<CraftingRecipeData>();
-		public List<InventoryItemData> HoldableItems { get; } = new List<InventoryItemData>();
 
 		public void AddItem(InventoryItemData item)
 		{
 			if (!Items.ContainsKey(item))
 			{
-				if (item.CanHold) { HoldableItems.Add(item); }
-
 				Items.Add(item, 1);
 				MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup($"Added {item.Name} to inventory", PopupMenu.PopupLevel.Info);
 				EventCollection.Instance.UpdateInventoryEvent?.Invoke(this);

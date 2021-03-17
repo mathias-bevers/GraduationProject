@@ -25,7 +25,7 @@ namespace Delirium
 
 			OnSanityChanged(GameManager.Instance.Player.Sanity);
 			EventCollection.Instance.SanityChangedEvent.AddListener(OnSanityChanged);
-			
+
 			EventCollection.Instance.ItemHoverEvent.AddListener(OnItemHoverEnter);
 			EventCollection.Instance.ItemHoverExitEvent.AddListener(() => pickupText.gameObject.SetActive(false));
 		}

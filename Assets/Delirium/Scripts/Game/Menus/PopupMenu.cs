@@ -1,8 +1,8 @@
-﻿using UnityEngine.UI;
+﻿using System;
 using Delirium.Tools;
-using UnityEngine;
-using System;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PopupMenu : Menu
 {
@@ -29,7 +29,7 @@ public class PopupMenu : Menu
 			case PopupLevel.Info:
 				textMeshProUGUI.color = Color.white;
 				break;
-			case PopupLevel.Waring: 
+			case PopupLevel.Waring:
 				textMeshProUGUI.color = Color.yellow;
 				break;
 			case PopupLevel.Error:
@@ -37,7 +37,7 @@ public class PopupMenu : Menu
 				break;
 			default: throw new ArgumentOutOfRangeException(nameof(level), level, null);
 		}
-		
+
 		Destroy(popupGameObject, 5.0f);
 	}
 

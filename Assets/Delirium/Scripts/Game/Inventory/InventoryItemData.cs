@@ -8,13 +8,9 @@ namespace Delirium
 		[SerializeField] private new string name;
 		[SerializeField] private Sprite sprite;
 		[SerializeField] private GameObject worldItem;
-		[SerializeField] private bool canHold;
-		
+
 		public string Name => name;
 		public Sprite Sprite => sprite;
 		public GameObject WorldItem => worldItem;
-		public bool CanHold => canHold;
-
-		//TODO: Add more data fields
 	}
 }
