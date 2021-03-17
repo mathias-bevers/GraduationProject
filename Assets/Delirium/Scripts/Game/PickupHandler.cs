@@ -1,5 +1,6 @@
-﻿using Delirium.Exceptions;
-using Delirium.Interfaces;
+﻿using System;
+using Delirium.AbstractClasses;
+using Delirium.Exceptions;
 using Delirium.Tools;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Delirium
 	public class PickupHandler : MonoBehaviour
 	{
 		[SerializeField] private float pickupReach = 1.5f;
-		private IHighlightable currentHighlightable;
+		private Pickupable highlightedObject;
 
 		private Player player;
 		private Transform cameraTransform;
@@ -31,46 +32,56 @@ namespace Delirium
 		{
 			if (!Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, pickupReach))
 			{
-				currentHighlightable?.EndHighlight();
-				currentHighlightable = null;
+				if (highlightedObject == null) { return; }
+
+				highlightedObject.InReach = false;
+				highlightedObject = null;
 				return;
 			}
 
-			var highlightable = hit.transform.gameObject.GetComponent<IHighlightable>();
+			var pickupable = hit.transform.GetComponent<Pickupable>();
 
-			if (highlightable == null)
+			if (pickupable == null)
 			{
-				currentHighlightable?.EndHighlight();
-				currentHighlightable = null;
+				if (highlightedObject == null) { return; }
+
+				highlightedObject.InReach = false;
+				highlightedObject = null;
 				return;
 			}
 
-			currentHighlightable = highlightable;
-			highlightable.Highlight();
+			highlightedObject = pickupable;
+			highlightedObject.InReach = true;
 
-			if (!Input.GetMouseButtonDown(0)) { return; }
+			if (Input.GetAxis("Interact") <= 0) { return; }
 
-			if (highlightable.GetType() == typeof(InventoryWorldItem))
+			AddToInventory(highlightedObject);
+		}
+
+		private void AddToInventory(Pickupable pickupable)
+		{
+			switch (pickupable)
 			{
-				var inventoryItem = highlightable as InventoryWorldItem;
+				case InventoryWorldItem inventoryItem:
+					try
+					{
+						player.Inventory.AddItem(inventoryItem.Data);
+						Destroy(inventoryItem.gameObject);
+						highlightedObject = null;
+					}
+					catch (AddingInventoryItemFailed exception) { MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup(exception.Message, PopupMenu.PopupLevel.Waring); }
 
-				try
-				{
-					player.Inventory.AddItem(inventoryItem.Data);
-					MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup($"Picked up {inventoryItem.Data.Name}", PopupMenu.PopupLevel.Info);
-					Destroy(inventoryItem.gameObject);
-					currentHighlightable = null;
-				}
-				catch (AddingInventoryItemFailed e) { MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup(e.Message, PopupMenu.PopupLevel.Waring); }
-			}
+					break;
 
-			if (highlightable.GetType() == typeof(WorldCraftingRecipe))
-			{
-				var craftingRecipe = highlightable as WorldCraftingRecipe;
-				
-				player.Inventory.AddCraftingRecipe(craftingRecipe.Data);
-				Destroy(craftingRecipe.gameObject);
-				currentHighlightable = null;
+				case WorldCraftingRecipe craftingRecipe:
+					try { player.Inventory.AddCraftingRecipe(craftingRecipe.Data); }
+					catch (AddingCraftingRecipeFailed exception) { MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup(exception.Message, PopupMenu.PopupLevel.Waring); }
+
+					Destroy(craftingRecipe.gameObject);
+					highlightedObject = null;
+					break;
+
+				default: throw new NotSupportedException($"{pickupable.GetType().FullName} does not inherit from {typeof(Pickupable).FullName}");
 			}
 		}
 	}

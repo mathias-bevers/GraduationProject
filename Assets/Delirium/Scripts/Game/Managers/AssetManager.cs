@@ -11,7 +11,7 @@ namespace Delirium
 		{
 			base.Awake();
 
-			StartRecipe = Resources.Load<CraftingRecipeData>("RecipeTest0");
+			StartRecipe = Resources.Load<CraftingRecipeData>("Torch_CraftingRecipe");
 		}
 	}
 }

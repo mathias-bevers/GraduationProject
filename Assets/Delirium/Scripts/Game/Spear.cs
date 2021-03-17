@@ -1,4 +1,5 @@
-﻿using Delirium.Testing;
+﻿using Delirium.AI;
+using Delirium.Tools;
 using UnityEngine;
 
 namespace Delirium.Combat
@@ -10,28 +11,28 @@ namespace Delirium.Combat
 
 		[SerializeField] private int damage;
 		private Animator animator;
-		private Health touchingHealth;
+		private Health enemyHealth;
 
 		private void Awake() { animator = GetComponent<Animator>(); }
 
 		private void Update()
 		{
-			if (!Input.GetMouseButtonDown(0) || !animator.GetCurrentAnimatorStateInfo(0).IsName("SpearIdle")) { return; }
+			if (!Input.GetMouseButtonDown(0) || !animator.GetCurrentAnimatorStateInfo(0).IsName("SpearIdle") || MenuManager.Instance.IsAnyOpen) { return; }
 
 			animator.SetTrigger(_attack);
-			touchingHealth?.TakeDamage(damage);
+			enemyHealth?.TakeDamage(damage);
 		}
 
 		private void OnTriggerEnter(Collider other)
 		{
 			//TODO: change to enemy AI
-			touchingHealth = other.gameObject.GetComponent<Dummy>()?.Health;
+			enemyHealth = other.gameObject.GetComponent<EnemyAI>()?.Health;
 
 			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("SpearAttack")) { return; }
 
-			touchingHealth?.TakeDamage(damage);
+			enemyHealth?.TakeDamage(damage);
 		}
 
-		private void OnTriggerExit(Collider other) { touchingHealth = null; }
+		private void OnTriggerExit(Collider other) { enemyHealth = null; }
 	}
 }
