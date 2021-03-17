@@ -11,7 +11,7 @@ namespace Delirium
 		[SerializeField] private float mouseSensitivity;
 		[SerializeField, Range(1.0f, 2.0f)] private float sprintMultiplier;
 
-		private bool IsGrounded => Physics.Raycast(cachedTransform.position, Vector3.down, collider.bounds.extents.y + 0.01f);
+		private bool IsGrounded => Physics.Raycast(cachedTransform.position, Vector3.down, collider.bounds.extents.y + 0.1f);
 
 		private new Collider collider;
 		private float cameraRotationX;

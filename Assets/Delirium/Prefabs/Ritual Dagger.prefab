@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5176427729336126193}
   - component: {fileID: 5130482307295012077}
   - component: {fileID: 5129800145141791863}
+  - component: {fileID: 6114939601443216990}
   m_Layer: 0
   m_Name: Ritual Dagger
   m_TagString: Untagged
@@ -109,3 +110,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43474421551865144, guid: a8c99475586e5fd4e92c5f74b2058fbd, type: 2}
+--- !u!114 &6114939601443216990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5176427729338159937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e139cf15614a1eb5d377ba4c3fc3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
