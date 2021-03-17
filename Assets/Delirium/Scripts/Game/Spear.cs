@@ -23,7 +23,7 @@ namespace Delirium.Combat
 
 
 			try { enemyHealth?.TakeDamage(damage); }
-			catch (MissingReferenceException e)
+			catch (MissingReferenceException)
 			{
 				enemyHealth = null;
 			}
@@ -31,7 +31,6 @@ namespace Delirium.Combat
 
 		private void OnTriggerEnter(Collider other)
 		{
-			//TODO: change to enemy AI
 			enemyHealth = other.gameObject.GetComponent<EnemyAI>()?.Health;
 
 			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("SpearAttack")) { return; }
