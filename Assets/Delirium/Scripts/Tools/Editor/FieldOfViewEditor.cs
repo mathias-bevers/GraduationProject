@@ -10,6 +10,9 @@ namespace Delirium.Editor
 		private void OnSceneGUI()
 		{
 			var fieldOfView = target as FieldOfView;
+
+			if (fieldOfView == null) { return; }
+
 			Handles.color = Color.white;
 			Handles.DrawWireArc(fieldOfView.transform.position, Vector3.up, Vector3.forward, 360.0f, fieldOfView.ViewRadius);
 

@@ -22,6 +22,17 @@ namespace Delirium.AI
 			registeredEnemies.Add(enemy);
 		}
 
+		public void UnregisterEnemy(EnemyAI enemy)
+		{
+			if (!registeredEnemies.Contains(enemy))
+			{
+				Debug.Log("This enemy doesn't exists");
+				return;
+			}
+
+			registeredEnemies.Remove(enemy);
+		}
+
 		private IEnumerator UpdateEnemyStates(float delay)
 		{
 			while (true)

@@ -1,4 +1,10 @@
 ﻿namespace Delirium.AI
 {
-	public enum EnemyAIState { Idle, TargetLock, Search, MoveToLastPosition }
+	public enum EnemyAIState
+	{
+		Idle,
+		TargetLock,
+		Search,
+		MoveToLastPosition,
+	}
 }

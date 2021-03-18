@@ -7,10 +7,10 @@ namespace Delirium
 	{
 		[SerializeField] private new string name;
 		[SerializeField] private Sprite sprite;
-		
+		[SerializeField] private GameObject worldItem;
+
 		public string Name => name;
 		public Sprite Sprite => sprite;
-
-		//TODO: Add more data fields
+		public GameObject WorldItem => worldItem;
 	}
 }

@@ -65,7 +65,20 @@ namespace Delirium
 
 				craftingRecipeObject.transform.Find("Title").GetComponent<TextMeshProUGUI>().SetText(unlockedRecipe.Result.Name);
 				craftingRecipeObject.transform.Find("Sprite").GetComponent<Image>().sprite = unlockedRecipe.Result.Sprite;
+				craftingRecipeObject.transform.Find("Needed Items").GetComponent<TextMeshProUGUI>().SetText(GenerateNeededItemsString(unlockedRecipe));
 			}
+		}
+
+		private static string GenerateNeededItemsString(CraftingRecipeData craftingRecipe)
+		{
+			var generatedString = $"{craftingRecipe.NeededItems[0].Amount} {craftingRecipe.NeededItems[0].InventoryItemData.Name}";
+
+			for (var i = 1; i < craftingRecipe.NeededItems.Length; i++)
+			{
+				generatedString += $" + {craftingRecipe.NeededItems[i].Amount} {craftingRecipe.NeededItems[i].InventoryItemData.Name}";
+			}
+
+			return generatedString;
 		}
 	}
 }

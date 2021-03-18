@@ -72,6 +72,6 @@ namespace Delirium.Tools
 			return null;
 		}
 
-		public T GetMenu<T>() where T : Menu => menus.OfType<T>().First();
+		public T GetMenu<T>() where T : Menu => menus.OfType<T>().FirstOrDefault();
 	}
 }

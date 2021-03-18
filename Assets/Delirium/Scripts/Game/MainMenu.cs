@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,7 +18,7 @@ public class MainMenu : MonoBehaviour
 	private IEnumerator LoadSceneAsync()
 	{
 		AsyncOperation loadingSceneOperation = SceneManager.LoadSceneAsync(1);
-		
+
 		loadingBar.SetActive(true);
 
 		while (!loadingSceneOperation.isDone)
@@ -27,7 +26,7 @@ public class MainMenu : MonoBehaviour
 			float progress = Mathf.Clamp01(loadingSceneOperation.progress / .9f);
 
 			loadingBar.GetComponentInChildren<Image>().fillAmount = progress;
-			
+
 			yield return null;
 		}
 	}

@@ -14,11 +14,14 @@ namespace Delirium
 			base.Start();
 			quitButton.onClick.AddListener(Application.Quit);
 
+#if UNITY_EDITOR
+			quitButton.onClick.AddListener(() => UnityEditor.EditorApplication.isPlaying = false);
+#endif
 			continueButton.onClick.AddListener(
 				() =>
 				{
-					MenuManager.Instance.OpenMenu<GeneralHudMenu>();
 					Close();
+					MenuManager.Instance.OpenMenu<GeneralHudMenu>();
 				}
 			);
 		}
@@ -41,10 +44,10 @@ namespace Delirium
 		public override void Close()
 		{
 			if (!CanBeClosed()) { return; }
-			
+
 			base.Close();
 			Time.timeScale = 1.0f;
-			
+
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
 		}
