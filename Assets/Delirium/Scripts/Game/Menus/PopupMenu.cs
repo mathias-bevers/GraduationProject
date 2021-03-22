@@ -1,4 +1,5 @@
 ﻿using System;
+using Delirium.Events;
 using Delirium.Tools;
 using TMPro;
 using UnityEngine;
@@ -13,17 +14,20 @@ public class PopupMenu : Menu
 
 	protected override void Start()
 	{
+		EventCollection.Instance.OpenPopupEvent.AddListener(ShowPopup);
+
 		IsHUD = true;
 		grid = GetComponentInChildren<GridLayoutGroup>().transform;
 		base.Start();
 	}
 
-	public void ShowPopup(string message, PopupLevel level)
+	private void ShowPopup(string message, PopupLevel level)
 	{
 		GameObject popupGameObject = Instantiate(popupPrefab, grid);
 
 		var textMeshProUGUI = popupGameObject.GetComponentInChildren<TextMeshProUGUI>();
 		textMeshProUGUI.SetText(message);
+
 		switch (level)
 		{
 			case PopupLevel.Info:

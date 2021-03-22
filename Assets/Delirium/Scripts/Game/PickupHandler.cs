@@ -1,5 +1,6 @@
 ﻿using System;
 using Delirium.AbstractClasses;
+using Delirium.Events;
 using Delirium.Exceptions;
 using Delirium.Tools;
 using UnityEngine;
@@ -57,7 +58,7 @@ namespace Delirium
 
 			AddToInventory(highlightedObject);
 		}
-
+		
 		private void AddToInventory(Pickupable pickupable)
 		{
 			switch (pickupable)
@@ -69,13 +70,13 @@ namespace Delirium
 						Destroy(inventoryItem.gameObject);
 						highlightedObject = null;
 					}
-					catch (AddingInventoryItemFailed exception) { MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup(exception.Message, PopupMenu.PopupLevel.Waring); }
+					catch (AddingInventoryItemFailed exception) { EventCollection.Instance.OpenPopupEvent.Invoke(exception.Message, PopupMenu.PopupLevel.Waring); }
 
 					break;
 
 				case WorldCraftingRecipe craftingRecipe:
 					try { player.Inventory.AddCraftingRecipe(craftingRecipe.Data); }
-					catch (AddingCraftingRecipeFailed exception) { MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup(exception.Message, PopupMenu.PopupLevel.Waring); }
+					catch (AddingCraftingRecipeFailed exception) { EventCollection.Instance.OpenPopupEvent.Invoke(exception.Message, PopupMenu.PopupLevel.Waring); }
 
 					Destroy(craftingRecipe.gameObject);
 					highlightedObject = null;

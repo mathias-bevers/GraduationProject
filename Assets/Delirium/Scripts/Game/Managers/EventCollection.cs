@@ -12,6 +12,8 @@ namespace Delirium.Events
 	public class ItemHoverEvent : UnityEvent<ScriptableObject> { }
 
 	public class TorchDecayEvent : UnityEvent<float> { }
+
+	public class OpenPopupEvent : UnityEvent<string, PopupMenu.PopupLevel> { }
 	#endregion
 
 	public class EventCollection : Singleton<EventCollection>
@@ -21,5 +23,6 @@ namespace Delirium.Events
 		public ItemHoverEvent ItemHoverEvent { get; } = new ItemHoverEvent();
 		public UnityEvent ItemHoverExitEvent { get; } = new UnityEvent();
 		public TorchDecayEvent TorchDecayEvent { get; } = new TorchDecayEvent();
+		public OpenPopupEvent OpenPopupEvent { get; } = new OpenPopupEvent();
 	}
 }

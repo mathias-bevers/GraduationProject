@@ -1,4 +1,4 @@
-﻿using Delirium.Tools;
+﻿using Delirium.Events;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,7 +14,7 @@ namespace Delirium
 		{
 			if (!holdingInventory.CanBeCrafted(data))
 			{
-				MenuManager.Instance.GetMenu<PopupMenu>().ShowPopup($"You don't have enough items to craft {data.Result.Name}", PopupMenu.PopupLevel.Error);
+				EventCollection.Instance.OpenPopupEvent.Invoke($"You don't have enough items to craft {data.Result.Name}", PopupMenu.PopupLevel.Error);
 				return;
 			}
 

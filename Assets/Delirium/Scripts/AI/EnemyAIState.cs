@@ -2,8 +2,9 @@
 {
 	public enum EnemyAIState
 	{
-		Idle,
+		Roaming,
 		TargetLock,
+		Attack,
 		Search,
 		MoveToLastPosition,
 	}
