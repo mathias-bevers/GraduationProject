@@ -1,4 +1,5 @@
 ﻿using Delirium.Tools;
+using TreeEditor;
 using UnityEngine;
 
 namespace Delirium
@@ -44,6 +45,8 @@ namespace Delirium
 
 		private void Move()
 		{
+			if (!IsGrounded) { return; }
+			
 			Vector3 movementInput = cameraTransform.right * Input.GetAxis("Horizontal") + cameraTransform.forward * Input.GetAxis("Vertical");
 			movementInput.Normalize();
 			movementInput *= Time.deltaTime * movementSpeed * (Input.GetAxis("Sprint") > 0 ? sprintMultiplier : 1);
