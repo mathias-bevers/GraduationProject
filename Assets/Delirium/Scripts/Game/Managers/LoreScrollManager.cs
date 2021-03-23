@@ -31,6 +31,7 @@ namespace Delirium
 			MenuManager.Instance.CloseMenu<GeneralHudMenu>();
 
 			if (foundLoreScroll.Number <= highestFoundLoreScrollNumber) { return; }
+			EventCollection.Instance.OpenPopupEvent.Invoke("You unlocked the next clue", PopupMenu.PopupLevel.Info);
 
 			foreach (WorldLoreScroll worldLoreScroll in worldLoreScrolls)
 			{

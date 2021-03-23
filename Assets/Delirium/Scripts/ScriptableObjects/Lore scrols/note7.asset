@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f98ebf9894694786a8eb3186939a9559, type: 3}
+  m_Name: note7
+  m_EditorClassIdentifier: 
+  number: 7
+  text: "Spear Recipe\r\n2 Stick + 2 Fiber + Flint\r\nA skull can be picked up here,
+    Jonathan\u2019s.\r\n\r\n1896, Jonathan Worthing\r\n\r\nI CAN\u2019T TAKE IT ANYMORE!
+    THE EYES, EVERYWHERE I LOOK. THEY STARE FROM EVERY DIRECTION.\r\nIT WON\u2019T
+    LET ME REST. PLEASE, GOD I BEG YOU. LORD BRING ME SALVATION.\r\nTREES WARP INTO
+    CREATURES BEFORE MY VERY EYES, SPIDERLINGS CRAWL UNDER MY SKIN.\r\nTHE FEELING
+    IS UNBEARABLE\r\n\r\nPLEASE\r\nSTOP\r\nITCHING\r\n\r\nKILL THE CREATURE IN THE
+    MIST"

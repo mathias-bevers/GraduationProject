@@ -102,8 +102,6 @@ namespace Delirium.AI
 			}
 		}
 
-		private void OnGUI() { GUI.Label(new Rect(10, 10, 150, 50), State.ToString()); }
-
 		private void OnTriggerEnter(Collider other)
 		{
 			Health collisionHealth = other.gameObject.GetComponent<Player>()?.Health;
