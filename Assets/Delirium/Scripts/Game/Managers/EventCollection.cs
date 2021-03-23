@@ -14,6 +14,8 @@ namespace Delirium.Events
 	public class TorchDecayEvent : UnityEvent<float> { }
 
 	public class OpenPopupEvent : UnityEvent<string, PopupMenu.PopupLevel> { }
+
+	public class LoreScrollFoundEvent : UnityEvent<LoreScrollData> { }
 	#endregion
 
 	public class EventCollection : Singleton<EventCollection>
@@ -24,5 +26,6 @@ namespace Delirium.Events
 		public UnityEvent ItemHoverExitEvent { get; } = new UnityEvent();
 		public TorchDecayEvent TorchDecayEvent { get; } = new TorchDecayEvent();
 		public OpenPopupEvent OpenPopupEvent { get; } = new OpenPopupEvent();
+		public LoreScrollFoundEvent LoreScrollFoundEvent { get; } = new LoreScrollFoundEvent();
 	}
 }

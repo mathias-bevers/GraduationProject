@@ -41,6 +41,7 @@ namespace Delirium
 		public override void Open()
 		{
 			base.Open();
+			
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
 		}
@@ -72,9 +73,15 @@ namespace Delirium
 				case InventoryItemData item:
 					pickupText.SetText($"Press <color=red>E</color> to pick up {item.Name}");
 					break;
+
 				case CraftingRecipeData craftingRecipe:
 					pickupText.SetText($"Press <color=red>E</color> to pick up {craftingRecipe.Result.Name} blueprint");
 					break;
+
+				case LoreScrollData loreScrollData:
+					pickupText.SetText($"Press <color=red>E</color> to pick up note #{loreScrollData.Number}");
+					break;
+
 				default: throw new NotSupportedException();
 			}
 		}

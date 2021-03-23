@@ -15,7 +15,7 @@ namespace Delirium
 
 		private Player player;
 		private Transform cameraTransform;
-
+		
 		public void Start()
 		{
 			player = GetComponent<Player>();
@@ -51,14 +51,15 @@ namespace Delirium
 				return;
 			}
 
+		
 			highlightedObject = pickupable;
 			highlightedObject.InReach = true;
 
-			if (Input.GetAxis("Interact") <= 0) { return; }
+			if (Input.GetAxis("Interact") <= 0 || MenuManager.Instance.IsAnyOpen) { return; }
 
 			AddToInventory(highlightedObject);
 		}
-		
+
 		private void AddToInventory(Pickupable pickupable)
 		{
 			switch (pickupable)
@@ -80,6 +81,10 @@ namespace Delirium
 
 					Destroy(craftingRecipe.gameObject);
 					highlightedObject = null;
+					break;
+
+				case WorldLoreScroll loreScroll:
+					EventCollection.Instance.LoreScrollFoundEvent.Invoke(loreScroll.Data);
 					break;
 
 				default: throw new NotSupportedException($"{pickupable.GetType().FullName} does not inherit from {typeof(Pickupable).FullName}");
