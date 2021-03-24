@@ -30,7 +30,6 @@ namespace Delirium.AI
 			switch (state)
 			{
 				case EnemyAIState.Roaming:
-					Debug.Log(new Exception("Roaming"));
 					animator.SetTrigger(_roaming);
 					break;
 				

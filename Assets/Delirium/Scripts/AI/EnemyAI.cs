@@ -9,7 +9,9 @@ namespace Delirium.AI
 	[RequireComponent(typeof(NavMeshAgent))]
 	public class EnemyAI : MonoBehaviour
 	{
-		private const float ATTACK_DISTANCE = 1.3f;
+		private const float ATTACK_DISTANCE = 1.5f;
+		private const float RUNNING_SPEED = 15.0f;
+		private const float WALKING_SPEED = 3.5f;
 
 		[SerializeField] private int damage;
 		public List<Vector3> idlePathPoints;
@@ -43,11 +45,17 @@ namespace Delirium.AI
 			fieldOfView = GetComponent<FieldOfView>();
 
 			healthBarImage = GetComponentInChildren<Image>();
+			
 		}
 
 		private void Start()
 		{
-			Health.HealthChangedEvent += health => { healthBarImage.fillAmount = health.Health01; };
+			Health.HealthChangedEvent += health =>
+			{
+				if (healthBarImage == null) { throw new NullReferenceException("Health bar image could not be found"); }
+
+				healthBarImage.fillAmount = health.Health01;
+			};
 			Health.DiedEvent += () =>
 			{
 				EnemyManager.Instance.UnregisterEnemy(this);
@@ -55,22 +63,27 @@ namespace Delirium.AI
 			};
 		}
 
-		private void Update()
+		private void Update()																																																
 		{
 			switch (State)
 			{
 				case EnemyAIState.Roaming:
+					healthBarImage.gameObject.SetActive(false);
+
+					navMeshAgent.speed = WALKING_SPEED;
+					
 					navMeshAgent.destination = idlePathPoints[pathPointIndex % idlePathPoints.Count];
 					if (HasArrived()) { pathPointIndex++; }
 
 					break;
 
 				case EnemyAIState.TargetLock:
+					healthBarImage.gameObject.SetActive(true);
+
+					navMeshAgent.speed = RUNNING_SPEED;
 					navMeshAgent.destination = target.transform.position;
 
-					float distance = Vector3.Distance(transform.position, target.transform.position);
-					if (distance <= ATTACK_DISTANCE) { State = EnemyAIState.Attack; }
-
+					if ( Vector3.Distance(transform.position, target.transform.position) <= ATTACK_DISTANCE) { State = EnemyAIState.Attack; }
 					break;
 
 				case EnemyAIState.Search:

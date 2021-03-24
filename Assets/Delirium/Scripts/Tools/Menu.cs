@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Delirium.Tools
@@ -11,6 +12,8 @@ namespace Delirium.Tools
 
 		protected virtual void Start()
 		{
+			if (transform.childCount > 1) { throw new NotSupportedException($"The only child of {GetType().Name} should be the \"Content\" GameObject."); }
+
 			Content = transform.GetChild(0);
 			if (IsHUD) { Open(); }
 			else { Close(); }
