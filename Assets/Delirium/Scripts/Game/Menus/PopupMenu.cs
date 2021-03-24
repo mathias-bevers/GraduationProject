@@ -12,11 +12,12 @@ public class PopupMenu : Menu
 	[SerializeField] private GameObject popupPrefab;
 	private Transform grid;
 
+	private void Awake() { IsHUD = true; }
+
 	protected override void Start()
 	{
 		EventCollection.Instance.OpenPopupEvent.AddListener(ShowPopup);
 
-		IsHUD = true;
 		grid = GetComponentInChildren<GridLayoutGroup>().transform;
 		base.Start();
 	}

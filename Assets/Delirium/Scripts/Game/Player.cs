@@ -9,6 +9,7 @@ namespace Delirium
 {
 	public class Player : MonoBehaviour
 	{
+		public bool IsAlive { get; set; } = true;
 		public Inventory Inventory { get; } = new Inventory();
 		public Health Health { get; } = new Health(100);
 		public Sanity Sanity { get; private set; }
@@ -24,14 +25,6 @@ namespace Delirium
 
 		private void Start()
 		{
-			Health.DiedEvent += () =>
-			{
-				Cursor.visible = true;
-				Cursor.lockState = CursorLockMode.None;
-
-				SceneManager.LoadScene(0);
-			};
-
 			EventCollection.Instance.UpdateInventoryEvent?.Invoke(Inventory);
 			ToggleHeldItems(1);
 		}

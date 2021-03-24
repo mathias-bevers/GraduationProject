@@ -12,19 +12,16 @@ namespace Delirium.AI
 		private static readonly int _searching = Animator.StringToHash("Search");
 
 		private Animator animator;
-		private EnemyAI enemyAI;
 
 		private void Start()
 		{
-			enemyAI = GetComponent<EnemyAI>();
-			enemyAI.StateChangedEvent += OnStateChanged;
+			GetComponent<EnemyAI>().StateChangedEvent += OnStateChanged;
 
 			animator = GetComponent<Animator>();
 		}
 
 		private void OnStateChanged(EnemyAIState state)
 		{
-			// Debug.Log(state);
 			ResetAllTriggers();
 
 			switch (state)
@@ -32,23 +29,22 @@ namespace Delirium.AI
 				case EnemyAIState.Roaming:
 					animator.SetTrigger(_roaming);
 					break;
-				
+
 				case EnemyAIState.TargetLock:
 					animator.SetTrigger(_hunt);
 					break;
-				
+
 				case EnemyAIState.Search:
-					
 					animator.SetTrigger(_searching);
 					break;
-				
+
 				case EnemyAIState.MoveToLastPosition:
 					animator.SetTrigger(_roaming);
 					break;
 				case EnemyAIState.Attack:
 					animator.SetTrigger(_attack);
 					break;
-				
+
 				default: throw new ArgumentOutOfRangeException(nameof(state), state, "This state does not exists");
 			}
 		}

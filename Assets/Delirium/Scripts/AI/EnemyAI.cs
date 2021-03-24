@@ -9,7 +9,7 @@ namespace Delirium.AI
 	[RequireComponent(typeof(NavMeshAgent))]
 	public class EnemyAI : MonoBehaviour
 	{
-		private const float ATTACK_DISTANCE = 1.5f;
+		private const float ATTACK_DISTANCE = 1.9f;
 		private const float RUNNING_SPEED = 15.0f;
 		private const float WALKING_SPEED = 3.5f;
 
@@ -29,9 +29,11 @@ namespace Delirium.AI
 		}
 
 
+		private Collider attackTrigger; 
 		private EnemyAIState state = EnemyAIState.Roaming;
 		private FieldOfView fieldOfView;
 		private float searchTimer = 5.0f;
+		private float attackTimer = 1.5f;
 		private Image healthBarImage;
 		private int pathPointIndex;
 		private NavMeshAgent navMeshAgent;
@@ -43,9 +45,9 @@ namespace Delirium.AI
 			EnemyManager.Instance.RegisterEnemy(this);
 			navMeshAgent = GetComponent<NavMeshAgent>();
 			fieldOfView = GetComponent<FieldOfView>();
-
-			healthBarImage = GetComponentInChildren<Image>();
+			attackTrigger = GetComponent<Collider>();
 			
+			healthBarImage = GetComponentInChildren<Image>();
 		}
 
 		private void Start()
@@ -63,15 +65,16 @@ namespace Delirium.AI
 			};
 		}
 
-		private void Update()																																																
+		private void Update()
 		{
 			switch (State)
 			{
 				case EnemyAIState.Roaming:
 					healthBarImage.gameObject.SetActive(false);
+					attackTrigger.enabled = false;
 
 					navMeshAgent.speed = WALKING_SPEED;
-					
+
 					navMeshAgent.destination = idlePathPoints[pathPointIndex % idlePathPoints.Count];
 					if (HasArrived()) { pathPointIndex++; }
 
@@ -79,11 +82,13 @@ namespace Delirium.AI
 
 				case EnemyAIState.TargetLock:
 					healthBarImage.gameObject.SetActive(true);
+					attackTrigger.enabled = false;
 
 					navMeshAgent.speed = RUNNING_SPEED;
 					navMeshAgent.destination = target.transform.position;
 
-					if ( Vector3.Distance(transform.position, target.transform.position) <= ATTACK_DISTANCE) { State = EnemyAIState.Attack; }
+					if (Vector3.Distance(transform.position, target.transform.position) <= ATTACK_DISTANCE) { State = EnemyAIState.Attack; }
+
 					break;
 
 				case EnemyAIState.Search:
@@ -107,16 +112,30 @@ namespace Delirium.AI
 					break;
 
 				case EnemyAIState.Attack:
+					attackTrigger.enabled = true;
 					navMeshAgent.destination = transform.position;
-					if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Z_Attack")) { UpdateState(); }
+
+					attackTimer -= Time.deltaTime;
+					if (attackTimer <= 0)
+					{
+						UpdateState();
+						attackTimer = 1.5f;
+					}
 
 					break;
 				default: throw new ArgumentOutOfRangeException();
 			}
 		}
 
+		private void OnGUI()
+		{
+			if (target != null) { GUI.Label(new Rect(10, 10, 150, 50), Vector3.Distance(target.transform.position, transform.position).ToString()); }
+		}
+
 		private void OnTriggerEnter(Collider other)
 		{
+			if(State != EnemyAIState.Attack) { return; }
+			
 			Health collisionHealth = other.gameObject.GetComponent<Player>()?.Health;
 			collisionHealth?.TakeDamage(damage);
 		}
@@ -125,9 +144,11 @@ namespace Delirium.AI
 
 		public void UpdateState()
 		{
+			if (State == EnemyAIState.Attack && attackTimer > 0) { return; }
+
 			Player newTarget = fieldOfView.FindPlayer();
 
-			if (newTarget != null && State != EnemyAIState.Attack)
+			if (newTarget != null)
 			{
 				State = EnemyAIState.TargetLock;
 				target = newTarget;

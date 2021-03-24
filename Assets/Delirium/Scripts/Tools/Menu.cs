@@ -6,7 +6,7 @@ namespace Delirium.Tools
 	public abstract class Menu : MonoBehaviour
 	{
 		public bool IsOpen { get; private set; }
-		public bool IsHUD { get; protected set; }
+		public bool IsHUD { get; protected set; } = false;
 
 		protected Transform Content { get; private set; }
 

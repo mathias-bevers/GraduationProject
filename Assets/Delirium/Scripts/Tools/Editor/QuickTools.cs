@@ -3,12 +3,14 @@ using UnityEngine;
 
 namespace Delirium.Editor
 {
-	public class 
-		QuickTools : EditorWindow
+	public class QuickTools : EditorWindow
 	{
 		private Color color;
 		private string emptyName;
 		private string groupName;
+
+		private Transform transformA;
+		private Transform transformB;
 
 		private void OnGUI()
 		{
@@ -81,16 +83,34 @@ namespace Delirium.Editor
 
 			EditorGUILayout.EndHorizontal();
 			#endregion
-			
+
 			#region Log components
 			EditorGUILayout.BeginHorizontal();
 
 			if (GUILayout.Button("Log components on GameObject"))
 			{
-				foreach (Component component in Selection.activeGameObject.GetComponents<Component>())
+				foreach (Component component in Selection.activeGameObject.GetComponents<Component>()) { Debug.Log(component.GetType().Name); }
+			}
+
+			EditorGUILayout.EndHorizontal();
+			#endregion
+
+			#region Calculate distance between trasforms
+			EditorGUILayout.BeginHorizontal();
+
+			transformA = EditorGUILayout.ObjectField(transformA, typeof(Transform), true) as Transform;
+			transformB = EditorGUILayout.ObjectField(transformB, typeof(Transform), true) as Transform;
+
+			if (GUILayout.Button("Calculate Distance"))
+			{
+				if (transformA == null || transformB == null)
 				{
-					Debug.Log(component.GetType().Name);
+					Debug.LogError("Make sure both fields have a transform assigned.");
+					return;
 				}
+
+				Debug.Log($"The distance is {Vector3.Distance(transformA.position, transformB.position)}.");
+				transformA = transformB = null;
 			}
 
 			EditorGUILayout.EndHorizontal();

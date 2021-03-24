@@ -88,5 +88,10 @@ namespace Delirium.Tools
 		/// <typeparam name="T">Menu to get. Requested type needs to inherit from Delirium.Tools.Menu.</typeparam>
 		/// <returns></returns>
 		public T GetMenu<T>() where T : Menu => menus.OfType<T>().FirstOrDefault();
+
+		public void CloseAllMenus()
+		{
+			foreach (Menu menu in menus) { menu.Close(); }
+		}
 	}
 }
