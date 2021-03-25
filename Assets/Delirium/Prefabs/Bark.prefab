@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3864685379344422570}
   - component: {fileID: 3864685379341629780}
   - component: {fileID: 3864685379342499238}
-  - component: {fileID: 3838271952350071080}
   - component: {fileID: 5426335595612582955}
   - component: {fileID: 253014330112303881}
+  - component: {fileID: 7631296004194730542}
   m_Layer: 0
   m_Name: Bark
   m_TagString: Untagged
@@ -82,20 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3838271952350071080
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3864685379344686222}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43815557549916538, guid: f2c89080bd918cf458c6ad7d6860932b, type: 2}
 --- !u!198 &5426335595612582955
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4817,3 +4803,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!65 &7631296004194730542
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864685379344686222}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5739453, y: 0.33761275, z: 0.6379104}
+  m_Center: {x: 0, y: 0.09529653, z: 0.00000014901161}

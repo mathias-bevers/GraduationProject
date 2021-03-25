@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 6066217549186897121}
   - component: {fileID: 6066217549189797057}
   - component: {fileID: 6066217549188797953}
-  - component: {fileID: 6066217549186502242}
   - component: {fileID: 6066217549186502237}
   - component: {fileID: 222486556986943753}
   - component: {fileID: 8939966324629763411}
+  - component: {fileID: 1767123426864147479}
   m_Layer: 0
   m_Name: Stick
   m_TagString: Untagged
@@ -83,20 +83,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6066217549186502242
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6066217549186533569}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2533472459810650268, guid: 46e4e4592005d82448c083531f42fb36, type: 3}
 --- !u!114 &6066217549186502237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4831,3 +4817,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!65 &1767123426864147479
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6066217549186533569}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.989123, y: 0.23458457, z: 4.242378}
+  m_Center: {x: 0.1818909, y: -0.00066961726, z: 0.01334572}

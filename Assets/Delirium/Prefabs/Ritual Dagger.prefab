@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 5176427729337878951}
   - component: {fileID: 5176427729337143867}
   - component: {fileID: 5176427729336126193}
-  - component: {fileID: 5130482307295012077}
-  - component: {fileID: 5129800145141791863}
   - component: {fileID: 6114939601443216990}
+  - component: {fileID: 1225692919859581535}
   m_Layer: 0
   m_Name: Ritual Dagger
   m_TagString: Untagged
@@ -82,34 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5130482307295012077
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5176427729338159937}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43440024684279720, guid: a8c99475586e5fd4e92c5f74b2058fbd, type: 2}
---- !u!64 &5129800145141791863
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5176427729338159937}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43474421551865144, guid: a8c99475586e5fd4e92c5f74b2058fbd, type: 2}
 --- !u!114 &6114939601443216990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,3 +94,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 0}
+--- !u!65 &1225692919859581535
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5176427729338159937}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.19977051, y: 0.59429336, z: 0.050026122}
+  m_Center: {x: -0.0000006072223, y: 0.29714668, z: -0.00000015273694}
