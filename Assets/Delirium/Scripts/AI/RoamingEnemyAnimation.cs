@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Delirium.AI
 {
 	[RequireComponent(typeof(Animator))]
-	public class EnemyAnimation : MonoBehaviour
+	public class RoamingEnemyAnimation : MonoBehaviour
 	{
 		private static readonly int _hunt = Animator.StringToHash("Hunt");
 		private static readonly int _attack = Animator.StringToHash("Attack");
@@ -15,7 +15,7 @@ namespace Delirium.AI
 
 		private void Start()
 		{
-			GetComponent<EnemyAI>().StateChangedEvent += OnStateChanged;
+			GetComponent<RoamingEnemy>().StateChangedEvent += OnStateChanged;
 
 			animator = GetComponent<Animator>();
 		}

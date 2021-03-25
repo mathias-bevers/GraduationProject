@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Delirium.Editor
 {
-	[CustomEditor(typeof(EnemyAI))]
-	public class EnemyAIEditor : UnityEditor.Editor
+	[CustomEditor(typeof(RoamingEnemy))]
+	public class RoamingEnemyEditor : UnityEditor.Editor
 	{
 		private void OnSceneGUI()
 		{
-			var enemyAI = target as EnemyAI;
+			var enemyAI = target as RoamingEnemy;
 
 			if (enemyAI == null || enemyAI.idlePathPoints == null) { return; }
 

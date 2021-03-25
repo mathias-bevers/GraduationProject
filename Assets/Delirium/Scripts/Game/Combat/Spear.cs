@@ -31,7 +31,7 @@ namespace Delirium.Combat
 
 		private void OnTriggerEnter(Collider other)
 		{
-			enemyHealth = other.gameObject.GetComponent<EnemyAI>()?.Health;
+			enemyHealth = other.gameObject.GetComponent<RoamingEnemy>()?.Health;
 
 			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("SpearAttack")) { return; }
 

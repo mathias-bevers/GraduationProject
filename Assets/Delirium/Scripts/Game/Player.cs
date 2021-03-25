@@ -18,9 +18,10 @@ namespace Delirium
 
 		private void Awake()
 		{
-			Inventory.UnlockedRecipes.Add(AssetManager.Instance.StartRecipe);
-			Sanity = GetComponent<Sanity>();
 			cameraTransform = GetComponentInChildren<Camera>().transform;
+			
+			Sanity = GetComponent<Sanity>();
+			Sanity.RegisterPlayer(this);
 		}
 
 		private void Start()

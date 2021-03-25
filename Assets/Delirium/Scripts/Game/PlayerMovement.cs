@@ -18,12 +18,12 @@ namespace Delirium
 		private float cameraRotationY;
 		private new Rigidbody rigidbody;
 		private Transform cachedTransform;
-		private Transform cameraTransform;
+		public Transform CameraTransform { get; private set; }
 
 		private void Awake()
 		{
 			cachedTransform = transform;
-			cameraTransform = GetComponentInChildren<Camera>().transform;
+			CameraTransform = GetComponentInChildren<Camera>().transform;
 			rigidbody = GetComponent<Rigidbody>();
 			collider = GetComponent<Collider>();
 		}
@@ -46,7 +46,7 @@ namespace Delirium
 		{
 			if (!IsGrounded) { return; }
 			
-			Vector3 movementInput = cameraTransform.right * Input.GetAxis("Horizontal") + cameraTransform.forward * Input.GetAxis("Vertical");
+			Vector3 movementInput = CameraTransform.right * Input.GetAxis("Horizontal") + CameraTransform.forward * Input.GetAxis("Vertical");
 			movementInput.Normalize();
 			movementInput *= Time.deltaTime * movementSpeed * (Input.GetAxis("Sprint") > 0 ? sprintMultiplier : 1);
 
@@ -63,7 +63,7 @@ namespace Delirium
 			cameraRotationX -= Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 			cameraRotationX = Mathf.Clamp(cameraRotationX, -90.0f, 90.0f);
 
-			cameraTransform.localRotation = Quaternion.Euler(cameraRotationX, cameraRotationY, 0.0f);
+			CameraTransform.localRotation = Quaternion.Euler(cameraRotationX, cameraRotationY, 0.0f);
 		}
 	}
 }
