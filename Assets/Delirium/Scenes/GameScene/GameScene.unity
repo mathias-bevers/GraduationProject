@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 6e00f8b39315691449f256740a5cb862, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 6eecb3bb77b3f7a43a504fceda3b0b5f, type: 2}
   m_HaloStrength: 0.443
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 64237708}
-  m_IndirectSpecularColor: {r: 0.40532714, g: 0.22878, b: 0.097420745, a: 1}
+  m_IndirectSpecularColor: {r: 0.021999996, g: 0.011606444, b: 0.019579679, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1145,6 +1145,24 @@ MonoBehaviour:
   MissionPlace: {fileID: 1800673973}
   CompassImage: {fileID: 1094155787}
   MissionPointer: {fileID: 1697686598}
+--- !u!114 &88364610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88364603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c4bbe6058ef7a409e3d77b8f99770d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: {fileID: 0}
+  power: 0.1
+  duration: 10
+  camera: {fileID: 88364604}
+  slowDownAmount: 1
+  shouldShake: 0
 --- !u!1001 &96226366
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3975,7 +3993,7 @@ PrefabInstance:
     - target: {fileID: 3681617351074583923, guid: 90958418c573f174eac9466f396cbd7f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3681617351074583927, guid: 90958418c573f174eac9466f396cbd7f,
         type: 3}
@@ -4085,17 +4103,17 @@ PrefabInstance:
     - target: {fileID: 3681617351215267626, guid: 90958418c573f174eac9466f396cbd7f,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3681617351215267626, guid: 90958418c573f174eac9466f396cbd7f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.9990441
       objectReference: {fileID: 0}
     - target: {fileID: 3681617351215267626, guid: 90958418c573f174eac9466f396cbd7f,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.00000009637132
       objectReference: {fileID: 0}
     - target: {fileID: 3681617351276697354, guid: 90958418c573f174eac9466f396cbd7f,
         type: 3}
@@ -11885,8 +11903,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764216119}
-  m_LocalRotation: {x: 0, y: 0.60698926, z: 0, w: 0.7947101}
-  m_LocalPosition: {x: 174.09, y: -0.8299999, z: 661.2}
+  m_LocalRotation: {x: -0.028825743, y: 0.8483061, z: 0.04633912, w: 0.5266863}
+  m_LocalPosition: {x: 188.255, y: -0.83400154, z: 674.58704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
