@@ -1,6 +1,5 @@
 ﻿using Delirium.Events;
 using Delirium.Tools;
-using UnityEngine;
 
 namespace Delirium
 {
@@ -17,12 +16,13 @@ namespace Delirium
 
 			foreach (WorldLoreScroll worldLoreScroll in worldLoreScrolls)
 			{
-				if (worldLoreScroll.Data.Number == 1) { continue;}
+				if (worldLoreScroll.Data.Number == 1) { continue; }
+
 				worldLoreScroll.gameObject.SetActive(false);
 			}
 		}
 
-		private void OnLoreScrollFound(LoreScrollData foundLoreScroll)
+		private void OnLoreScrollFound(LoreScrollData foundLoreScroll, Player invokingPlayer)
 		{
 			var openedMenu = MenuManager.Instance.OpenMenu<LoreScrollMenu>();
 			if (!openedMenu.IsOpen) { return; }
@@ -31,6 +31,7 @@ namespace Delirium
 			MenuManager.Instance.CloseMenu<GeneralHudMenu>();
 
 			if (foundLoreScroll.Number <= highestFoundLoreScrollNumber) { return; }
+
 			EventCollection.Instance.OpenPopupEvent.Invoke("You unlocked the next clue", PopupMenu.PopupLevel.Info);
 
 			foreach (WorldLoreScroll worldLoreScroll in worldLoreScrolls)
@@ -41,6 +42,24 @@ namespace Delirium
 			}
 
 			highestFoundLoreScrollNumber = foundLoreScroll.Number;
+
+			switch (foundLoreScroll.Number)
+			{
+				case 1:
+					invokingPlayer.Inventory.AddCraftingRecipe(ResourceManager.Instance.GetRecipeByResultName("Torch"));
+					break;
+
+				case 3:
+					invokingPlayer.Inventory.AddCraftingRecipe(ResourceManager.Instance.GetRecipeByResultName("Datura Potion"));
+					break;
+				
+				case 5: 
+					//TODO: Add replacement for torch.
+					break;
+				case 7: 
+					invokingPlayer.Inventory.AddCraftingRecipe(ResourceManager.Instance.GetRecipeByResultName("Spear"));
+					break;
+			}
 		}
 	}
 }

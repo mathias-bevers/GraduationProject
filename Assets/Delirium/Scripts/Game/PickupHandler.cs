@@ -84,7 +84,7 @@ namespace Delirium
 					break;
 
 				case WorldLoreScroll loreScroll:
-					EventCollection.Instance.LoreScrollFoundEvent.Invoke(loreScroll.Data);
+					EventCollection.Instance.LoreScrollFoundEvent.Invoke(loreScroll.Data, player);
 					break;
 
 				default: throw new NotSupportedException($"{pickupable.GetType().FullName} does not inherit from {typeof(Pickupable).FullName}");

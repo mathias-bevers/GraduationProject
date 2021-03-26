@@ -16,7 +16,7 @@ namespace Delirium
 			if (!Items.ContainsKey(item))
 			{
 				Items.Add(item, 1);
-				EventCollection.Instance.OpenPopupEvent.Invoke($"Added {item.Name} to inventory", PopupMenu.PopupLevel.Info);
+				EventCollection.Instance.OpenPopupEvent?.Invoke($"Added {item.Name} to inventory", PopupMenu.PopupLevel.Info);
 				EventCollection.Instance.UpdateInventoryEvent?.Invoke(this);
 				return;
 			}
@@ -24,7 +24,7 @@ namespace Delirium
 			if (Items[item] >= 10) { throw new AddingInventoryItemFailed($"Too many items of {item.Name} in inventory"); }
 
 			Items[item]++;
-			EventCollection.Instance.OpenPopupEvent.Invoke($"Added {item.Name} to inventory", PopupMenu.PopupLevel.Info);
+			EventCollection.Instance.OpenPopupEvent?.Invoke($"Added {item.Name} to inventory", PopupMenu.PopupLevel.Info);
 			EventCollection.Instance.UpdateInventoryEvent?.Invoke(this);
 		}
 
@@ -58,6 +58,7 @@ namespace Delirium
 
 			UnlockedRecipes.Add(craftingRecipe);
 			EventCollection.Instance.UpdateInventoryEvent?.Invoke(this);
+			EventCollection.Instance.OpenPopupEvent?.Invoke($"You unlocked the {craftingRecipe.Result.Name} crafting recipe", PopupMenu.PopupLevel.Info);
 		}
 	}
 }

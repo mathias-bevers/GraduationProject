@@ -3507,7 +3507,7 @@ GameObject:
   - component: {fileID: 7548629572738190918}
   - component: {fileID: 7378117222343955548}
   m_Layer: 0
-  m_Name: ZombieEnemy
+  m_Name: RoamingEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3602,8 +3602,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5139330190c054fa6e4a1450415d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 7.5
-  viewAngle: 120
+  viewRadius: 20
+  viewAngle: 180
   targetMask:
     serializedVersion: 2
     m_Bits: 256

@@ -15,7 +15,7 @@ namespace Delirium.Events
 
 	public class OpenPopupEvent : UnityEvent<string, PopupMenu.PopupLevel> { }
 
-	public class LoreScrollFoundEvent : UnityEvent<LoreScrollData> { }
+	public class LoreScrollFoundEvent : UnityEvent<LoreScrollData, Player> { }
 	#endregion
 
 	public class EventCollection : Singleton<EventCollection>

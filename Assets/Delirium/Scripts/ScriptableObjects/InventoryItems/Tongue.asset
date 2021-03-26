@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 400341ba509442569ca33c85c38368c6, type: 3}
-  m_Name: Datura
+  m_Name: Tongue
   m_EditorClassIdentifier: 
-  name: Datura
-  sprite: {fileID: 21300000, guid: c89f9a1c931511647b4292505792c04a, type: 3}
+  name: Tongue
+  sprite: {fileID: 0}
   worldItem: {fileID: 0}

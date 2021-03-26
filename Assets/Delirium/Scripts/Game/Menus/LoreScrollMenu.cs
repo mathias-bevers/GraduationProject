@@ -11,6 +11,9 @@ namespace Delirium
 
 		protected override void Start()
 		{
+			Opened += OnOpened;
+			Closed += () => { MenuManager.Instance.OpenMenu<GeneralHudMenu>(); };
+
 			base.Start();
 
 			Content.GetComponentInChildren<UnityEngine.UI.Button>().onClick.AddListener(Close);
@@ -25,19 +28,10 @@ namespace Delirium
 			text.SetText(loreScroll.Text);
 		}
 
-		public override void Open()
+		private void OnOpened()
 		{
-			base.Open();
-
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
-		}
-
-		public override void Close()
-		{
-			base.Close();
-
-			MenuManager.Instance.OpenMenu<GeneralHudMenu>();
 		}
 	}
 }

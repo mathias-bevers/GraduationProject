@@ -27,9 +27,8 @@ namespace Delirium.AI
 				StateChangedEvent?.Invoke(State);
 			}
 		}
-
-
-		private Collider attackTrigger; 
+		
+		private Collider attackTrigger;
 		private EnemyAIState state = EnemyAIState.Roaming;
 		private FieldOfView fieldOfView;
 		private float searchTimer = 5.0f;
@@ -46,7 +45,7 @@ namespace Delirium.AI
 			navMeshAgent = GetComponent<NavMeshAgent>();
 			fieldOfView = GetComponent<FieldOfView>();
 			attackTrigger = GetComponent<Collider>();
-			
+
 			healthBarImage = GetComponentInChildren<Image>();
 		}
 
@@ -58,6 +57,7 @@ namespace Delirium.AI
 
 				healthBarImage.fillAmount = health.Health01;
 			};
+
 			Health.DiedEvent += () =>
 			{
 				EnemyManager.Instance.UnregisterEnemy(this);
@@ -127,15 +127,10 @@ namespace Delirium.AI
 			}
 		}
 
-		private void OnGUI()
-		{
-			if (target != null) { GUI.Label(new Rect(10, 10, 150, 50), Vector3.Distance(target.transform.position, transform.position).ToString()); }
-		}
-
 		private void OnTriggerEnter(Collider other)
 		{
-			if(State != EnemyAIState.Attack) { return; }
-			
+			if (State != EnemyAIState.Attack) { return; }
+
 			Health collisionHealth = other.gameObject.GetComponent<Player>()?.Health;
 			collisionHealth?.TakeDamage(damage);
 		}

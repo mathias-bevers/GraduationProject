@@ -21,15 +21,20 @@ namespace Delirium
 
 		[SerializeField] private RectTransform recipeGrid;
 
-		private void Awake() { EventCollection.Instance.UpdateInventoryEvent.AddListener(OnUpdateInventory); }
+		protected override void Start()
+		{
+			Opened += OnOpened;
+
+			base.Start();
+
+			EventCollection.Instance.UpdateInventoryEvent.AddListener(OnUpdateInventory);
+		}
 
 		public override bool CanBeClosed() => true;
 		public override bool CanBeOpened() => !MenuManager.Instance.IsAnyOpen;
 
-		public override void Open()
+		public void OnOpened()
 		{
-			base.Open();
-
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
 		}
@@ -73,10 +78,7 @@ namespace Delirium
 		{
 			var generatedString = $"{craftingRecipe.NeededItems[0].Amount} {craftingRecipe.NeededItems[0].InventoryItemData.Name}";
 
-			for (var i = 1; i < craftingRecipe.NeededItems.Length; i++)
-			{
-				generatedString += $" + {craftingRecipe.NeededItems[i].Amount} {craftingRecipe.NeededItems[i].InventoryItemData.Name}";
-			}
+			for (var i = 1; i < craftingRecipe.NeededItems.Length; i++) { generatedString += $" + {craftingRecipe.NeededItems[i].Amount} {craftingRecipe.NeededItems[i].InventoryItemData.Name}"; }
 
 			return generatedString;
 		}

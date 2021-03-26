@@ -3,7 +3,6 @@ using System.Linq;
 using Delirium.Events;
 using Delirium.Tools;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Delirium
 {
@@ -19,7 +18,7 @@ namespace Delirium
 		private void Awake()
 		{
 			cameraTransform = GetComponentInChildren<Camera>().transform;
-			
+
 			Sanity = GetComponent<Sanity>();
 			Sanity.RegisterPlayer(this);
 		}

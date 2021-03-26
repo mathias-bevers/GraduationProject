@@ -1,50 +1,90 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Delirium;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.PostProcessing;
 
 public class CameraShake : MonoBehaviour
 {
-    
-    public PostProcessProfile volume;
-    public float power = 0.5f;
-    public float duration = 1.0f;
-    public Transform camera;
-    public float slowDownAmount = 1.0f;
-    public bool shouldShake = false;
+	[SerializeField] private float fadeSpeed;
+	[SerializeField] private float vignetteScale;
 
-    Vector3 startPosition;
-    float initialDuration;
+	public float power;
+	public Transform cameraTransform;
+	private Player parentPlayer;
+	private PostProcessingProfile postProcessingProfile;
+	private VignetteModel.Settings vignetteSettings;
+	private Vector3 startPosition;
+	private VignetteModel vignetteEffect;
 
-    private Vignette vignetteEffect;
+	// Start is called before the first frame update
+	private void Start()
+	{
+		postProcessingProfile = GetComponent<PostProcessingBehaviour>().profile;
+		parentPlayer = SearchForParentPlayer();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        camera = Camera.main.transform;
-        startPosition = camera.localPosition;
-        initialDuration = duration;
-        volume.TryGetSettings(out vignetteEffect);
-        vignetteEffect.intensity.value = 0;
-    }
+		cameraTransform = Camera.main.transform;
+		startPosition = cameraTransform.localPosition;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (shouldShake)
-        {
-            if (duration > 0)
-            {
-                //vignetteEffect.intensity.value = Mathf.Lerp(vignetteEffect.intensity.value, 15, .05f * Time.deltaTime);
-                camera.localPosition = startPosition + Random.insideUnitSphere * power;
-                duration -= Time.deltaTime * slowDownAmount;
-            }
-            else
-            {
-                shouldShake = false;
-                duration = initialDuration;
-                camera.localPosition = startPosition;
-            }
-        }
-    }
+		vignetteEffect = postProcessingProfile.vignette;
+		postProcessingProfile.vignette.enabled = true;
+
+		vignetteSettings = vignetteEffect.settings;
+		vignetteSettings.intensity = 0f;
+		vignetteEffect.settings = vignetteSettings;
+	}
+
+	// Update is called once per frame
+	private void Update()
+	{
+		/*if (!shouldShake) { return; }
+
+		if (duration > 0)
+		{
+			VignetteModel.Settings vignetteEffectSettings = vignetteEffect.settings;
+			vignetteEffectSettings.intensity = Mathf.Lerp(vignetteEffectSettings.intensity, 15, .05f * Time.deltaTime);
+			vignetteEffect.settings = vignetteEffectSettings;
+			
+			cameraTransform.localPosition = startPosition + Random.insideUnitSphere * power;
+			duration -= Time.deltaTime * slowDownAmount;
+		}
+		else
+		{
+			shouldShake = false;
+			duration = initialDuration;
+			cameraTransform.localPosition = startPosition;
+		}*/
+
+		if (parentPlayer.Sanity.CurrentSanity >= 20)
+		{
+			vignetteSettings.intensity = Mathf.Lerp(vignetteEffect.settings.intensity, 0.0f, fadeSpeed * 2 * Time.deltaTime);
+			vignetteEffect.settings = vignetteSettings;
+
+			cameraTransform.localPosition = startPosition;
+			return;
+		}
+
+
+		vignetteSettings.intensity = Mathf.Lerp(vignetteSettings.intensity, vignetteScale, fadeSpeed * Time.deltaTime);
+		vignetteEffect.settings = vignetteSettings;
+
+		cameraTransform.localPosition = startPosition + Random.insideUnitSphere * power;
+	}
+
+	private void OnGUI() { GUI.Label(new Rect(10, 10, 150, 50), vignetteEffect.settings.intensity.ToString()); }
+
+	private Player SearchForParentPlayer()
+	{
+		Transform t = transform;
+
+		while (t.parent != null)
+		{
+			var player = t.parent.GetComponent<Player>();
+
+			if (player != null) { return player; }
+
+			t = t.parent;
+		}
+
+		Debug.LogError("Could not find parent player");
+		return null;
+	}
 }

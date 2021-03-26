@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 400341ba509442569ca33c85c38368c6, type: 3}
-  m_Name: Datura
+  m_Name: DaturaPotion
   m_EditorClassIdentifier: 
-  name: Datura
-  sprite: {fileID: 21300000, guid: c89f9a1c931511647b4292505792c04a, type: 3}
+  name: Datura Potion
+  sprite: {fileID: 21300000, guid: b31962060c3b34843bf948e2637f30f7, type: 3}
   worldItem: {fileID: 0}

@@ -49,7 +49,7 @@ namespace Delirium.AI
 		{
 			if (followingEnemyObject != null) { return; }
 
-			followingEnemyObject = Instantiate(ResourcesManager.Instance.FollowingEnemyPrefab);
+			followingEnemyObject = Instantiate(ResourceManager.Instance.FollowingEnemyPrefab);
 
 			Transform playerCameraTransform = playerToFollow.GetComponent<PlayerMovement>()?.CameraTransform;
 			followingEnemyObject.transform.position = playerToFollow.transform.position + playerCameraTransform.forward * FOLLOWING_ENEMY_SPAWN_DISTANCE;

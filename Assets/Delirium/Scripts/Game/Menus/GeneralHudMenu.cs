@@ -20,6 +20,8 @@ namespace Delirium
 
 		protected override void Start()
 		{
+			Opened += OnOpened;
+
 			base.Start();
 
 			Health playerHealth = GameManager.Instance.Player.Health;
@@ -38,10 +40,8 @@ namespace Delirium
 		public override bool CanBeOpened() => !MenuManager.Instance.IsAnyOpen;
 		public override bool CanBeClosed() => true;
 
-		public override void Open()
+		public void OnOpened()
 		{
-			base.Open();
-			
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
 		}
