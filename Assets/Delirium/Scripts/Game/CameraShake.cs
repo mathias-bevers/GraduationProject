@@ -69,8 +69,6 @@ public class CameraShake : MonoBehaviour
 		cameraTransform.localPosition = startPosition + Random.insideUnitSphere * power;
 	}
 
-	private void OnGUI() { GUI.Label(new Rect(10, 10, 150, 50), vignetteEffect.settings.intensity.ToString()); }
-
 	private Player SearchForParentPlayer()
 	{
 		Transform t = transform;
