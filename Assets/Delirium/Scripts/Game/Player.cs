@@ -12,7 +12,7 @@ namespace Delirium
 		public Inventory Inventory { get; } = new Inventory();
 		public Health Health { get; } = new Health(100);
 		public Sanity Sanity { get; private set; }
-
+		
 		private Transform cameraTransform;
 
 		private void Awake()
@@ -34,12 +34,12 @@ namespace Delirium
 			if (Input.GetKeyUp(KeyCode.Tab))
 			{
 				MenuManager.Instance.ToggleMenu<InventoryMenu>();
-				MenuManager.Instance.ToggleMenu<GeneralHudMenu>();
+				MenuManager.Instance.ToggleMenu<GeneralHUDMenu>();
 			}
 
 			if (Input.GetKeyUp(KeyCode.Escape))
 			{
-				MenuManager.Instance.CloseMenu<GeneralHudMenu>();
+				MenuManager.Instance.CloseMenu<GeneralHUDMenu>();
 				MenuManager.Instance.OpenMenu<PauseMenu>();
 			}
 
@@ -54,7 +54,7 @@ namespace Delirium
 		{
 			void DisableTools()
 			{
-				MenuManager.Instance.GetMenu<GeneralHudMenu>()?.TorchDurabilityBar.SetActive(false);
+				MenuManager.Instance.GetMenu<GeneralHUDMenu>()?.TorchDurabilityBar.SetActive(false);
 				foreach (Transform child in cameraTransform) { child.gameObject.SetActive(false); }
 			}
 
@@ -73,7 +73,7 @@ namespace Delirium
 					if (!Inventory.Items.ContainsKey(torchData) || Inventory.Items[torchData] == 0) { return; }
 
 					DisableTools();
-					MenuManager.Instance.GetMenu<GeneralHudMenu>()?.TorchDurabilityBar.SetActive(true);
+					MenuManager.Instance.GetMenu<GeneralHUDMenu>()?.TorchDurabilityBar.SetActive(true);
 					cameraTransform.GetChild(1).gameObject.SetActive(true);
 					break;
 

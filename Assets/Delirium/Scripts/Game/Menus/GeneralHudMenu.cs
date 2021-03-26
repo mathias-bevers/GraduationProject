@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Delirium
 {
-	public class GeneralHudMenu : Menu
+	public class GeneralHUDMenu : Menu
 	{
 		[SerializeField] private GameObject healthBar;
 		[SerializeField] private GameObject sanityBar;
@@ -31,8 +31,9 @@ namespace Delirium
 			OnSanityChanged(GameManager.Instance.Player.Sanity);
 			EventCollection.Instance.SanityChangedEvent.AddListener(OnSanityChanged);
 
+			EventCollection.Instance.EnteredInteractionZoneEvent.AddListener(OnEnteredInteractionZone);
 			EventCollection.Instance.ItemHoverEvent.AddListener(OnItemHoverEnter);
-			EventCollection.Instance.ItemHoverExitEvent.AddListener(() => pickupText.gameObject.SetActive(false));
+			EventCollection.Instance.DisableInteractTextEvent.AddListener(() => pickupText.gameObject.SetActive(false));
 
 			EventCollection.Instance.TorchDecayEvent.AddListener(fillAmount => torchDurabilityBar.fillAmount = fillAmount);
 		}
@@ -83,6 +84,28 @@ namespace Delirium
 					break;
 
 				default: throw new NotSupportedException();
+			}
+		}
+
+		private void OnEnteredInteractionZone(ZoneHandler.InteractionZone zoneType)
+		{
+			pickupText.gameObject.SetActive(true);
+
+			switch (zoneType)
+			{
+				case ZoneHandler.InteractionZone.None: 
+					pickupText.gameObject.SetActive(false);
+					break;
+				
+				case ZoneHandler.InteractionZone.Campfire: 
+					pickupText.SetText("Press <color=red>E</color> to light the campfire");
+					break;
+				
+				case ZoneHandler.InteractionZone.Ritual: 
+					pickupText.SetText("Press <color=red>E</color> to perform the ritual");
+					break;
+				
+				default: throw new ArgumentOutOfRangeException(nameof(zoneType), zoneType, null);
 			}
 		}
 	}

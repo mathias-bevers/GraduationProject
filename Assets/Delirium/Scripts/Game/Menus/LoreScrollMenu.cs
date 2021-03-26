@@ -12,7 +12,7 @@ namespace Delirium
 		protected override void Start()
 		{
 			Opened += OnOpened;
-			Closed += () => { MenuManager.Instance.OpenMenu<GeneralHudMenu>(); };
+			Closed += () => { MenuManager.Instance.OpenMenu<GeneralHUDMenu>(); };
 
 			base.Start();
 

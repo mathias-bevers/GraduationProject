@@ -1,10 +1,14 @@
-﻿using Delirium.Events;
+﻿using System.Linq;
+using Delirium.Events;
 using Delirium.Tools;
+using UnityEngine;
 
 namespace Delirium
 {
 	public class LoreScrollManager : Singleton<LoreScrollManager>
 	{
+		public int ScrollsFound { get; private set; } = 0;
+
 		private int highestFoundLoreScrollNumber;
 		private WorldLoreScroll[] worldLoreScrolls;
 
@@ -25,10 +29,10 @@ namespace Delirium
 		private void OnLoreScrollFound(LoreScrollData foundLoreScroll, Player invokingPlayer)
 		{
 			var openedMenu = MenuManager.Instance.OpenMenu<LoreScrollMenu>();
-			if (!openedMenu.IsOpen) { return; }
 
 			openedMenu.SetScrollText(foundLoreScroll);
-			MenuManager.Instance.CloseMenu<GeneralHudMenu>();
+
+			MenuManager.Instance.CloseMenu<GeneralHUDMenu>();
 
 			if (foundLoreScroll.Number <= highestFoundLoreScrollNumber) { return; }
 
@@ -42,6 +46,7 @@ namespace Delirium
 			}
 
 			highestFoundLoreScrollNumber = foundLoreScroll.Number;
+			ScrollsFound++;
 
 			switch (foundLoreScroll.Number)
 			{
@@ -52,12 +57,14 @@ namespace Delirium
 				case 3:
 					invokingPlayer.Inventory.AddCraftingRecipe(ResourceManager.Instance.GetRecipeByResultName("Datura Potion"));
 					break;
-				
-				case 5: 
-					//TODO: Add replacement for torch.
-					break;
-				case 7: 
+
+				case 7:
 					invokingPlayer.Inventory.AddCraftingRecipe(ResourceManager.Instance.GetRecipeByResultName("Spear"));
+					break;
+
+				case 8:
+					Transform noteTransform = worldLoreScrolls.ToList().Find(worldLoreScroll => worldLoreScroll.Data.Number == 8).transform;
+					noteTransform.parent.GetComponent<Collider>().enabled = true;
 					break;
 			}
 		}

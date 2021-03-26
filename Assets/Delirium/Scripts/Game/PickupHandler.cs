@@ -15,7 +15,7 @@ namespace Delirium
 
 		private Player player;
 		private Transform cameraTransform;
-		
+
 		public void Start()
 		{
 			player = GetComponent<Player>();
@@ -51,7 +51,7 @@ namespace Delirium
 				return;
 			}
 
-		
+
 			highlightedObject = pickupable;
 			highlightedObject.InReach = true;
 

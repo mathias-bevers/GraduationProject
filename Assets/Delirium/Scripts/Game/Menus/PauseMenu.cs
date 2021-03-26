@@ -37,7 +37,7 @@ namespace Delirium
 		public void OnClosed()
 		{
 			Time.timeScale = 1.0f;
-			MenuManager.Instance.OpenMenu<GeneralHudMenu>();
+			MenuManager.Instance.OpenMenu<GeneralHUDMenu>();
 		}
 	}
 }

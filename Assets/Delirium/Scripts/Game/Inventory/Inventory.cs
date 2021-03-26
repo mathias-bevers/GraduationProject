@@ -2,7 +2,6 @@
 using System.Linq;
 using Delirium.Events;
 using Delirium.Exceptions;
-using Delirium.Tools;
 
 namespace Delirium
 {
@@ -49,9 +48,6 @@ namespace Delirium
 			catch (RemovingInventoryItemFailed exception) { EventCollection.Instance.OpenPopupEvent.Invoke(exception.Message, PopupMenu.PopupLevel.Error); }
 		}
 
-		public bool CanBeCrafted(CraftingRecipeData craftingRecipe) => craftingRecipe.NeededItems.All(crp => Items.ContainsKey(crp.InventoryItemData) && Items[crp.InventoryItemData] >= crp.Amount);
-
-
 		public void AddCraftingRecipe(CraftingRecipeData craftingRecipe)
 		{
 			if (UnlockedRecipes.Contains(craftingRecipe)) { throw new AddingCraftingRecipeFailed($"You already unlocked the crafting recipe for {craftingRecipe.Result.Name}"); }
@@ -60,5 +56,10 @@ namespace Delirium
 			EventCollection.Instance.UpdateInventoryEvent?.Invoke(this);
 			EventCollection.Instance.OpenPopupEvent?.Invoke($"You unlocked the {craftingRecipe.Result.Name} crafting recipe", PopupMenu.PopupLevel.Info);
 		}
+
+		public bool CanBeCrafted(CraftingRecipeData craftingRecipe) => craftingRecipe.NeededItems.All(crp => Items.ContainsKey(crp.InventoryItemData) && Items[crp.InventoryItemData] >= crp.Amount);
+
+		public InventoryItemData GetItemKeyByName(string name) => Items.FirstOrDefault(x => x.Key.Name == name).Key;
+		public int GetItemValueByName(string name) => Items.FirstOrDefault(x => x.Key.Name == name).Value;
 	}
 }
