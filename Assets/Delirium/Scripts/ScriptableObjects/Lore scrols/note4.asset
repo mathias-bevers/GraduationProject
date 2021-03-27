@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: note4
   m_EditorClassIdentifier: 
   number: 4
-  text: "1896, Jonathan Worthing\r\n\r\nNo sign of a living soul yet, strangely no
-    animals either, not even seagulls. I think I saw smoke rising from the east \u2013
-    I kept calling out but no one answered. Still, I should remain quiet in case
-    the beasts are simply sleeping. I wouldn\u2019t want to end up like the poor
-    bastard I found when I arrived.\r"
+  text: "\n1896, Jonathan Worthing\r\n\r\nNo sign of a living soul yet, strangely
+    no animals either, not even seagulls. I think I saw smoke rising from the east
+    \u2013 I kept calling out but no one answered. Still, I should remain quiet in
+    case the beasts are simply sleeping. I wouldn\u2019t want to end up like the
+    poor bastard I found when I arrived.\r"

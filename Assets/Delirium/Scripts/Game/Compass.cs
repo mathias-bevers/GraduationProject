@@ -1,17 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Delirium.Events;
 
+namespace Delirium{
 public class Compass : MonoBehaviour
 {
+    [SerializeField] private Transform southernIsland;
+    [SerializeField] private Transform ferry;
+
     Vector3 NorthDirection;
     public Transform player;
     public Quaternion MissionDirection;
 
-    public Transform MissionPlace;
+    private Transform MissionPlace;
     public Transform CompassImage;
     public Transform MissionPointer;
 
+    private void Start()
+    {
+        EventCollection.Instance.LoreScrollFoundEvent.AddListener(OnLoreScrollFound);
+        MissionPointer.gameObject.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -26,7 +36,7 @@ public class Compass : MonoBehaviour
 
     public void MissionTrigger()
     {
-
+        MissionPointer.gameObject.SetActive(true);
     }
 
     public void ChangeMissionPointer()
@@ -41,4 +51,16 @@ public class Compass : MonoBehaviour
 
         MissionPointer.localRotation = MissionDirection * Quaternion.Euler(NorthDirection);
     }
+        private void OnLoreScrollFound(LoreScrollData data, Player player)
+        {
+            if (data.Number == 8)
+            {
+                MissionPlace = southernIsland;
+            }
+            if (data.Number == 11)
+            {
+                MissionPlace = ferry;
+            }
+    }
+}
 }

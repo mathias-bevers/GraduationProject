@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: note8
   m_EditorClassIdentifier: 
   number: 8
-  text: "Cave Altar + 3 Human skulls + 9 notes + one tongue\r\n\r\nYa na kadishtu
-    nilgh'ri stell'bsna Nyogtha,\r\nK'yarnak phlegethor l'ebumna syha'h n'ghft,\r\nYa
-    hai kadishtu ep r'luh-eeh Nyogtha eeh,\r\ns'uhn-ngh athg li'hee orr'e syha'h.\r\n\r\n\r\nTHREE
-    SKULLS OF HUMAN BONE, FORGOTTEN BY THEIR KIN\r\nNINE FRAGMENTS OF THE MIND\r\nAND
-    A CREATURE FREE OF SIN\r\n\r\nTHE FERRYMAN WILL TAKE YOU HOME\r\nAfter this,
-    the compass will break and point you south-west.\r"
+  text: "Ya na kadishtu nilgh'ri stell'bsna Nyogtha,\r\nK'yarnak phlegethor l'ebumna
+    syha'h n'ghft,\r\nYa hai kadishtu ep r'luh-eeh Nyogtha eeh,\r\ns'uhn-ngh athg
+    li'hee orr'e syha'h.\r\n\r\n\r\nTHREE SKULLS OF HUMAN BONE, FORGOTTEN BY THEIR
+    KIN\r\nNINE FRAGMENTS OF THE MIND\r\nAND A CREATURE FREE OF SIN\r\n\r\nTHE FERRYMAN
+    WILL TAKE YOU HOME\r"

@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: note1
   m_EditorClassIdentifier: 
   number: 1
-  text: "Fireplace + Torch/Flint\r\nFlint is to be found at the shoreline.\r\n\r\n1743
-    Philippe of Bursbury\r\n\r\nI believe I\u2019ve discovered an uncharted Island!
-    I\u2019ve double\u2014nay, triple checked at this point, and it doesn\u2019t
+  text: "\n1743 Philippe of Bursbury\r\n\r\nI believe I\u2019ve discovered an uncharted
+    Island! I\u2019ve double\u2014nay, triple checked at this point, and it doesn\u2019t
     line up in the slightest. Either Jeremiah sold me a faulty map, or I\u2019ll
     have discovered my very own land. Should it truly be uninhabited, I\u2019ll use
     the island\u2019s resources to build myself a mansion fit for a king. Why, if
@@ -25,5 +24,6 @@ MonoBehaviour:
     be the storm that drove my rowboat against the rocks! A proper hole in the hull
     if I\u2019ve ever seen one. I should blame the craftsmanship first and foremost..
     though the main ship should catch up soon enough. I believe I\u2019ll head deeper
-    into the forest first, south-eastward and see if I cannot find something to eat
-    now that I\u2019ve got a fire started.\r"
+    into the forest first, south by south-eastward and see if I cannot find something
+    to eat now that I\u2019ve got a fire started.\r\n\nFlint is to be found at the
+    shoreline.\r"

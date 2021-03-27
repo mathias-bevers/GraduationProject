@@ -13,8 +13,5 @@ MonoBehaviour:
   m_Name: note10
   m_EditorClassIdentifier: 
   number: 10
-  text: "A skull can be picked up here, Winfield\u2019s.\r\nA ritual knife next to
-    the last skeleton.\r\nUse the knife in the inventory to cut out your tongue,
-    losing health and sanity.\r\n\r\n????, ????\r\n\r\nY'ai 'ng'ngah, h'ee - l'geb
-    f'ai throdog uaaah.\r\n\r\nCUT OUT YOUR TONGUE AND SPEAK NOT OF THIS PLACE \r\nPROVE
-    YOUR DEVOTION"
+  text: "\r????, ????\r\n\r\nY'ai 'ng'ngah, h'ee - l'geb f'ai throdog uaaah.\r\n\r\nCUT
+    OUT YOUR TONGUE AND SPEAK NOT OF THIS PLACE \r\nPROVE YOUR DEVOTION"
