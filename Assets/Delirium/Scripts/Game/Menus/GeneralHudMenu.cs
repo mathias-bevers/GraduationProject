@@ -72,7 +72,7 @@ namespace Delirium
 			switch (data)
 			{
 				case InventoryItemData item:
-					pickupText.SetText($"Press <color=red>E</color> to pick up {item.Name}");
+					pickupText.SetText(item.Name != "Tongue" ?  $"Press <color=red>E</color> to pick up {item.Name}" : "Press <color=red>E</color> to cut out your tongue");
 					break;
 
 				case CraftingRecipeData craftingRecipe:

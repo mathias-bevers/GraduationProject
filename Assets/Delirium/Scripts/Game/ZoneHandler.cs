@@ -54,8 +54,9 @@ namespace Delirium
 						EventCollection.Instance.OpenPopupEvent.Invoke("You don't have all the required times for the ritual", PopupMenu.PopupLevel.Error);
 						return;
 					}
-					//TODO: perform ritual.
 					
+					EventCollection.Instance.LoreScrollFoundEvent.Invoke(ResourceManager.Instance.GetLoreScrollByNumber(12), GetComponent<Player>());
+					//TODO: spawn enemies.
 					break;
 				default: throw new ArgumentOutOfRangeException();
 			}

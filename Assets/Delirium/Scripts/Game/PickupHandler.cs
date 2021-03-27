@@ -70,6 +70,10 @@ namespace Delirium
 						player.Inventory.AddItem(inventoryItem.Data);
 						Destroy(inventoryItem.gameObject);
 						highlightedObject = null;
+
+						if (inventoryItem.Data.Name != "Tongue") { return; }
+
+						EventCollection.Instance.LoreScrollFoundEvent.Invoke(ResourceManager.Instance.GetLoreScrollByNumber(11), player);
 					}
 					catch (AddingInventoryItemFailed exception) { EventCollection.Instance.OpenPopupEvent.Invoke(exception.Message, PopupMenu.PopupLevel.Waring); }
 

@@ -84,6 +84,13 @@
       "dependencies": {},
       "hash": "4dedbeac2e2d61c5c892e517728d2c4c74ce0acc"
     },
+    "missingunityevents": {
+      "version": "https://github.com/handzlikchris/Unity.MissingUnityEvents.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "9da57fbc4b0b33d11d3e01feb0ec0cb22c4115a8"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

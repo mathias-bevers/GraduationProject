@@ -34,13 +34,10 @@ public class Compass : MonoBehaviour
         CompassImage.localEulerAngles = NorthDirection;
     }
 
-    public void MissionTrigger()
-    {
-        MissionPointer.gameObject.SetActive(true);
-    }
-
     public void ChangeMissionPointer()
     {
+        if (MissionPlace == null) { return; }
+
         Vector3 dir = transform.position - MissionPlace.position;
 
         MissionDirection = Quaternion.LookRotation(dir);
@@ -51,16 +48,19 @@ public class Compass : MonoBehaviour
 
         MissionPointer.localRotation = MissionDirection * Quaternion.Euler(NorthDirection);
     }
-        private void OnLoreScrollFound(LoreScrollData data, Player player)
+    
+    private void OnLoreScrollFound(LoreScrollData data, Player player)
+    {
+        if (data.Number == 8)
         {
-            if (data.Number == 8)
-            {
-                MissionPlace = southernIsland;
-            }
-            if (data.Number == 11)
-            {
-                MissionPlace = ferry;
-            }
+            MissionPointer.gameObject.SetActive(true);
+            MissionPlace = southernIsland;
+        }
+        if (data.Number == 12)
+        {
+            ferry.gameObject.SetActive(true);
+            MissionPlace = ferry;
+        }
     }
 }
 }

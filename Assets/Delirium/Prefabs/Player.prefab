@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 2670622493161808087}
   - component: {fileID: 2670622493161808084}
   - component: {fileID: 8215542582263587478}
+  - component: {fileID: 1160309462017245806}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -304,6 +305,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e043d6252026490a9c4b6c2f170cd6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1160309462017245806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2670622493161808044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0ff847026b57914ba38295b2106d52d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2670622494810681447
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +346,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2670622494810681447}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.29862434, z: 0, w: 0.95437074}
   m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -342,7 +355,7 @@ Transform:
   - {fileID: 2487478478178632364}
   m_Father: {fileID: 2670622493161808080}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -34.75, z: 0}
 --- !u!20 &2670622494810681445
 Camera:
   m_ObjectHideFlags: 0
@@ -427,7 +440,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c4bbe6058ef7a409e3d77b8f99770d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vignetteScale: 5
+  fadeSpeed: 0.25
+  vignetteScale: 0.75
   power: 0.1
   cameraTransform: {fileID: 2670622494810681450}
 --- !u!114 &4294963164643036479
@@ -442,9 +456,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5bd4872e9ad63f418d17cecfa2aa1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  southernIsland: {fileID: 0}
+  ferry: {fileID: 0}
   player: {fileID: 2670622494810681450}
   MissionDirection: {x: 0, y: 0, z: 0, w: 0}
-  MissionPlace: {fileID: 0}
   CompassImage: {fileID: 0}
   MissionPointer: {fileID: 0}
 --- !u!65 &771897436

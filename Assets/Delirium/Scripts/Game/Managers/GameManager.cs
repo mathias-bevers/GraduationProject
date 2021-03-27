@@ -5,8 +5,7 @@ using UnityEngine;
 
 namespace Delirium
 {
-	public class 
-		GameManager : Singleton<GameManager>
+	public class GameManager : Singleton<GameManager>
 	{
 		public Player Player { get; private set; }
 

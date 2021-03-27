@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Tongue
   m_EditorClassIdentifier: 
   name: Tongue
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: d95d56c8f89ba1544b7951c0de805177, type: 3}
   worldItem: {fileID: 0}

@@ -1,4 +1,5 @@
-﻿using Delirium.AI;
+﻿using System;
+using Delirium.AI;
 using Delirium.Events;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ namespace Delirium
 
 			if (CurrentSanity < 20) { parentPlayer.Health.TakeDamage(1); }
 
-			if (CurrentSanity < 10) { EnemyManager.Instance.SpawnFollowingEnemy(parentPlayer); }
+			if (CurrentSanity < 10) { /*EnemyManager.Instance.SpawnFollowingEnemy(parentPlayer);*/ }
 
 			EventCollection.Instance.SanityChangedEvent?.Invoke(this);
 			timer = SANITY_ADJUST_DELAY;
@@ -59,7 +60,7 @@ namespace Delirium
 		//TODO: Remove when done testing.
 		public void DEVELOPERTEST()
 		{
-			CurrentSanity = 20;
+			CurrentSanity = 10;
 			EventCollection.Instance.SanityChangedEvent?.Invoke(this);
 		}
 	}

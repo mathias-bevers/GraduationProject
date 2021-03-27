@@ -6,7 +6,7 @@ namespace Delirium
 	public class LoreScrollData : ScriptableObject
 	{
 		[SerializeField, Range(1, 12)] private int number = 1;
-		[SerializeField, TextArea] private string text;
+		[SerializeField, TextArea(10, 100)] private string text;
 
 		public string Text => text;
 		public int Number => number;

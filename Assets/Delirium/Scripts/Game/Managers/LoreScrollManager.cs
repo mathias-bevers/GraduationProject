@@ -7,7 +7,7 @@ namespace Delirium
 {
 	public class LoreScrollManager : Singleton<LoreScrollManager>
 	{
-		public int ScrollsFound { get; private set; } = 0;
+		public int ScrollsFound { get; private set; }
 
 		private int highestFoundLoreScrollNumber;
 		private WorldLoreScroll[] worldLoreScrolls;
@@ -48,6 +48,10 @@ namespace Delirium
 			highestFoundLoreScrollNumber = foundLoreScroll.Number;
 			ScrollsFound++;
 
+			if (foundLoreScroll.Number > 10) { return; }
+
+			Transform noteTransform = worldLoreScrolls.ToList().Find(worldLoreScroll => worldLoreScroll.Data.Number == foundLoreScroll.Number).transform;
+
 			switch (foundLoreScroll.Number)
 			{
 				case 1:
@@ -63,8 +67,10 @@ namespace Delirium
 					break;
 
 				case 8:
-					Transform noteTransform = worldLoreScrolls.ToList().Find(worldLoreScroll => worldLoreScroll.Data.Number == 8).transform;
 					noteTransform.parent.GetComponent<Collider>().enabled = true;
+					break;
+				case 10:
+					noteTransform.parent.Find("Ritual Dagger").GetComponent<Collider>().enabled = true;
 					break;
 			}
 		}

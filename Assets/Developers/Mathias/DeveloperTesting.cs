@@ -7,7 +7,7 @@ namespace Testing
 {
 	public class DeveloperTesting : MonoBehaviour
 	{
-		[SerializeField] private LoreScrollData note8;
+		[SerializeField] private LoreScrollData scrollToUnlock;
 		
 		private void Update()
 		{
@@ -15,7 +15,7 @@ namespace Testing
 
 			if (Input.GetKeyDown(KeyCode.F2)) { GameManager.Instance.Player.Sanity.DEVELOPERTEST(); }
 
-			if (Input.GetKeyDown(KeyCode.F3)) { EventCollection.Instance.LoreScrollFoundEvent.Invoke(note8, GameManager.Instance.Player);}
+			if (Input.GetKeyDown(KeyCode.F3)) { EventCollection.Instance.LoreScrollFoundEvent.Invoke(scrollToUnlock, GameManager.Instance.Player);}
 		}
 	}
 }
