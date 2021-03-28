@@ -1,53 +1,53 @@
 ﻿using UnityEngine.Audio;
 using System;
+using Delirium.Tools;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+namespace Delirium.Sound
 {
-    public Sound[] sounds;
+	public class AudioManager : Singleton<AudioManager>
+	{
+		[SerializeField] private AudioMixer audioMixer;
 
-    public static AudioManager instance;
-    // Start is called before the first frame update
-    void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+		public AudioMixer AudioMixer => audioMixer;
 
-        DontDestroyOnLoad(gameObject);
+		public Sound[] sounds;
 
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
+		protected override void Awake()
+		{
+			base.Awake();
 
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-        }
-    }
+			foreach (Sound sound in sounds)
+			{
+				sound.source = gameObject.AddComponent<AudioSource>();
+				sound.source.clip = sound.clip;
 
-    private void Start()
-    {
-        Play("Theme");
-        Play("Ambience_01");
-        Play("Ambience_02");
-        Play("Ambience_03");
-    }
+				sound.source.volume = sound.volume;
+				sound.source.pitch = sound.pitch;
+				sound.source.loop = sound.loop;
+				sound.source.outputAudioMixerGroup = AudioMixer.FindMatchingGroups("Master")[0];
+			}
+		}
 
-    public void Play (string name)
-    {
-       Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null)
-        {
-            Debug.LogWarning("Sound: " + name + " not found");
-            return;
-        }
-        s.source.Play();
-        
-    }
+		private void Start()
+		{
+			Play("Theme");
+			Play("Ambience_01");
+			Play("Ambience_02");
+			Play("Ambience_03");
+		}
+
+		public Sound Play(string clipName)
+		{
+			Sound sound = Array.Find(sounds, s => s.name == clipName);
+			
+			if (sound == null)
+			{
+				throw new NullReferenceException($"Could not find a sound clip with the name {clipName}.");
+			}
+			
+			sound.source.Play();
+			return sound;
+		}
+	}
 }

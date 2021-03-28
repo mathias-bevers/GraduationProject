@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Delirium.Sound;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -23,11 +24,13 @@ namespace Delirium.AI
 			get => state;
 			set
 			{
+				if (value != state) { StateChangedEvent?.Invoke(value); }
+
 				state = value;
-				StateChangedEvent?.Invoke(State);
 			}
 		}
 
+		private bool canPlayJumpScare;
 		private Collider attackTrigger;
 		private EnemyAIState state = EnemyAIState.Roaming;
 		private FieldOfView fieldOfView;
@@ -86,8 +89,6 @@ namespace Delirium.AI
 
 					navMeshAgent.speed = RUNNING_SPEED;
 					navMeshAgent.destination = target.transform.position;
-					FindObjectOfType<AudioManager>().Play("Enemy_Chase");
-					FindObjectOfType<AudioManager>().Play("Jumpscare_01");
 					if (Vector3.Distance(transform.position, target.transform.position) <= ATTACK_DISTANCE) { State = EnemyAIState.Attack; }
 
 					break;
@@ -177,6 +178,22 @@ namespace Delirium.AI
 			if (!(navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)) { return false; }
 
 			return !navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0.0f;
+		}
+
+		private void OnStateChanged(EnemyAIState state)
+		{
+			if (target != null && !target.IsAlive) { return; }
+
+			if (state == EnemyAIState.Roaming) { canPlayJumpScare = true; }
+
+			if (state != EnemyAIState.TargetLock) { return; }
+
+			AudioManager.Instance.Play("Enemy_Chase");
+
+			if (!canPlayJumpScare) { return; }
+
+			AudioManager.Instance.Play("Jumpscare_01");
+			canPlayJumpScare = false;
 		}
 	}
 }

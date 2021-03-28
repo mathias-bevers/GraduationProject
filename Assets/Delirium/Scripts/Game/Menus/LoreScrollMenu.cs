@@ -7,6 +7,8 @@ namespace Delirium.Lore
 {
 	public class LoreScrollMenu : Menu
 	{
+		private int openScrollNumber;
+		
 		[SerializeField] private TextMeshProUGUI title;
 		[SerializeField] private TextMeshProUGUI text;
 
@@ -27,6 +29,8 @@ namespace Delirium.Lore
 		{
 			title.SetText($"Note #{loreScroll.Number}");
 			text.SetText(loreScroll.Text);
+
+			openScrollNumber = loreScroll.Number;
 		}
 
 		private void OnOpened()
@@ -38,6 +42,13 @@ namespace Delirium.Lore
 		private void OnClosed()
 		{
 			 MenuManager.Instance.OpenMenu<PlayerHUDMenu>();
+
+			 if (openScrollNumber != 12)
+			 {
+				 openScrollNumber = 0;
+				 return;
+			 }
+			 
 			 EnemyManager.Instance.SpawnEnemyHorde();
 		}
 	}
