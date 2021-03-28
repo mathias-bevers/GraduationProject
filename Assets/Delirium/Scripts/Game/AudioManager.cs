@@ -3,7 +3,7 @@ using System;
 using Delirium.Tools;
 using UnityEngine;
 
-namespace Delirium.Sound
+namespace Delirium.Audio
 {
 	public class AudioManager : Singleton<AudioManager>
 	{
@@ -47,6 +47,21 @@ namespace Delirium.Sound
 			}
 			
 			sound.source.Play();
+			return sound;
+		}
+		
+		public Sound GetSoundByName(string clipName) => Array.Find(sounds, s => s.name == clipName);
+		
+		public Sound Stop(string clipName)
+		{
+			Sound sound = Array.Find(sounds, s => s.name == clipName);
+			
+			if (sound == null)
+			{
+				throw new NullReferenceException($"Could not find a sound clip with the name {clipName}.");
+			}
+			
+			sound.source.Stop();
 			return sound;
 		}
 	}

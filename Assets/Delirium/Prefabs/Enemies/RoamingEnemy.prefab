@@ -3505,6 +3505,7 @@ GameObject:
   - component: {fileID: 7548629572738190939}
   - component: {fileID: 7548629572738190936}
   - component: {fileID: 7548629572738190918}
+  - component: {fileID: 2210268275902756306}
   - component: {fileID: 7378117222343955548}
   m_Layer: 0
   m_Name: RoamingEnemy
@@ -3622,6 +3623,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51cbf55fd144f5d8c2c86322c056004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2210268275902756306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548629572875815375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40bf1fb2a7d4bdc919a0b4c1e9c045d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseFadeSpeed: 1
 --- !u!65 &7378117222343955548
 BoxCollider:
   m_ObjectHideFlags: 0

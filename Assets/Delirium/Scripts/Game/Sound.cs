@@ -3,7 +3,7 @@ using UnityEngine.Audio;
 using UnityEngine;
 
 
-namespace Delirium.Sound
+namespace Delirium.Audio
 {
     [Serializable]
     public class Sound

@@ -1,4 +1,4 @@
-﻿using Delirium.Sound;
+﻿using Delirium.Audio;
 using Delirium.Tools;
 using UnityEngine;
 using UnityEngine.UI;
