@@ -27,7 +27,7 @@ namespace Delirium.AI
 				StateChangedEvent?.Invoke(State);
 			}
 		}
-		
+
 		private Collider attackTrigger;
 		private EnemyAIState state = EnemyAIState.Roaming;
 		private FieldOfView fieldOfView;
@@ -134,6 +134,13 @@ namespace Delirium.AI
 
 			Health collisionHealth = other.gameObject.GetComponent<Player>()?.Health;
 			collisionHealth?.TakeDamage(damage);
+		}
+
+		private void OnValidate()
+		{
+			if (idlePathPoints.Count <= 0) { return; }
+
+			idlePathPoints[0] = transform.position;
 		}
 
 		public event Action<EnemyAIState> StateChangedEvent;
