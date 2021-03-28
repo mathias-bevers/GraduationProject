@@ -86,7 +86,8 @@ namespace Delirium.AI
 
 					navMeshAgent.speed = RUNNING_SPEED;
 					navMeshAgent.destination = target.transform.position;
-
+					FindObjectOfType<AudioManager>().Play("Enemy_Chase");
+					FindObjectOfType<AudioManager>().Play("Jumpscare_01");
 					if (Vector3.Distance(transform.position, target.transform.position) <= ATTACK_DISTANCE) { State = EnemyAIState.Attack; }
 
 					break;
