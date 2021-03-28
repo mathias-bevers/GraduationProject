@@ -3081,8 +3081,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3681617351215267629}
   m_HandleRect: {fileID: 3681617351215267626}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3185,7 +3185,7 @@ GameObject:
   - component: {fileID: 3681617352523070426}
   - component: {fileID: 3681617352523070429}
   m_Layer: 5
-  m_Name: GeneralHUDMenu
+  m_Name: PlayerHUDMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

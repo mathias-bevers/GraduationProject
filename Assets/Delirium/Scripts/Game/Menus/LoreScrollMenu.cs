@@ -37,7 +37,7 @@ namespace Delirium.Lore
 
 		private void OnClosed()
 		{
-			 MenuManager.Instance.OpenMenu<GeneralHUDMenu>();
+			 MenuManager.Instance.OpenMenu<PlayerHUDMenu>();
 			 EnemyManager.Instance.SpawnEnemyHorde();
 		}
 	}

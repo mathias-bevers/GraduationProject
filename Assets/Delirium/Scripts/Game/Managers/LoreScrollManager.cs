@@ -33,7 +33,7 @@ namespace Delirium.Lore
 
 			openedMenu.SetScrollText(foundLoreScroll);
 
-			MenuManager.Instance.CloseMenu<GeneralHUDMenu>();
+			MenuManager.Instance.CloseMenu<PlayerHUDMenu>();
 
 			if (foundLoreScroll.Number <= highestFoundLoreScrollNumber) { return; }
 
