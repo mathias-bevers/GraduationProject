@@ -1,8 +1,9 @@
-﻿using Delirium.Tools;
+﻿using Delirium.AI;
+using Delirium.Tools;
 using TMPro;
 using UnityEngine;
 
-namespace Delirium
+namespace Delirium.Lore
 {
 	public class LoreScrollMenu : Menu
 	{
@@ -12,7 +13,7 @@ namespace Delirium
 		protected override void Start()
 		{
 			Opened += OnOpened;
-			Closed += () => { MenuManager.Instance.OpenMenu<GeneralHUDMenu>(); };
+			Closed += OnClosed;
 
 			base.Start();
 
@@ -32,6 +33,12 @@ namespace Delirium
 		{
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
+		}
+
+		private void OnClosed()
+		{
+			 MenuManager.Instance.OpenMenu<GeneralHUDMenu>();
+			 EnemyManager.Instance.SpawnEnemyHorde();
 		}
 	}
 }

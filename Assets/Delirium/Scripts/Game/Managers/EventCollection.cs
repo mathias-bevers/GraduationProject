@@ -1,4 +1,5 @@
-﻿using Delirium.Tools;
+﻿using Delirium.Lore;
+using Delirium.Tools;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,7 +17,7 @@ namespace Delirium.Events
 	public class OpenPopupEvent : UnityEvent<string, PopupMenu.PopupLevel> { }
 
 	public class LoreScrollFoundEvent : UnityEvent<LoreScrollData, Player> { }
-	
+
 	public class EnteredInteractionZoneEvent : UnityEvent<ZoneHandler.InteractionZone> { }
 	#endregion
 

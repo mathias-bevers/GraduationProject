@@ -1,9 +1,10 @@
 ﻿using System.Linq;
+using Delirium.AI;
 using Delirium.Events;
 using Delirium.Tools;
 using UnityEngine;
 
-namespace Delirium
+namespace Delirium.Lore
 {
 	public class LoreScrollManager : Singleton<LoreScrollManager>
 	{
@@ -69,6 +70,7 @@ namespace Delirium
 				case 8:
 					noteTransform.parent.GetComponent<Collider>().enabled = true;
 					break;
+				
 				case 10:
 					noteTransform.parent.Find("Ritual Dagger").GetComponent<Collider>().enabled = true;
 					break;

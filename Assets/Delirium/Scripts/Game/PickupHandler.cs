@@ -2,6 +2,7 @@
 using Delirium.AbstractClasses;
 using Delirium.Events;
 using Delirium.Exceptions;
+using Delirium.Lore;
 using Delirium.Tools;
 using UnityEngine;
 

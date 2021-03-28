@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Delirium.Tools;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Delirium.AI
 	public class EnemyManager : Singleton<EnemyManager>
 	{
 		private const float FOLLOWING_ENEMY_SPAWN_DISTANCE = 10.0f;
-		
+
 		private readonly List<RoamingEnemy> registeredEnemies = new List<RoamingEnemy>();
 		private GameObject followingEnemyObject;
 
@@ -47,10 +48,12 @@ namespace Delirium.AI
 
 		public void SpawnFollowingEnemy(Player playerToFollow)
 		{
+			//BUG: the enemy is moving in between init frame and first update frame.
+
 			if (followingEnemyObject != null) { return; }
 
 			followingEnemyObject = Instantiate(ResourceManager.Instance.FollowingEnemyPrefab);
-
+			
 			Transform playerCameraTransform = playerToFollow.GetComponent<PlayerMovement>()?.CameraTransform;
 			followingEnemyObject.transform.position = playerToFollow.transform.position + playerCameraTransform.forward * FOLLOWING_ENEMY_SPAWN_DISTANCE;
 			followingEnemyObject.transform.LookAt(playerToFollow.transform);
@@ -58,6 +61,11 @@ namespace Delirium.AI
 			followingEnemyObject.GetComponent<FollowingEnemy>()?.Initialize(playerToFollow.transform);
 
 			StartCoroutine(DestroyFollowingEnemy());
+		}
+
+		public void SpawnEnemyHorde()
+		{
+			throw new NotImplementedException();
 		}
 
 		private IEnumerator DestroyFollowingEnemy()

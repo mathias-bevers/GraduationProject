@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Delirium.Editor
+namespace Delirium.Editor 
 {
 	[CustomEditor(typeof(RoamingEnemy))]
 	public class RoamingEnemyEditor : UnityEditor.Editor
@@ -12,8 +12,7 @@ namespace Delirium.Editor
 			var enemyAI = target as RoamingEnemy;
 
 			if (enemyAI == null || enemyAI.idlePathPoints == null) { return; }
-
-			Handles.color = Color.magenta;
+	Handles.color = Color.magenta;
 
 			for (var i = 0; i < enemyAI.idlePathPoints.Count; i++)
 			{
@@ -28,5 +27,6 @@ namespace Delirium.Editor
 				Handles.DrawLine(enemyAI.idlePathPoints[i], enemyAI.idlePathPoints[i + 1]);
 			}
 		}
+		
 	}
 }

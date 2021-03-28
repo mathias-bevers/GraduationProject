@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Delirium
+namespace Delirium.Lore
 {
 	[CreateAssetMenu(fileName = "Lore scroll", menuName = "Delirium/Lore scroll", order = 0)]
 	public class LoreScrollData : ScriptableObject

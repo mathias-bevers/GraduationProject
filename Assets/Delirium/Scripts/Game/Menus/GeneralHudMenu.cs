@@ -1,5 +1,6 @@
 ﻿using System;
 using Delirium.Events;
+using Delirium.Lore;
 using Delirium.Tools;
 using TMPro;
 using UnityEngine;
@@ -72,7 +73,7 @@ namespace Delirium
 			switch (data)
 			{
 				case InventoryItemData item:
-					pickupText.SetText(item.Name != "Tongue" ?  $"Press <color=red>E</color> to pick up {item.Name}" : "Press <color=red>E</color> to cut out your tongue");
+					pickupText.SetText(item.Name != "Tongue" ? $"Press <color=red>E</color> to pick up {item.Name}" : "Press <color=red>E</color> to cut out your tongue");
 					break;
 
 				case CraftingRecipeData craftingRecipe:
@@ -93,18 +94,18 @@ namespace Delirium
 
 			switch (zoneType)
 			{
-				case ZoneHandler.InteractionZone.None: 
+				case ZoneHandler.InteractionZone.None:
 					pickupText.gameObject.SetActive(false);
 					break;
-				
-				case ZoneHandler.InteractionZone.Campfire: 
+
+				case ZoneHandler.InteractionZone.Campfire:
 					pickupText.SetText("Press <color=red>E</color> to light the campfire");
 					break;
-				
-				case ZoneHandler.InteractionZone.Ritual: 
+
+				case ZoneHandler.InteractionZone.Ritual:
 					pickupText.SetText("Press <color=red>E</color> to perform the ritual");
 					break;
-				
+
 				default: throw new ArgumentOutOfRangeException(nameof(zoneType), zoneType, null);
 			}
 		}

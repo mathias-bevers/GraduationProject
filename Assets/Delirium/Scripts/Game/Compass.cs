@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Delirium.Events;
+using Delirium.Lore;
 
 namespace Delirium{
 public class Compass : MonoBehaviour
