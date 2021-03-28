@@ -2,7 +2,7 @@
 using Delirium.Events;
 using UnityEngine;
 
-namespace Delirium
+namespace Delirium.Lore
 {
 	public class WorldLoreScroll : Pickupable
 	{

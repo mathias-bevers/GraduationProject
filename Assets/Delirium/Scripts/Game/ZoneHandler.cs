@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Delirium.Lore;
 using Delirium.Events;
 using UnityEngine;
 
@@ -56,7 +57,7 @@ namespace Delirium
 					}
 					
 					EventCollection.Instance.LoreScrollFoundEvent.Invoke(ResourceManager.Instance.GetLoreScrollByNumber(12), GetComponent<Player>());
-					//TODO: spawn enemies.
+					
 					break;
 				default: throw new ArgumentOutOfRangeException();
 			}

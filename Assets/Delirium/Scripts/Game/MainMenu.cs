@@ -7,7 +7,9 @@ public class MainMenu : MonoBehaviour
 {
 	[SerializeField] private Button startButton;
 	[SerializeField] private Button quitButton;
-	[SerializeField] private GameObject loadingBar;
+	[SerializeField] private Button splashContinueButton;
+	[SerializeField] private GameObject loadingSplash;
+	[SerializeField] private Image loadingBarFill;
 
 	private void Start()
 	{
@@ -17,15 +19,17 @@ public class MainMenu : MonoBehaviour
 
 	private IEnumerator LoadSceneAsync()
 	{
-		AsyncOperation loadingSceneOperation = SceneManager.LoadSceneAsync(1);
+		AsyncOperation async = SceneManager.LoadSceneAsync(1);
+		async.allowSceneActivation = false;
+		splashContinueButton.onClick.AddListener(() => async.allowSceneActivation = true);
 
-		loadingBar.SetActive(true);
+		loadingSplash.SetActive(true);
 
-		while (!loadingSceneOperation.isDone)
+		while (!async.isDone)
 		{
-			float progress = Mathf.Clamp01(loadingSceneOperation.progress / .9f);
+			loadingBarFill.fillAmount = Mathf.Clamp01(async.progress / .9f);
 
-			loadingBar.GetComponentInChildren<Image>().fillAmount = progress;
+			if (async.progress >= 0.9f) { splashContinueButton.gameObject.SetActive(true); }
 
 			yield return null;
 		}

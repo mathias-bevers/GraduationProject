@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Delirium.Lore;
 using Delirium.Tools;
 using UnityEngine;
 

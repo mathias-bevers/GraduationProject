@@ -1,8 +1,9 @@
-﻿using Delirium;
+﻿#if UNITY_EDITOR
+using Delirium;
 using Delirium.Events;
+using Delirium.Lore;
 using UnityEngine;
 
-#if UNITY_EDITOR
 namespace Testing
 {
 	public class DeveloperTesting : MonoBehaviour

@@ -34,12 +34,12 @@ namespace Delirium
 			if (Input.GetKeyUp(KeyCode.Tab))
 			{
 				MenuManager.Instance.ToggleMenu<InventoryMenu>();
-				MenuManager.Instance.ToggleMenu<GeneralHUDMenu>();
+				MenuManager.Instance.ToggleMenu<PlayerHUDMenu>();
 			}
 
 			if (Input.GetKeyUp(KeyCode.Escape))
 			{
-				MenuManager.Instance.CloseMenu<GeneralHUDMenu>();
+				MenuManager.Instance.CloseMenu<PlayerHUDMenu>();
 				MenuManager.Instance.OpenMenu<PauseMenu>();
 			}
 
@@ -54,7 +54,7 @@ namespace Delirium
 		{
 			void DisableTools()
 			{
-				MenuManager.Instance.GetMenu<GeneralHUDMenu>()?.TorchDurabilityBar.SetActive(false);
+				MenuManager.Instance.GetMenu<PlayerHUDMenu>()?.TorchDurabilityBar.SetActive(false);
 				foreach (Transform child in cameraTransform) { child.gameObject.SetActive(false); }
 			}
 
@@ -73,7 +73,7 @@ namespace Delirium
 					if (!Inventory.Items.ContainsKey(torchData) || Inventory.Items[torchData] == 0) { return; }
 
 					DisableTools();
-					MenuManager.Instance.GetMenu<GeneralHUDMenu>()?.TorchDurabilityBar.SetActive(true);
+					MenuManager.Instance.GetMenu<PlayerHUDMenu>()?.TorchDurabilityBar.SetActive(true);
 					cameraTransform.GetChild(1).gameObject.SetActive(true);
 					break;
 
