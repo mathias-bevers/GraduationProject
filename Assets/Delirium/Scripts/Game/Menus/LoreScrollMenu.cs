@@ -1,5 +1,4 @@
-﻿using Delirium.AI;
-using Delirium.Tools;
+﻿using Delirium.Tools;
 using TMPro;
 using UnityEngine;
 
@@ -7,10 +6,9 @@ namespace Delirium.Lore
 {
 	public class LoreScrollMenu : Menu
 	{
-		private int openScrollNumber;
-		
 		[SerializeField] private TextMeshProUGUI title;
 		[SerializeField] private TextMeshProUGUI text;
+		private int openScrollNumber;
 
 		protected override void Start()
 		{
@@ -39,17 +37,6 @@ namespace Delirium.Lore
 			Cursor.lockState = CursorLockMode.None;
 		}
 
-		private void OnClosed()
-		{
-			 MenuManager.Instance.OpenMenu<PlayerHUDMenu>();
-
-			 if (openScrollNumber != 12)
-			 {
-				 openScrollNumber = 0;
-				 return;
-			 }
-			 
-			 EnemyManager.Instance.SpawnEnemyHorde();
-		}
+		private void OnClosed() { MenuManager.Instance.OpenMenu<PlayerHUDMenu>(); }
 	}
 }

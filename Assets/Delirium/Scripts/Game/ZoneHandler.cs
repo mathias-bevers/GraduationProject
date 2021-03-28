@@ -3,6 +3,7 @@ using System.Collections;
 using Delirium.Lore;
 using Delirium.Events;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Delirium
 {
@@ -57,8 +58,12 @@ namespace Delirium
 					}
 					
 					EventCollection.Instance.LoreScrollFoundEvent.Invoke(ResourceManager.Instance.GetLoreScrollByNumber(12), GetComponent<Player>());
-					
 					break;
+				case InteractionZone.Ferry:
+					//TODO: add ending;
+					SceneManager.LoadScene(0);
+					break;
+				
 				default: throw new ArgumentOutOfRangeException();
 			}
 		}
@@ -72,6 +77,13 @@ namespace Delirium
 				EventCollection.Instance.EnteredInteractionZoneEvent.Invoke(interactionZone);
 			}
 
+			if (other.CompareTag("Ferry"))
+			{
+				interactionZone = InteractionZone.Ferry;
+				interactableObject = other.transform;
+				EventCollection.Instance.EnteredInteractionZoneEvent.Invoke(interactionZone);
+			}
+
 			if (!other.CompareTag("Altar")) { return; }
 
 			interactionZone = InteractionZone.Ritual;
@@ -81,7 +93,7 @@ namespace Delirium
 
 		private void OnTriggerExit(Collider other)
 		{
-			if (!other.CompareTag("Campfire") && !other.CompareTag("Altar")) { return; }
+			if (!other.CompareTag("Campfire") && !other.CompareTag("Altar") && other.CompareTag("Ferry")) { return; }
 
 			interactionZone = InteractionZone.None;
 			interactableObject = null;
@@ -95,6 +107,6 @@ namespace Delirium
 			canInteract = true;
 		}
 
-		public enum InteractionZone { None, Campfire, Ritual }
+		public enum InteractionZone { None, Campfire, Ritual, Ferry }
 	}
 }

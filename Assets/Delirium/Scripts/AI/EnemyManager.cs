@@ -11,6 +11,7 @@ namespace Delirium.AI
 		private const float FOLLOWING_ENEMY_SPAWN_DISTANCE = 10.0f;
 
 		private readonly List<RoamingEnemy> registeredEnemies = new List<RoamingEnemy>();
+		[SerializeField] private GameObject hordeParent;
 		private GameObject followingEnemyObject;
 
 		private void Start() { StartCoroutine(UpdateEnemyStates(0.25f)); }
@@ -53,7 +54,7 @@ namespace Delirium.AI
 			if (followingEnemyObject != null) { return; }
 
 			followingEnemyObject = Instantiate(ResourceManager.Instance.FollowingEnemyPrefab);
-			
+
 			Transform playerCameraTransform = playerToFollow.GetComponent<PlayerMovement>()?.CameraTransform;
 			followingEnemyObject.transform.position = playerToFollow.transform.position + playerCameraTransform.forward * FOLLOWING_ENEMY_SPAWN_DISTANCE;
 			followingEnemyObject.transform.LookAt(playerToFollow.transform);
@@ -63,9 +64,11 @@ namespace Delirium.AI
 			StartCoroutine(DestroyFollowingEnemy());
 		}
 
-		public void SpawnEnemyHorde()
+		public void SpawnEnemyHorde(Transform invokingPlayerTransform)
 		{
-			throw new NotImplementedException();
+			foreach (FollowingEnemy followingEnemy in hordeParent.GetComponentsInChildren<FollowingEnemy>()) { followingEnemy.Initialize(invokingPlayerTransform); }
+
+			hordeParent.SetActive(true);
 		}
 
 		private IEnumerator DestroyFollowingEnemy()

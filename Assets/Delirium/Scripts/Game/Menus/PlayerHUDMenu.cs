@@ -106,6 +106,9 @@ namespace Delirium
 					pickupText.SetText("Press <color=red>E</color> to perform the ritual");
 					break;
 
+				case ZoneHandler.InteractionZone.Ferry:
+					pickupText.SetText("Press <color=red>E</color> to board the ferry and go home.");
+					break;
 				default: throw new ArgumentOutOfRangeException(nameof(zoneType), zoneType, null);
 			}
 		}

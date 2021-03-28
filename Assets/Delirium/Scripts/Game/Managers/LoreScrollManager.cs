@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Delirium.AI;
+using Delirium.Audio;
 using Delirium.Events;
 using Delirium.Tools;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Delirium.Lore
 {
 	public class LoreScrollManager : Singleton<LoreScrollManager>
 	{
+		[SerializeField] private GameObject ferry;
+		
 		public int ScrollsFound { get; private set; }
 
 		private int highestFoundLoreScrollNumber;
@@ -37,7 +40,7 @@ namespace Delirium.Lore
 
 			if (foundLoreScroll.Number <= highestFoundLoreScrollNumber) { return; }
 
-			EventCollection.Instance.OpenPopupEvent.Invoke("You unlocked the next clue", PopupMenu.PopupLevel.Info);
+			if (foundLoreScroll.Number != 12) { EventCollection.Instance.OpenPopupEvent.Invoke("You unlocked the next clue", PopupMenu.PopupLevel.Info); }
 
 			foreach (WorldLoreScroll worldLoreScroll in worldLoreScrolls)
 			{
@@ -49,9 +52,9 @@ namespace Delirium.Lore
 			highestFoundLoreScrollNumber = foundLoreScroll.Number;
 			ScrollsFound++;
 
-			if (foundLoreScroll.Number > 10) { return; }
+			Transform noteTransform = null;
+			if (foundLoreScroll.Number < 10) { noteTransform = worldLoreScrolls.ToList().Find(worldLoreScroll => worldLoreScroll.Data.Number == foundLoreScroll.Number).transform; }
 
-			Transform noteTransform = worldLoreScrolls.ToList().Find(worldLoreScroll => worldLoreScroll.Data.Number == foundLoreScroll.Number).transform;
 
 			switch (foundLoreScroll.Number)
 			{
@@ -70,9 +73,18 @@ namespace Delirium.Lore
 				case 8:
 					noteTransform.parent.GetComponent<Collider>().enabled = true;
 					break;
-				
+
 				case 10:
 					noteTransform.parent.Find("Ritual Dagger").GetComponent<Collider>().enabled = true;
+					break;
+
+				case 12:
+					openedMenu.Closed += () =>
+					{
+						EnemyManager.Instance.SpawnEnemyHorde(invokingPlayer.transform);
+						ferry.SetActive(true);
+						AudioManager.Instance.Play("Enemy_Chase");
+					};
 					break;
 			}
 		}

@@ -25,7 +25,6 @@ namespace Delirium.AI
 			agent = GetComponent<NavMeshAgent>();
 
 			this.transformToFollow = transformToFollow;
-			agent.destination = transform.position;
 		}
 	}
 }

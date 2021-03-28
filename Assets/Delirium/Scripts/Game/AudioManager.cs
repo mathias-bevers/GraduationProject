@@ -50,8 +50,6 @@ namespace Delirium.Audio
 			return sound;
 		}
 		
-		public Sound GetSoundByName(string clipName) => Array.Find(sounds, s => s.name == clipName);
-		
 		public Sound Stop(string clipName)
 		{
 			Sound sound = Array.Find(sounds, s => s.name == clipName);

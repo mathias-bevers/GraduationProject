@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Campfire
   - Altar
+  - Ferry
   layers:
   - Default
   - TransparentFX

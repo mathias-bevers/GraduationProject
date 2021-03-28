@@ -3603,6 +3603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5139330190c054fa6e4a1450415d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyeHeight: 2.55
   viewRadius: 20
   viewAngle: 180
   targetMask:
@@ -3635,7 +3636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40bf1fb2a7d4bdc919a0b4c1e9c045d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseFadeSpeed: 1
+  chaseFadeSpeed: 0.3
 --- !u!65 &7378117222343955548
 BoxCollider:
   m_ObjectHideFlags: 0
