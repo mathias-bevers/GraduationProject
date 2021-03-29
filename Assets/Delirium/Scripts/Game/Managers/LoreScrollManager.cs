@@ -71,10 +71,12 @@ namespace Delirium.Lore
 					break;
 
 				case 8:
+					//Enable the altar trigger, so the you can perform the ritual.
 					noteTransform.parent.GetComponent<Collider>().enabled = true;
 					break;
 
 				case 10:
+					//Enable the collider for the ritual dagger so you can collect the tongue item.
 					noteTransform.parent.Find("Ritual Dagger").GetComponent<Collider>().enabled = true;
 					break;
 

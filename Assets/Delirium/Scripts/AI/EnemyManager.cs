@@ -49,14 +49,15 @@ namespace Delirium.AI
 
 		public void SpawnFollowingEnemy(Player playerToFollow)
 		{
-			//BUG: the enemy is moving in between init frame and first update frame.
+			//DONE: the enemy is moving in between init frame and first update frame. If you need to set the position, if possible, give the position as an argument in the instantiate method.
 
 			if (followingEnemyObject != null) { return; }
-
-			followingEnemyObject = Instantiate(ResourceManager.Instance.FollowingEnemyPrefab);
-
+			
 			Transform playerCameraTransform = playerToFollow.GetComponent<PlayerMovement>()?.CameraTransform;
-			followingEnemyObject.transform.position = playerToFollow.transform.position + playerCameraTransform.forward * FOLLOWING_ENEMY_SPAWN_DISTANCE;
+			Vector3 pos = playerToFollow.transform.position + playerCameraTransform.forward * FOLLOWING_ENEMY_SPAWN_DISTANCE;
+
+			followingEnemyObject = Instantiate(ResourceManager.Instance.FollowingEnemyPrefab, pos, Quaternion.identity);
+
 			followingEnemyObject.transform.LookAt(playerToFollow.transform);
 
 			followingEnemyObject.GetComponent<FollowingEnemy>()?.Initialize(playerToFollow.transform);

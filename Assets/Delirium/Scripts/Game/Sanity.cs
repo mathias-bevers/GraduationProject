@@ -33,7 +33,7 @@ namespace Delirium
 
 			if (CurrentSanity < 20) { parentPlayer.Health.TakeDamage(1); }
 
-			if (CurrentSanity < 10) { /*EnemyManager.Instance.SpawnFollowingEnemy(parentPlayer);*/ }
+			if (CurrentSanity < 10) { EnemyManager.Instance.SpawnFollowingEnemy(parentPlayer); }
 
 			EventCollection.Instance.SanityChangedEvent?.Invoke(this);
 			timer = SANITY_ADJUST_DELAY;
