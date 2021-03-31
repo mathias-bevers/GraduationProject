@@ -1,5 +1,4 @@
-﻿using System;
-using Delirium.AI;
+﻿using Delirium.AI;
 using Delirium.Events;
 using UnityEngine;
 
@@ -26,12 +25,12 @@ namespace Delirium
 
 			if (timer > 0) { return; }
 
-			if (inLightZone) { CurrentSanity += 2; }
+			if (inLightZone) { CurrentSanity += 4; }
 			else { CurrentSanity -= 2; }
 
 			CurrentSanity = Mathf.Clamp(CurrentSanity, 0, MAX_SANITY);
 
-			if (CurrentSanity < 20) { parentPlayer.Health.TakeDamage(1); }
+			if (CurrentSanity < 20) { parentPlayer.Health.TakeDamage(3); }
 
 			if (CurrentSanity < 10) { EnemyManager.Instance.SpawnFollowingEnemy(parentPlayer); }
 
@@ -56,6 +55,14 @@ namespace Delirium
 		}
 
 		public void RegisterPlayer(Player player) { parentPlayer = player; }
+
+		public void RegenSanity(int amount)
+		{
+			CurrentSanity += amount;
+			if (CurrentSanity > 100) { CurrentSanity = 100; }
+
+			EventCollection.Instance.OpenPopupEvent.Invoke($"Regenerated sanity to {CurrentSanity}%.", PopupMenu.PopupLevel.Info);
+		}
 
 		//TODO: Remove when done testing.
 		public void DEVELOPERTEST()

@@ -1,5 +1,6 @@
 ﻿using System;
-using Delirium.Events;
+using System.Linq;
+using System.Reflection;
 using Delirium.Tools;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Delirium
 		protected override void Awake()
 		{
 			base.Awake();
-			
+
 			Player[] players = FindObjectsOfType<Player>();
 			if (players.Length > 1) { Debug.LogError($"There are {players.Length} instances of player found. There should only be one in the scene."); }
 

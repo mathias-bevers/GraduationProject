@@ -9,7 +9,7 @@ namespace Delirium
 	public class Player : MonoBehaviour
 	{
 		public bool IsAlive { get; set; } = true;
-		public Inventory Inventory { get; } = new Inventory();
+		public Inventory Inventory { get; private set; }
 		public Health Health { get; } = new Health(100);
 		public Sanity Sanity { get; private set; }
 		
@@ -18,6 +18,8 @@ namespace Delirium
 		private void Awake()
 		{
 			cameraTransform = GetComponentInChildren<Camera>().transform;
+
+			Inventory = new Inventory(this);
 
 			Sanity = GetComponent<Sanity>();
 			Sanity.RegisterPlayer(this);

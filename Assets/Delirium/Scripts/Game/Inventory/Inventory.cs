@@ -10,6 +10,13 @@ namespace Delirium
 		public Dictionary<InventoryItemData, int> Items { get; } = new Dictionary<InventoryItemData, int>();
 		public List<CraftingRecipeData> UnlockedRecipes { get; } = new List<CraftingRecipeData>();
 
+		public Player ParentPlayer { get;  }
+
+		public Inventory(Player parentPlayer)
+		{
+			ParentPlayer = parentPlayer;
+		}
+
 		public void AddItem(InventoryItemData item)
 		{
 			if (!Items.ContainsKey(item))

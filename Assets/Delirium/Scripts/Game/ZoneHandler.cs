@@ -16,7 +16,7 @@ namespace Delirium
 		private Inventory playerInventory;
 		private Transform interactableObject;
 
-		private void Awake() { playerInventory = GetComponent<Player>().Inventory; }
+		private void Start() { playerInventory = GetComponent<Player>().Inventory; }
 
 		private void Update()
 		{

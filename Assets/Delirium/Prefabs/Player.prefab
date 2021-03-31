@@ -458,6 +458,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   southernIsland: {fileID: 0}
   ferry: {fileID: 0}
+  missionPlaces:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   player: {fileID: 2670622494810681450}
   MissionDirection: {x: 0, y: 0, z: 0, w: 0}
   CompassImage: {fileID: 0}

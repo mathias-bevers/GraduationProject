@@ -34,12 +34,6 @@ namespace Delirium
 
 		public void Heal(int amount)
 		{
-			if (CurrentHealth == maxHealth)
-			{
-				EventCollection.Instance.OpenPopupEvent.Invoke("Healing will have no effect", PopupMenu.PopupLevel.Waring);
-				return;
-			}
-
 			CurrentHealth += amount;
 			CurrentHealth = Mathf.Clamp(CurrentHealth, 0, maxHealth);
 			EventCollection.Instance.OpenPopupEvent.Invoke($"Healed to {CurrentHealth} HP", PopupMenu.PopupLevel.Info);

@@ -53,6 +53,8 @@ namespace Delirium
 				inventoryItemUI.name = kvp.Key.Name;
 				inventoryItemUI.GetComponentInChildren<TextMeshProUGUI>().SetText(kvp.Value.ToString());
 				inventoryItemUI.GetComponentInChildren<Image>().sprite = kvp.Key.Sprite;
+				
+				inventoryItemUI.GetComponent<InventoryItemUI>()?.Initialize(inventory.ParentPlayer, kvp.Key);
 			}
 
 			foreach (Transform child in recipeGrid) { Destroy(child.gameObject); }

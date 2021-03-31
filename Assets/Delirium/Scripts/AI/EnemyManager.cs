@@ -67,7 +67,10 @@ namespace Delirium.AI
 
 		public void SpawnEnemyHorde(Transform invokingPlayerTransform)
 		{
-			foreach (FollowingEnemy followingEnemy in hordeParent.GetComponentsInChildren<FollowingEnemy>()) { followingEnemy.Initialize(invokingPlayerTransform); }
+			foreach (FollowingEnemy followingEnemy in hordeParent.GetComponentsInChildren<FollowingEnemy>())
+			{
+				followingEnemy.Initialize(invokingPlayerTransform);
+			}
 
 			hordeParent.SetActive(true);
 		}
