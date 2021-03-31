@@ -2,7 +2,6 @@
 using System.Linq;
 using Delirium.Events;
 using Delirium.Exceptions;
-using Delirium.Tools;
 
 namespace Delirium
 {
@@ -16,7 +15,7 @@ namespace Delirium
 			if (!Items.ContainsKey(item))
 			{
 				Items.Add(item, 1);
-				MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup($"Added {item.Name} to inventory", PopupMenu.PopupLevel.Info);
+				EventCollection.Instance.OpenPopupEvent?.Invoke($"Added {item.Name} to inventory", PopupMenu.PopupLevel.Info);
 				EventCollection.Instance.UpdateInventoryEvent?.Invoke(this);
 				return;
 			}
@@ -24,7 +23,7 @@ namespace Delirium
 			if (Items[item] >= 10) { throw new AddingInventoryItemFailed($"Too many items of {item.Name} in inventory"); }
 
 			Items[item]++;
-			MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup($"Added {item.Name} to inventory", PopupMenu.PopupLevel.Info);
+			EventCollection.Instance.OpenPopupEvent?.Invoke($"Added {item.Name} to inventory", PopupMenu.PopupLevel.Info);
 			EventCollection.Instance.UpdateInventoryEvent?.Invoke(this);
 		}
 
@@ -46,11 +45,8 @@ namespace Delirium
 
 				AddItem(craftingRecipe.Result);
 			}
-			catch (RemovingInventoryItemFailed exception) { MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup(exception.Message, PopupMenu.PopupLevel.Error); }
+			catch (RemovingInventoryItemFailed exception) { EventCollection.Instance.OpenPopupEvent.Invoke(exception.Message, PopupMenu.PopupLevel.Error); }
 		}
-
-		public bool CanBeCrafted(CraftingRecipeData craftingRecipe) => craftingRecipe.NeededItems.All(crp => Items.ContainsKey(crp.InventoryItemData) && Items[crp.InventoryItemData] >= crp.Amount);
-
 
 		public void AddCraftingRecipe(CraftingRecipeData craftingRecipe)
 		{
@@ -58,6 +54,12 @@ namespace Delirium
 
 			UnlockedRecipes.Add(craftingRecipe);
 			EventCollection.Instance.UpdateInventoryEvent?.Invoke(this);
+			EventCollection.Instance.OpenPopupEvent?.Invoke($"You unlocked the {craftingRecipe.Result.Name} crafting recipe", PopupMenu.PopupLevel.Info);
 		}
+
+		public bool CanBeCrafted(CraftingRecipeData craftingRecipe) => craftingRecipe.NeededItems.All(crp => Items.ContainsKey(crp.InventoryItemData) && Items[crp.InventoryItemData] >= crp.Amount);
+
+		public InventoryItemData GetItemKeyByName(string name) => Items.FirstOrDefault(x => x.Key.Name == name).Key;
+		public int GetItemValueByName(string name) => Items.FirstOrDefault(x => x.Key.Name == name).Value;
 	}
 }

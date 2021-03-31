@@ -1,26 +1,23 @@
-﻿using System;
+﻿#if UNITY_EDITOR
 using Delirium;
+using Delirium.Events;
+using Delirium.Lore;
 using UnityEngine;
 
 namespace Testing
 {
 	public class DeveloperTesting : MonoBehaviour
 	{
-		private float fps;
+		[SerializeField] private LoreScrollData scrollToUnlock;
 		
 		private void Update()
 		{
-			fps = 1.0f / Time.deltaTime;
-			
-			if (Input.GetKeyDown(KeyCode.F1))
-			{
-				GameManager.Instance.Player.Health.TakeDamage(10);
-			}
-		}
+			if (Input.GetKeyDown(KeyCode.F1)) { GameManager.Instance.Player.Health.TakeDamage(10); }
 
-		private void OnGUI()
-		{
-			GUI.Label(new Rect(10, 10, 150, 50), fps.ToString("0.##"));
+			if (Input.GetKeyDown(KeyCode.F2)) { GameManager.Instance.Player.Sanity.DEVELOPERTEST(); }
+
+			if (Input.GetKeyDown(KeyCode.F3)) { EventCollection.Instance.LoreScrollFoundEvent.Invoke(scrollToUnlock, GameManager.Instance.Player);}
 		}
 	}
 }
+#endif

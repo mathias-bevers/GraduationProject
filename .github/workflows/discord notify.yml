@@ -1,0 +1,13 @@
+name: discord-notify
+on:
+  push:
+  
+jobs:
+  discord-notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: sarisia/actions-status-discord@v1.8.3
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORDWEBHOOK }}
+          description: "<@&822090194383011870> There are new changes."

@@ -1,6 +1,8 @@
 ﻿using System;
 using Delirium.AbstractClasses;
+using Delirium.Events;
 using Delirium.Exceptions;
+using Delirium.Lore;
 using Delirium.Tools;
 using UnityEngine;
 
@@ -50,10 +52,11 @@ namespace Delirium
 				return;
 			}
 
+
 			highlightedObject = pickupable;
 			highlightedObject.InReach = true;
 
-			if (Input.GetAxis("Interact") <= 0) { return; }
+			if (Input.GetAxis("Interact") <= 0 || MenuManager.Instance.IsAnyOpen) { return; }
 
 			AddToInventory(highlightedObject);
 		}
@@ -68,17 +71,25 @@ namespace Delirium
 						player.Inventory.AddItem(inventoryItem.Data);
 						Destroy(inventoryItem.gameObject);
 						highlightedObject = null;
+
+						if (inventoryItem.Data.Name != "Tongue") { return; }
+
+						EventCollection.Instance.LoreScrollFoundEvent.Invoke(ResourceManager.Instance.GetLoreScrollByNumber(11), player);
 					}
-					catch (AddingInventoryItemFailed exception) { MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup(exception.Message, PopupMenu.PopupLevel.Waring); }
+					catch (AddingInventoryItemFailed exception) { EventCollection.Instance.OpenPopupEvent.Invoke(exception.Message, PopupMenu.PopupLevel.Waring); }
 
 					break;
 
 				case WorldCraftingRecipe craftingRecipe:
 					try { player.Inventory.AddCraftingRecipe(craftingRecipe.Data); }
-					catch (AddingCraftingRecipeFailed exception) { MenuManager.Instance.GetMenu<PopupMenu>()?.ShowPopup(exception.Message, PopupMenu.PopupLevel.Waring); }
+					catch (AddingCraftingRecipeFailed exception) { EventCollection.Instance.OpenPopupEvent.Invoke(exception.Message, PopupMenu.PopupLevel.Waring); }
 
 					Destroy(craftingRecipe.gameObject);
 					highlightedObject = null;
+					break;
+
+				case WorldLoreScroll loreScroll:
+					EventCollection.Instance.LoreScrollFoundEvent.Invoke(loreScroll.Data, player);
 					break;
 
 				default: throw new NotSupportedException($"{pickupable.GetType().FullName} does not inherit from {typeof(Pickupable).FullName}");

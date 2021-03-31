@@ -1,5 +1,5 @@
 ﻿using System;
-using Delirium.Tools;
+using Delirium.Events;
 using UnityEngine;
 
 namespace Delirium
@@ -36,13 +36,13 @@ namespace Delirium
 		{
 			if (CurrentHealth == maxHealth)
 			{
-				MenuManager.Instance.GetMenu<PopupMenu>().ShowPopup("Healing will have no effect", PopupMenu.PopupLevel.Waring);
+				EventCollection.Instance.OpenPopupEvent.Invoke("Healing will have no effect", PopupMenu.PopupLevel.Waring);
 				return;
 			}
 
 			CurrentHealth += amount;
 			CurrentHealth = Mathf.Clamp(CurrentHealth, 0, maxHealth);
-			MenuManager.Instance.GetMenu<PopupMenu>().ShowPopup($"Healed to {CurrentHealth} HP", PopupMenu.PopupLevel.Info);
+			EventCollection.Instance.OpenPopupEvent.Invoke($"Healed to {CurrentHealth} HP", PopupMenu.PopupLevel.Info);
 			HealthChangedEvent?.Invoke(this);
 		}
 	}

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f98ebf9894694786a8eb3186939a9559, type: 3}
+  m_Name: note1
+  m_EditorClassIdentifier: 
+  number: 1
+  text: "1743 Philippe of Bursbury\r\n\r\nI believe I\u2019ve discovered an uncharted
+    Island! I\u2019ve double\u2014nay, triple checked at this point, and it doesn\u2019t
+    line up in the slightest. Either Jeremiah sold me a faulty map, or I\u2019ll
+    have discovered my very own land. Should it truly be uninhabited, I\u2019ll use
+    the island\u2019s resources to build myself a mansion fit for a king. Why, if
+    not \u2013 I\u2019ll round up the men and drive out the current peasant population.
+    Now to see if I remember the very basics of survival father taught me and explore
+    the place, a piece of flint should be enough to make a spark. \r\n\r\nDamned
+    be the storm that drove my rowboat against the rocks! A proper hole in the hull
+    if I\u2019ve ever seen one. I should blame the craftsmanship first and foremost..
+    though the main ship should catch up soon enough. I believe I\u2019ll head deeper
+    into the forest first, south by south-eastward and see if I cannot find something
+    to eat now that I\u2019ve got a fire started.\r\n\nFlint is to be found at the
+    shoreline.\r"

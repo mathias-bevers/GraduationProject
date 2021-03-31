@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Datura
   m_EditorClassIdentifier: 
   name: Datura
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: c89f9a1c931511647b4292505792c04a, type: 3}
   worldItem: {fileID: 0}

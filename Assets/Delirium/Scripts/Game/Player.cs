@@ -3,35 +3,28 @@ using System.Linq;
 using Delirium.Events;
 using Delirium.Tools;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Delirium
 {
 	public class Player : MonoBehaviour
 	{
+		public bool IsAlive { get; set; } = true;
 		public Inventory Inventory { get; } = new Inventory();
 		public Health Health { get; } = new Health(100);
 		public Sanity Sanity { get; private set; }
-
+		
 		private Transform cameraTransform;
 
 		private void Awake()
 		{
-			Inventory.UnlockedRecipes.Add(AssetManager.Instance.StartRecipe);
-			Sanity = GetComponent<Sanity>();
 			cameraTransform = GetComponentInChildren<Camera>().transform;
+
+			Sanity = GetComponent<Sanity>();
+			Sanity.RegisterPlayer(this);
 		}
 
 		private void Start()
 		{
-			Health.DiedEvent += () =>
-			{
-				Cursor.visible = true;
-				Cursor.lockState = CursorLockMode.None;
-
-				SceneManager.LoadScene(0);
-			};
-
 			EventCollection.Instance.UpdateInventoryEvent?.Invoke(Inventory);
 			ToggleHeldItems(1);
 		}
@@ -41,12 +34,12 @@ namespace Delirium
 			if (Input.GetKeyUp(KeyCode.Tab))
 			{
 				MenuManager.Instance.ToggleMenu<InventoryMenu>();
-				MenuManager.Instance.ToggleMenu<GeneralHudMenu>();
+				MenuManager.Instance.ToggleMenu<PlayerHUDMenu>();
 			}
 
 			if (Input.GetKeyUp(KeyCode.Escape))
 			{
-				MenuManager.Instance.CloseMenu<GeneralHudMenu>();
+				MenuManager.Instance.CloseMenu<PlayerHUDMenu>();
 				MenuManager.Instance.OpenMenu<PauseMenu>();
 			}
 
@@ -61,7 +54,7 @@ namespace Delirium
 		{
 			void DisableTools()
 			{
-				MenuManager.Instance.GetMenu<GeneralHudMenu>()?.TorchDurabilityBar.SetActive(false);
+				MenuManager.Instance.GetMenu<PlayerHUDMenu>()?.TorchDurabilityBar.SetActive(false);
 				foreach (Transform child in cameraTransform) { child.gameObject.SetActive(false); }
 			}
 
@@ -80,7 +73,7 @@ namespace Delirium
 					if (!Inventory.Items.ContainsKey(torchData) || Inventory.Items[torchData] == 0) { return; }
 
 					DisableTools();
-					MenuManager.Instance.GetMenu<GeneralHudMenu>()?.TorchDurabilityBar.SetActive(true);
+					MenuManager.Instance.GetMenu<PlayerHUDMenu>()?.TorchDurabilityBar.SetActive(true);
 					cameraTransform.GetChild(1).gameObject.SetActive(true);
 					break;
 

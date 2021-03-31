@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Flint
   m_EditorClassIdentifier: 
   name: Flint
-  sprite: {fileID: 21300000, guid: a5044aa1911d3a046849dbbfdcc82d5a, type: 3}
+  sprite: {fileID: 21300000, guid: 3ee1fc4509def934eb2ff95760ea08de, type: 3}
   worldItem: {fileID: 160396, guid: db96700501799fd448a90dae5ab5a837, type: 3}

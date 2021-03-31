@@ -4,11 +4,13 @@ namespace Delirium.AI
 {
 	public class FieldOfView : MonoBehaviour
 	{
+		[SerializeField] private float eyeHeight;
 		[SerializeField] private float viewRadius;
 		[SerializeField, Range(0.0f, 360.0f)] private float viewAngle;
 		[SerializeField] private LayerMask targetMask;
 		[SerializeField] private LayerMask obstacleMask;
 
+		public float EyeHeight => eyeHeight;
 		public float ViewRadius => viewRadius;
 		public float ViewAngle => viewAngle;
 
@@ -24,7 +26,7 @@ namespace Delirium.AI
 
 				float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
-				if (Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask)) { continue; }
+				if (Physics.Raycast(transform.position + Vector3.up * eyeHeight, directionToTarget, distanceToTarget, obstacleMask)) { continue; }
 
 				var player = target.GetComponent<Player>();
 

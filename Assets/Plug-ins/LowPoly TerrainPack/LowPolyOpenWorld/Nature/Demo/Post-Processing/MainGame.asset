@@ -26,7 +26,7 @@ MonoBehaviour:
         motionVectorsResolution: 24
         motionVectorsAmplitude: 64
   fog:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       excludeSkybox: 1
   antialiasing:
@@ -86,25 +86,25 @@ MonoBehaviour:
   eyeAdaptation:
     m_Enabled: 1
     m_Settings:
-      lowPercent: 45
-      highPercent: 95
+      lowPercent: 1
+      highPercent: 51.000004
       minLuminance: -5
       maxLuminance: 1
       keyValue: 0.25
       dynamicKeyValue: 1
-      adaptationType: 0
+      adaptationType: 1
       speedUp: 2
       speedDown: 1
-      logMin: -8
-      logMax: 4
+      logMin: -7
+      logMax: 5
   bloom:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 3.55
+        intensity: 2
         threshold: 1.34
         softKnee: 1
-        radius: 2.2
+        radius: 1.77
         antiFlicker: 0
       lensDirt:
         texture: {fileID: 0}
@@ -303,7 +303,7 @@ MonoBehaviour:
   userLut:
     m_Enabled: 0
     m_Settings:
-      lut: {fileID: 0}
+      lut: {fileID: 2800000, guid: 3866dcf10419cc940adfb5cf5b9d58d5, type: 3}
       contribution: 1
   chromaticAberration:
     m_Enabled: 0
@@ -314,17 +314,17 @@ MonoBehaviour:
     m_Enabled: 0
     m_Settings:
       colored: 1
-      intensity: 0.5
-      size: 1
+      intensity: 0.204
+      size: 0.3
       luminanceContribution: 0.8
   vignette:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       mode: 0
-      color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0
-      smoothness: 0.01
+      intensity: 0.349
+      smoothness: 0.232
       roundness: 1
       mask: {fileID: 0}
       opacity: 1
