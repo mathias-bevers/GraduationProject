@@ -10,8 +10,6 @@ namespace Delirium.Lore
 {
 	public class LoreScrollManager : Singleton<LoreScrollManager>
 	{
-		[SerializeField] private GameObject ferry;
-
 		public int ScrollsFound { get; private set; }
 
 		private int highestFoundLoreScrollNumber;
@@ -43,11 +41,9 @@ namespace Delirium.Lore
 
 			if (foundLoreScroll.Number <= highestFoundLoreScrollNumber) { return; }
 
-			if (foundLoreScroll.Number != 12)
-			{
-				EventCollection.Instance.OpenPopupEvent.Invoke("You unlocked the next clue", PopupMenu.PopupLevel.Info);
-				newScrollFoundEvent?.Invoke(foundLoreScroll.Number);
-			}
+			if (foundLoreScroll.Number != 12) { EventCollection.Instance.OpenPopupEvent.Invoke("You unlocked the next clue", PopupMenu.PopupLevel.Info); }
+
+			newScrollFoundEvent?.Invoke(foundLoreScroll.Number);
 
 			foreach (WorldLoreScroll worldLoreScroll in worldLoreScrolls)
 			{
@@ -60,7 +56,7 @@ namespace Delirium.Lore
 			ScrollsFound++;
 
 			Transform noteTransform = null;
-			if (foundLoreScroll.Number < 10) { noteTransform = worldLoreScrolls.ToList().Find(worldLoreScroll => worldLoreScroll.Data.Number == foundLoreScroll.Number).transform; }
+			if (foundLoreScroll.Number < 11) { noteTransform = worldLoreScrolls.ToList().Find(worldLoreScroll => worldLoreScroll.Data.Number == foundLoreScroll.Number).transform; }
 
 
 			switch (foundLoreScroll.Number)
@@ -78,11 +74,15 @@ namespace Delirium.Lore
 					break;
 
 				case 8:
+
 					//Enable the altar trigger, so the you can perform the ritual.
-					
-					
-					noteTransform.parent.GetComponent<Collider>().enabled = true;
-					
+					void EnableAltarTrigger()
+					{
+						noteTransform.parent.GetComponent<Collider>().enabled = true;
+						openedMenu.Closed -= EnableAltarTrigger;
+					}
+
+					openedMenu.Closed += EnableAltarTrigger;
 					break;
 
 				case 10:
@@ -96,7 +96,6 @@ namespace Delirium.Lore
 					openedMenu.Closed += () =>
 					{
 						EnemyManager.Instance.SpawnEnemyHorde(invokingPlayer.transform);
-						ferry.SetActive(true);
 						AudioManager.Instance.Play("Enemy_Chase");
 						AudioManager.Instance.Play("Jumpscare_02");
 					};

@@ -6177,6 +6177,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e85e11a8b71650d4680e2e63721c84de,
         type: 3}
+      propertyPath: m_TagString
+      value: Ferry
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e85e11a8b71650d4680e2e63721c84de,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
@@ -11674,7 +11679,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 012c824f6d22436990b64416c432f483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ferry: {fileID: 537770428}
 --- !u!114 &693848959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12694,8 +12698,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764216119}
-  m_LocalRotation: {x: 0, y: 0.2986244, z: 0, w: -0.95437074}
-  m_LocalPosition: {x: 135.10971, y: -5.184646, z: 738.7996}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 234.25269, y: -165.59973, z: 645.2287}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

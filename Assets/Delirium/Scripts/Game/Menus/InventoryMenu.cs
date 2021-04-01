@@ -51,7 +51,8 @@ namespace Delirium
 				inventoryItemUI.transform.localScale = Vector3.one;
 
 				inventoryItemUI.name = kvp.Key.Name;
-				inventoryItemUI.GetComponentInChildren<TextMeshProUGUI>().SetText(kvp.Value.ToString());
+				inventoryItemUI.transform.Find("AmountText").GetComponent<TextMeshProUGUI>().SetText(kvp.Value.ToString());
+				inventoryItemUI.transform.Find("NameText").GetComponent<TextMeshProUGUI>().SetText(kvp.Key.Name);
 				inventoryItemUI.GetComponentInChildren<Image>().sprite = kvp.Key.Sprite;
 				
 				inventoryItemUI.GetComponent<InventoryItemUI>()?.Initialize(inventory.ParentPlayer, kvp.Key);

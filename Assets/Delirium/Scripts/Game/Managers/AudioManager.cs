@@ -1,7 +1,7 @@
-﻿using UnityEngine.Audio;
-using System;
+﻿using System;
 using Delirium.Tools;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Delirium.Audio
 {
@@ -9,9 +9,9 @@ namespace Delirium.Audio
 	{
 		[SerializeField] private AudioMixer audioMixer;
 
-		public AudioMixer AudioMixer => audioMixer;
-
 		public Sound[] sounds;
+
+		public AudioMixer AudioMixer => audioMixer;
 
 		protected override void Awake()
 		{
@@ -40,25 +40,22 @@ namespace Delirium.Audio
 		public Sound Play(string clipName)
 		{
 			Sound sound = Array.Find(sounds, s => s.name == clipName);
-			
-			if (sound == null)
-			{
-				throw new NullReferenceException($"Could not find a sound clip with the name {clipName}.");
-			}
-			
-			sound.source.Play();
+
+			if (sound == null) { throw new NullReferenceException($"Could not find a sound clip with the name {clipName}."); }
+
+
+			if (!sound.source.isPlaying) { sound.source.Play(); }
+
 			return sound;
 		}
-		
+
 		public Sound Stop(string clipName)
 		{
 			Sound sound = Array.Find(sounds, s => s.name == clipName);
-			
-			if (sound == null)
-			{
-				throw new NullReferenceException($"Could not find a sound clip with the name {clipName}.");
-			}
-			
+
+			if (sound == null) { throw new NullReferenceException($"Could not find a sound clip with the name {clipName}."); }
+
+			Debug.Log($"Stopping {clipName} sound!");
 			sound.source.Stop();
 			return sound;
 		}

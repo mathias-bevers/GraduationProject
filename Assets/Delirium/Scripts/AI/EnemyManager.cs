@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Delirium.Tools;
 using UnityEngine;
@@ -13,9 +12,9 @@ namespace Delirium.AI
 		private readonly List<RoamingEnemy> registeredEnemies = new List<RoamingEnemy>();
 		[SerializeField] private GameObject hordeParent;
 		private GameObject followingEnemyObject;
-
+		
 		private void Start() { StartCoroutine(UpdateEnemyStates(0.25f)); }
-
+		
 		public void RegisterEnemy(RoamingEnemy roamingEnemy)
 		{
 			if (registeredEnemies.Contains(roamingEnemy))
@@ -52,7 +51,7 @@ namespace Delirium.AI
 			//DONE: the enemy is moving in between init frame and first update frame. If you need to set the position, if possible, give the position as an argument in the instantiate method.
 
 			if (followingEnemyObject != null) { return; }
-			
+
 			Transform playerCameraTransform = playerToFollow.GetComponent<PlayerMovement>()?.CameraTransform;
 			Vector3 pos = playerToFollow.transform.position + playerCameraTransform.forward * FOLLOWING_ENEMY_SPAWN_DISTANCE;
 
@@ -67,12 +66,12 @@ namespace Delirium.AI
 
 		public void SpawnEnemyHorde(Transform invokingPlayerTransform)
 		{
+			hordeParent.SetActive(true);
+			
 			foreach (FollowingEnemy followingEnemy in hordeParent.GetComponentsInChildren<FollowingEnemy>())
 			{
 				followingEnemy.Initialize(invokingPlayerTransform);
 			}
-
-			hordeParent.SetActive(true);
 		}
 
 		private IEnumerator DestroyFollowingEnemy()

@@ -32,6 +32,8 @@ namespace Delirium
 		{
 			if (scrollNumber == 10) { return; }
 
+			if (scrollNumber == 12) { missionPlaces[scrollNumber].gameObject.SetActive(true); }
+
 			MissionPlace = missionPlaces[scrollNumber];
 		}
 
