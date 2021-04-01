@@ -2,6 +2,7 @@
 using System.Collections;
 using Delirium.Events;
 using Delirium.Lore;
+using Delirium.Tools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -66,8 +67,10 @@ namespace Delirium
 					EventCollection.Instance.LoreScrollFoundEvent.Invoke(ResourceManager.Instance.GetLoreScrollByNumber(12), GetComponent<Player>());
 					break;
 				case InteractionZone.Ferry:
-					//TODO: add ending.
-					SceneManager.LoadScene(0);
+					StartCoroutine(InteractionCooldown());
+					
+					MenuManager.Instance.CloseAllMenus();
+					MenuManager.Instance.OpenMenu<EndMenu>();
 					break;
 
 				default: throw new ArgumentOutOfRangeException();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Delirium.Events;
 using Delirium.Tools;
@@ -33,6 +33,8 @@ namespace Delirium
 
 		private void Update()
 		{
+			if (!IsAlive) { return; }
+
 			if (Input.GetKeyUp(KeyCode.Tab))
 			{
 				MenuManager.Instance.ToggleMenu<InventoryMenu>();

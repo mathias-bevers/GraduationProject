@@ -59,8 +59,10 @@ namespace Delirium
 		public void RegenSanity(int amount)
 		{
 			CurrentSanity += amount;
-			if (CurrentSanity > 100) { CurrentSanity = 100; }
-
+			
+			CurrentSanity = Mathf.Clamp(CurrentSanity, 0, MAX_SANITY);
+			
+			EventCollection.Instance.SanityChangedEvent?.Invoke(this);
 			EventCollection.Instance.OpenPopupEvent.Invoke($"Regenerated sanity to {CurrentSanity}%.", PopupMenu.PopupLevel.Info);
 		}
 

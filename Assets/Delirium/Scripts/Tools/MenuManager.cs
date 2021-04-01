@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Delirium.Tools
 {
@@ -91,7 +92,10 @@ namespace Delirium.Tools
 
 		public void CloseAllMenus()
 		{
-			foreach (Menu menu in menus) { menu.Close(); }
+			foreach (Menu menu in menus)
+			{
+				menu.Close();
+			}
 		}
 	}
 }

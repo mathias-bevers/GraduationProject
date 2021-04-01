@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 2670622493161808084}
   - component: {fileID: 8215542582263587478}
   - component: {fileID: 1160309462017245806}
+  - component: {fileID: 5377408641230688918}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -317,6 +318,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ff847026b57914ba38295b2106d52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!111 &5377408641230688918
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2670622493161808044}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 9c549b848e5b5784ea144e674ad0d6a4, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &2670622494810681447
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,8 +472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5bd4872e9ad63f418d17cecfa2aa1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  southernIsland: {fileID: 0}
-  ferry: {fileID: 0}
   missionPlaces:
   - {fileID: 0}
   - {fileID: 0}
@@ -473,7 +487,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   player: {fileID: 2670622494810681450}
-  MissionDirection: {x: 0, y: 0, z: 0, w: 0}
   CompassImage: {fileID: 0}
   MissionPointer: {fileID: 0}
 --- !u!65 &771897436
