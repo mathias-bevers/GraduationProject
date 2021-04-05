@@ -96,12 +96,12 @@ MonoBehaviour:
       speedUp: 2
       speedDown: 1
       logMin: -7
-      logMax: 5
+      logMax: 4
   bloom:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 2
+        intensity: 4.39
         threshold: 1.34
         softKnee: 1
         radius: 1.77
@@ -131,7 +131,7 @@ MonoBehaviour:
         red: {x: 1, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
         blue: {x: 0, y: 0, z: 1}
-        currentEditingChannel: 1
+        currentEditingChannel: 0
       colorWheels:
         mode: 1
         log:
@@ -314,7 +314,7 @@ MonoBehaviour:
     m_Enabled: 0
     m_Settings:
       colored: 1
-      intensity: 0.204
+      intensity: 0.579
       size: 0.3
       luminanceContribution: 0.8
   vignette:
