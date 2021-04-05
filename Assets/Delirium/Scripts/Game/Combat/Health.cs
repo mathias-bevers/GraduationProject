@@ -26,6 +26,9 @@ namespace Delirium
 			CurrentHealth -= amount;
 			CurrentHealth = Mathf.Clamp(CurrentHealth, 0, maxHealth);
 			HealthChangedEvent?.Invoke(this);
+			
+			//Todo: play hit sound.
+			
 
 			if (CurrentHealth > 0) { return; }
 

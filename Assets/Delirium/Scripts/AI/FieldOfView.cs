@@ -10,6 +10,7 @@ namespace Delirium.AI
 		[SerializeField] private LayerMask targetMask;
 		[SerializeField] private LayerMask obstacleMask;
 
+		public Vector3 Origin => transform.position + Vector3.up * eyeHeight;
 		public float EyeHeight => eyeHeight;
 		public float ViewRadius => viewRadius;
 		public float ViewAngle => viewAngle;
@@ -26,7 +27,7 @@ namespace Delirium.AI
 
 				float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
-				if (Physics.Raycast(transform.position + Vector3.up * eyeHeight, directionToTarget, distanceToTarget, obstacleMask)) { continue; }
+				if (Physics.Raycast(Origin, directionToTarget, distanceToTarget, obstacleMask)) { continue; }
 
 				var player = target.GetComponent<Player>();
 

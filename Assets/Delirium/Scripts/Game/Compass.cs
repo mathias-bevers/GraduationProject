@@ -1,4 +1,5 @@
-﻿using Delirium.Lore;
+﻿using Delirium.Events;
+using Delirium.Lore;
 using UnityEngine;
 
 namespace Delirium
@@ -35,6 +36,7 @@ namespace Delirium
 			if (scrollNumber == 12) { missionPlaces[scrollNumber].gameObject.SetActive(true); }
 
 			MissionPlace = missionPlaces[scrollNumber];
+			EventCollection.Instance.OpenPopupEvent.Invoke("Mission waypoint updated", PopupMenu.PopupLevel.Info);
 		}
 
 		public void ChangeCompass()

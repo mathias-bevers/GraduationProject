@@ -5,12 +5,12 @@ namespace Delirium.AI
 {
 	public class RoamingEnemyAudio : MonoBehaviour
 	{
-		[SerializeField] private float chaseFadeSpeed;
-		private bool shouldStopClip = true;
-		private bool canPlayJumpScare = true;
-		private bool shouldFadeChase;
+		private const float CHASE_SOUND_VOLUME_MAX = 0.5f;
 
-		private EnemyAIState previousState;
+		[SerializeField] private float chaseFadeSpeed;
+
+		private bool hasCompletedPreviousHunt = true;
+		private bool shouldFadeChase;
 		private Sound chaseSound;
 
 		private void Start() { GetComponent<RoamingEnemy>().StateChangedEvent += OnStateChangedEvent; }
@@ -23,39 +23,31 @@ namespace Delirium.AI
 
 			if (chaseSound.source.volume > 0.05f) { return; }
 
-			chaseSound.source.volume = 0.5f;
+			chaseSound.source.volume = CHASE_SOUND_VOLUME_MAX;
 
-			if (shouldStopClip) { AudioManager.Instance.Stop("Enemy_Chase"); }
+			AudioManager.Instance.Stop("Enemy_Chase");
 
 			shouldFadeChase = false;
 		}
 
 		private void OnStateChangedEvent(EnemyAIState state)
 		{
-			if (previousState == EnemyAIState.Attack)
-			{
-				previousState = state;
-				shouldStopClip = false;
-				return;
-			}
-
-			previousState = state;
-			shouldStopClip = true;
-
 			if (state == EnemyAIState.Roaming)
 			{
 				shouldFadeChase = true;
-				canPlayJumpScare = true;
+				hasCompletedPreviousHunt = true;
+				return;
 			}
 
-			if (state != EnemyAIState.TargetLock) { return; }
+			if (state != EnemyAIState.TargetLock || !hasCompletedPreviousHunt) { return; }
 
 			chaseSound = AudioManager.Instance.Play("Enemy_Chase");
+			shouldFadeChase = false;
+			chaseSound.source.volume = CHASE_SOUND_VOLUME_MAX;
 
-			if (!canPlayJumpScare) { return; }
 
 			AudioManager.Instance.Play("Jumpscare_01");
-			canPlayJumpScare = false;
+			hasCompletedPreviousHunt = false;
 		}
 	}
 }

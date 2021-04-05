@@ -3603,7 +3603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5139330190c054fa6e4a1450415d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeHeight: 2.55
+  eyeHeight: 1
   viewRadius: 20
   viewAngle: 180
   targetMask:

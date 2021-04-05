@@ -43,6 +43,13 @@ namespace Delirium
 
 			if (Input.GetKeyUp(KeyCode.Escape))
 			{
+				if (MenuManager.Instance.GetMenu<PauseMenu>().IsOpen)
+				{
+					MenuManager.Instance.CloseMenu<PauseMenu>();
+					MenuManager.Instance.OpenMenu<PlayerHUDMenu>();
+					return;
+				}
+				
 				MenuManager.Instance.CloseMenu<PlayerHUDMenu>();
 				MenuManager.Instance.OpenMenu<PauseMenu>();
 			}

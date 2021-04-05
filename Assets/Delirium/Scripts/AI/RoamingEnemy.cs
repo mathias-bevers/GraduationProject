@@ -9,6 +9,7 @@ namespace Delirium.AI
 	[RequireComponent(typeof(NavMeshAgent))]
 	public class RoamingEnemy : MonoBehaviour
 	{
+		private const float ATTACK_ANIMATION_DURATION = 1.5f;
 		private const float ATTACK_DISTANCE = 1.9f;
 		private const float RUNNING_SPEED = 15.0f;
 		private const float WALKING_SPEED = 3.5f;
@@ -33,7 +34,7 @@ namespace Delirium.AI
 		private EnemyAIState state = EnemyAIState.Roaming;
 		private FieldOfView fieldOfView;
 		private float searchTimer = 5.0f;
-		private float attackTimer = 1.5f;
+		private float attackTimer = ATTACK_ANIMATION_DURATION;
 		private Image healthBarImage;
 		private int pathPointIndex;
 		private NavMeshAgent navMeshAgent;
@@ -121,7 +122,7 @@ namespace Delirium.AI
 					if (attackTimer <= 0)
 					{
 						UpdateState();
-						attackTimer = 1.5f;
+						attackTimer = ATTACK_ANIMATION_DURATION;
 					}
 
 					break;

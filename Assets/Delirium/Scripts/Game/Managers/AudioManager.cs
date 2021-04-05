@@ -54,8 +54,7 @@ namespace Delirium.Audio
 			Sound sound = Array.Find(sounds, s => s.name == clipName);
 
 			if (sound == null) { throw new NullReferenceException($"Could not find a sound clip with the name {clipName}."); }
-
-			Debug.Log($"Stopping {clipName} sound!");
+			
 			sound.source.Stop();
 			return sound;
 		}
