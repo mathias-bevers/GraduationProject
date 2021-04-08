@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 namespace Delirium
 {
+	/// <summary>
+	///     This class is used to Handle the death splash screen's UI elements and animator.
+	///     <para>Made by: Mathias Bevers</para>
+	/// </summary>
 	public class DiedMenu : Menu
 	{
 		private static readonly int _playerDied = Animator.StringToHash("PlayerDied");

@@ -1,0 +1,275 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Assembly-CSharp</name>
+    </assembly>
+    <members>
+        <member name="T:Delirium.AI.EnemyManager">
+            <summary>
+                This manager keeps track of all the enemies in the scene and updates the state of the roaming enemies.
+                <para>Made by Mathias Bevers</para>
+            </summary>
+        </member>
+        <member name="M:Delirium.AI.EnemyManager.RegisterRoamingEnemy(Delirium.AI.RoamingEnemy)">
+            <summary>
+                Register a <see cref="T:Delirium.AI.RoamingEnemy" />, so its state is updated.
+            </summary>
+            <param name="roamingEnemy">The roaming enemy that has to be registered.</param>
+        </member>
+        <member name="M:Delirium.AI.EnemyManager.UnregisterEnemy(Delirium.AI.RoamingEnemy)">
+            <summary>
+                Unregister a <see cref="T:Delirium.AI.RoamingEnemy" />, so its  state won't be updated anymore.
+            </summary>
+            <param name="roamingEnemy">The roaming enemy that has to be unregistered.</param>
+        </member>
+        <member name="M:Delirium.AI.EnemyManager.UpdateEnemyStates(System.Single)">
+            <summary>
+                Loops over all the registered <see cref="T:Delirium.AI.RoamingEnemy" /> and updates their states. Has a delay, updating every frame would be very expensive.
+            </summary>
+            <param name="delay">Time between updates.</param>
+        </member>
+        <member name="M:Delirium.AI.EnemyManager.SpawnFollowingEnemy(Delirium.Player)">
+            <summary> Spawn a <see cref="T:Delirium.AI.FollowingEnemy" /> directly in front of the player.</summary>
+            <param name="playerToFollow">The player that has to be followed.</param>
+        </member>
+        <member name="M:Delirium.AI.EnemyManager.SpawnEnemyHorde(UnityEngine.Transform)">
+            <summary>
+                Enables the <see cref="F:Delirium.AI.EnemyManager.hordeParent" /> game object initializes all of the <see cref="T:Delirium.AI.FollowingEnemy" /> in its children.
+            </summary>
+            <param name="invokingPlayerTransform">Player that needs to be followed</param>
+        </member>
+        <member name="M:Delirium.AI.EnemyManager.DestroyFollowingEnemy">
+            <summary>
+                Destroys the current <see cref="T:Delirium.AI.FollowingEnemy" /> game object.
+            </summary>
+        </member>
+        <member name="T:Delirium.AI.FieldOfView">
+            <summary>
+                This class is used as the Eyes of the <see cref="T:Delirium.AI.RoamingEnemy" />.
+                <para>Made by Mathias Bevers</para>
+            </summary>
+        </member>
+        <member name="M:Delirium.AI.FieldOfView.FindPlayer">
+            <summary>
+                This method tries to find the player in the given field of view.
+            </summary>
+            <returns>Returns the first player that is within the FOV</returns>
+        </member>
+        <member name="M:Delirium.AI.FieldOfView.DirectionFromAngle(System.Single,System.Boolean)">
+            <summary>
+                Get the direction vector from an angle in degrees.
+            </summary>
+            <param name="angleInDegrees">The angle that has to be converted to a vector3</param>
+            <param name="isGlobal">If this is set to false the transform's y angle is first added.</param>
+            <returns>The direction in a Vector3</returns>
+        </member>
+        <member name="T:Delirium.AI.FollowingEnemy">
+            <summary>
+                This class is used to let a NavMeshAgent follow an transform.
+                <para>Made by Mathias Bevers</para>
+            </summary>
+        </member>
+        <member name="M:Delirium.AI.FollowingEnemy.Initialize(UnityEngine.Transform)">
+            <summary>
+                The Initialize method is used because unity's Awake/Start can't take any arguments.
+                This method set the transform that has to be followed, plays a JumpScare sound and Starts the <see cref="M:Delirium.AI.FollowingEnemy.CalculatePath" /> coroutine.
+            </summary>
+            <param name="transformToFollow">The transform the FollowingEnemy has to follow for its entire life span.</param>
+        </member>
+        <member name="M:Delirium.AI.FollowingEnemy.CalculatePath">
+            <summary>
+                Sets the designation of the NavMeshAgent. This is done with a delay, other wise the FollowingEnemy would always stand still because it did not have a path.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Delirium.AI.RoamingEnemy">
+            <summary>
+                This class is used to control the behaviour of a NavMeshAgent that can roam through the map.
+                <para>Made by Mathias Bevers</para>
+            </summary>
+        </member>
+        <member name="E:Delirium.AI.RoamingEnemy.StateChangedEvent">
+            <summary>
+                This event is invoked when the state is set and different from the previous state.
+            </summary>
+        </member>
+        <member name="M:Delirium.AI.RoamingEnemy.UpdateState">
+            <summary>
+                Updates the state based on whether a target is found. If an target is found is based on <see cref="T:Delirium.AI.FieldOfView" />.
+            </summary>
+        </member>
+        <member name="M:Delirium.AI.RoamingEnemy.HasArrived">
+            <summary>
+                Checks if the NavMeshAgent has arrived on its destination, using only the agent's hasPath can lead to some weird behaviour.
+                This method gives it some extra checks whether it has arrived on its destination.
+            </summary>
+            <returns>Returns true if the NavMeshAgent has a arrived on its destination.</returns>
+        </member>
+        <member name="T:Delirium.AI.RoamingEnemyAnimation">
+            <summary>
+                This class is used to communicate with the animator which is attached to the <see cref="T:Delirium.AI.RoamingEnemy" /> game object.
+                <para>Made by Mathias Bevers</para>
+            </summary>
+        </member>
+        <member name="M:Delirium.AI.RoamingEnemyAnimation.OnStateChanged(Delirium.AI.RoamingEnemyState)">
+            <summary>
+                Set the correct animation triggers based on the current state of the attached <see cref="T:Delirium.AI.RoamingEnemy" />.
+            </summary>
+            <param name="state">The new state of the attached <see cref="T:Delirium.AI.RoamingEnemy" />.</param>
+        </member>
+        <member name="M:Delirium.AI.RoamingEnemyAnimation.ResetAllTriggers">
+            <summary>
+                Reset all the current active triggers to inactive.
+            </summary>
+        </member>
+        <member name="T:Delirium.AI.RoamingEnemyAudio">
+            <summary>
+            This class is used to play the correct enemy sounds.
+            <para>Made by Mathias Bevers</para>
+            </summary>
+        </member>
+        <member name="M:Delirium.AI.RoamingEnemyAudio.Update">
+            <summary>
+                Fades the chase music if the attached <see cref="T:Delirium.AI.RoamingEnemy" /> is back in the roaming state.
+                When faded out the sound is stopped and the volume is reset to it's original volume.
+            </summary>
+        </member>
+        <member name="M:Delirium.AI.RoamingEnemyAudio.OnStateChangedEvent(Delirium.AI.RoamingEnemyState)">
+            <summary>
+                Play or reset sounds based on the state of the attached <see cref="T:Delirium.AI.RoamingEnemy" />.
+            </summary>
+            <param name="state">The new state of the attached <see cref="T:Delirium.AI.RoamingEnemy" />.</param>
+        </member>
+        <member name="T:Delirium.AI.RoamingEnemyState">
+            <summary> All of the states the roaming enemy can be in. </summary>
+        </member>
+        <member name="T:Delirium.AbstractClasses.Pickupable">
+            <summary>
+                This class is used to identify a item that can be picked up. And to invoke some of the basic events.
+                <para>Made by Mathias Bevers</para>
+            </summary>
+        </member>
+        <member name="T:Delirium.Health">
+            <summary>
+                Basic health class which keeps track of the health value and supports healing and taking damage.
+                <para>Made by Mathias Bevers</para>
+            </summary>
+        </member>
+        <member name="M:Delirium.Health.TakeDamage(System.Int32)">
+            <summary>
+                Decrease the health value by the given amount, it is automatically clamped between 0 and <see cref="F:Delirium.Health.maxHealth" />.
+                When damage is applied it immediately checks if the health value is 0, meaning the attached game object is dead.
+                When the game object has died, the <see cref="E:Delirium.Health.DiedEvent" /> is invoked.
+            </summary>
+            <param name="amount">The amount the health value should be decreased with.</param>
+        </member>
+        <member name="M:Delirium.Health.Heal(System.Int32)">
+            <summary>
+                Increase the health value with the given amount, it is automatically clamped between 0 and <see cref="F:Delirium.Health.maxHealth" />.
+            </summary>
+            <param name="amount">The amount the health value should be increased with.</param>
+        </member>
+        <member name="T:Delirium.Combat.Spear">
+            <summary>
+                This class is used to communicate with the spear's animator and deal damage to hit objects.
+                <para>Made by: Mathias Bevers</para>
+            </summary>
+        </member>
+        <member name="M:Delirium.ResourceManager.GetRecipeByResultName(System.String)">
+            <summary>Returns the recipe for the given result name. Returns null when the recipe could not be found.</summary>
+            <param name="resultName">The result name of the crafting recipe that is requested.</param>
+            <returns>Crafting recipe with the given result name.</returns>
+        </member>
+        <member name="M:Delirium.ResourceManager.GetLoreScrollByNumber(System.Int32)">
+            <summary>Returns the data of the lore scroll with the given number. Returns null when the lore scroll data could not be found.</summary>
+            <param name="number">The number of the lore scroll data that is requested</param>
+            <returns>The date of the lore scroll with the given number</returns>
+        </member>
+        <member name="M:Delirium.Tools.Menu.Open">
+            <summary>Tries to open the Menu, when the menu meets the opening conditions the Opened event is invoked().</summary>
+        </member>
+        <member name="M:Delirium.Tools.Menu.Close">
+            <summary>Tries to close the Menu, when the menu meets the closing conditions the Closed event is invoked().</summary>
+        </member>
+        <member name="P:Delirium.Tools.MenuManager.OpenMenuCount">
+            <summary>Counts all the menus that are open and not a HUD menu.</summary>
+        </member>
+        <member name="P:Delirium.Tools.MenuManager.IsAnyOpen">
+            <summary>Returns true if the open menu count is more than 0. Ignores HUD menus.</summary>
+        </member>
+        <member name="M:Delirium.Tools.MenuManager.OpenMenu``1">
+            <summary>Attempts to open the first menu of the requested menu type that is not opened. Returns the menu that is attempted to open.</summary>
+            <typeparam name="T">Menu type that has to be opened. Requested type needs to inherit from Delirium.Tools.Menu.</typeparam>
+            <returns>Menu that is attempted to open.</returns>
+        </member>
+        <member name="M:Delirium.Tools.MenuManager.CloseMenu``1">
+            <summary>Attempts to close the first menu of the requested menu type that is not closed. Returns the menu that is attempted to close.</summary>
+            <typeparam name="T">Menu type that has to be closed. Requested type needs to inherit from Delirium.Tools.Menu.</typeparam>
+            <returns>Menu that is attempted to close.</returns>
+        </member>
+        <member name="M:Delirium.Tools.MenuManager.ToggleMenu``1">
+            <summary>Attempts to toggle the first menu of the requested menu type. Returns the menu that is attempted to toggle.</summary>
+            <typeparam name="T">Menu type that has to be toggled. Requested type needs to inherit from Delirium.Tools.Menu.</typeparam>
+            <returns>Menu that is attempted to toggle.</returns>
+        </member>
+        <member name="M:Delirium.Tools.MenuManager.GetMenu``1">
+            <summary>Returns the first menu of requested type that is registered to the MenuManager.</summary>
+            <typeparam name="T">Menu to get. Requested type needs to inherit from Delirium.Tools.Menu.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Delirium.Tools.Singleton`1">
+            <summary>
+            When there should only be one instance of a MonoBehaviourExtensions class it can inherit from Singleton.
+            It has all the same possibilities as a normal MonoBehaviourExtensions class and it makes sure there is only one of this class in the scene.
+            </summary>
+            <typeparam name="T">The MonoBehaviourExtensions class that has to be a Singleton</typeparam>
+        </member>
+        <member name="P:Delirium.Tools.Singleton`1.SearchForInstance">
+            <summary>
+            When this is true and the Singleton is not set up correctly,
+            all the references to the Instance will attempt to find an object with this Singleton class.
+            </summary>
+        </member>
+        <member name="P:Delirium.Tools.Singleton`1.Instance">
+            <summary>
+            Returns the Singleton Instance of the requested class type.
+            When no Instance is found, there will be an attempt to find a instance in the scene.
+            In case there are more then one instances found, an error is thrown and null will be returned.
+            </summary>
+        </member>
+        <member name="P:Delirium.Tools.Singleton`1.InstanceIfInitialized">
+            <summary>
+            Returns the Instance if it is initialized. Otherwise it will return null.
+            </summary>
+        </member>
+        <member name="P:Delirium.Tools.Singleton`1.IsInitialized">
+            <summary>
+            Returns whether if the instance is initialized or not.
+            </summary>
+        </member>
+        <member name="M:Delirium.Tools.Singleton`1.Awake">
+            <summary>
+            The Awake method, called by Unity when the MonoBehaviour is initialized, sets up the SingletonBehavior's unique Instance. 
+            All classes that inherit from Singleton should call base.Awake() to make sure that the Instance is set up properly.
+            </summary>
+        </member>
+        <member name="M:Delirium.Tools.Singleton`1.OnDestroy">
+            <summary>
+            The OnDestroy method, called by Unity when the MonoBehaviour is destroyed, makes sure the unique instance is also destroyed and set to null.
+            All classes that inherit from Singleton should call base.OnDestroy() to make sure the instance is cleaned up properly.
+            </summary>
+        </member>
+        <member name="F:UnityEngine.PostProcessing.ColorGradingModel.Tonemapper.ACES">
+            <summary>
+            ACES Filmic reference tonemapper.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:UnityEngine.PostProcessing.ColorGradingModel.Tonemapper.Neutral" -->
+        <member name="F:UnityEngine.PostProcessing.ScreenSpaceReflectionModel.ReflectionSettings.iterationCount">
+            REFLECTIONS
+        </member>
+        <member name="M:UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController.GroundCheck">
+            sphere cast down just beyond the bottom of the capsule to see if the capsule is colliding round the bottom
+        </member>
+    </members>
+</doc>

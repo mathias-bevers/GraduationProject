@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: note12
   m_EditorClassIdentifier: 
   number: 12
-  text: "Board the ferry and \u2018escape\u2019. You find yourself back at the Island.
-    Home."
+  text: RUN.

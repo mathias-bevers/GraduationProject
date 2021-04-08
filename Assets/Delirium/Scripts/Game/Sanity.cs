@@ -65,12 +65,5 @@ namespace Delirium
 			EventCollection.Instance.SanityChangedEvent?.Invoke(this);
 			EventCollection.Instance.OpenPopupEvent.Invoke($"Regenerated sanity to {CurrentSanity}%.", PopupMenu.PopupLevel.Info);
 		}
-
-		//TODO: Remove when done testing.
-		public void DEVELOPERTEST()
-		{
-			CurrentSanity = 10;
-			EventCollection.Instance.SanityChangedEvent?.Invoke(this);
-		}
 	}
 }

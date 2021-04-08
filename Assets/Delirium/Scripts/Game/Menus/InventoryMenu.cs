@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Delirium.Events;
 using Delirium.Tools;
 using TMPro;
 using UnityEngine;
@@ -7,6 +6,10 @@ using UnityEngine.UI;
 
 namespace Delirium
 {
+	/// <summary>
+	///     This class is used to display the correct inventory items to the UI elements.
+	///     <para>Made by: Mathias Bevers</para>
+	/// </summary>
 	public class InventoryMenu : Menu
 	{
 		private const float RECIPE_UI_HEIGHT = 192.0f;
@@ -26,8 +29,6 @@ namespace Delirium
 			Opened += OnOpened;
 
 			base.Start();
-
-			EventCollection.Instance.UpdateInventoryEvent.AddListener(OnUpdateInventory);
 		}
 
 		public override bool CanBeClosed() => true;
@@ -39,14 +40,16 @@ namespace Delirium
 			Cursor.lockState = CursorLockMode.None;
 		}
 
-		private void OnUpdateInventory(Inventory inventory)
+		/// <summary>
+		/// Upa
+		/// </summary>
+		/// <param name="inventory"></param>
+		public void UpdateUI(Inventory inventory)
 		{
 			foreach (Transform child in itemGrid.transform) { Destroy(child.gameObject); }
 
 			foreach (KeyValuePair<InventoryItemData, int> kvp in inventory.Items)
 			{
-				if (kvp.Value <= 0) { continue; }
-
 				GameObject inventoryItemUI = Instantiate(inventoryItemUIPrefab, itemGrid.transform, true);
 				inventoryItemUI.transform.localScale = Vector3.one;
 
@@ -54,7 +57,7 @@ namespace Delirium
 				inventoryItemUI.transform.Find("AmountText").GetComponent<TextMeshProUGUI>().SetText(kvp.Value.ToString());
 				inventoryItemUI.transform.Find("NameText").GetComponent<TextMeshProUGUI>().SetText(kvp.Key.Name);
 				inventoryItemUI.GetComponentInChildren<Image>().sprite = kvp.Key.Sprite;
-				
+
 				inventoryItemUI.GetComponent<InventoryItemUI>()?.Initialize(inventory.ParentPlayer, kvp.Key);
 			}
 
@@ -69,7 +72,7 @@ namespace Delirium
 				craftingRecipeObject.transform.localScale = Vector3.one;
 				craftingRecipeObject.name = unlockedRecipe.Result.Name;
 
-				craftingRecipeObject.GetComponent<CraftingRecipeUI>().Setup(unlockedRecipe, inventory);
+				craftingRecipeObject.GetComponent<CraftingRecipeUI>().Initialize(unlockedRecipe, inventory);
 
 				craftingRecipeObject.transform.Find("Title").GetComponent<TextMeshProUGUI>().SetText(unlockedRecipe.Result.Name);
 				craftingRecipeObject.transform.Find("Sprite").GetComponent<Image>().sprite = unlockedRecipe.Result.Sprite;
@@ -77,6 +80,11 @@ namespace Delirium
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="craftingRecipe"></param>
+		/// <returns></returns>
 		private static string GenerateNeededItemsString(CraftingRecipeData craftingRecipe)
 		{
 			var generatedString = $"{craftingRecipe.NeededItems[0].Amount} {craftingRecipe.NeededItems[0].InventoryItemData.Name}";

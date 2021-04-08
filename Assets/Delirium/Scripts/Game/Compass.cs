@@ -18,7 +18,7 @@ namespace Delirium
 
 		private void Start()
 		{
-			LoreScrollManager.Instance.newScrollFoundEvent += OnNewScrollFound;
+			LoreScrollManager.Instance.NewScrollFoundEvent += OnNewScrollFound;
 			MissionPlace = missionPlaces[0];
 		}
 

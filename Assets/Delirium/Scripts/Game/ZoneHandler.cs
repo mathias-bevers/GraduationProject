@@ -41,11 +41,11 @@ namespace Delirium
 
 					if (isCampfireLit) { return; }
 
-					if (playerInventory.GetItemValueByName("Torch") > 0)
+					if (playerInventory.GetItemCountByName("Torch") > 0)
 					{
 						foreach (Transform child in interactableObject.transform) { child.gameObject.SetActive(true); }
 					}
-					else if (playerInventory.GetItemValueByName("Flint") > 0)
+					else if (playerInventory.GetItemCountByName("Flint") > 0)
 					{
 						foreach (Transform child in interactableObject.transform) { child.gameObject.SetActive(true); }
 
@@ -58,7 +58,7 @@ namespace Delirium
 				case InteractionZone.Ritual:
 					StartCoroutine(InteractionCooldown());
 					
-					if (playerInventory.GetItemValueByName("Skull") < 3 || playerInventory.GetItemValueByName("Tongue") < 1 || LoreScrollManager.Instance.ScrollsFound < 9)
+					if (playerInventory.GetItemCountByName("Skull") < 3 || playerInventory.GetItemCountByName("Tongue") < 1 || LoreScrollManager.Instance.ScrollsFound < 9)
 					{
 						EventCollection.Instance.OpenPopupEvent.Invoke("You don't have all the required times for the ritual", PopupMenu.PopupLevel.Error);
 						return;
@@ -70,6 +70,7 @@ namespace Delirium
 					StartCoroutine(InteractionCooldown());
 					
 					MenuManager.Instance.CloseAllMenus();
+					MenuManager.Instance.CloseMenu<PlayerHUDMenu>();
 					MenuManager.Instance.OpenMenu<EndMenu>();
 					break;
 

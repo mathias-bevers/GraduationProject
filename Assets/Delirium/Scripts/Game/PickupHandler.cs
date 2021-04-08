@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Delirium.AbstractClasses;
+using Delirium.Audio;
 using Delirium.Events;
 using Delirium.Exceptions;
 using Delirium.Lore;
@@ -13,7 +14,7 @@ namespace Delirium
 	public class PickupHandler : MonoBehaviour
 	{
 		private const float INTERACTION_COOLDOWN = 0.5f;
-		
+
 		[SerializeField] private float pickupReach = 1.5f;
 
 		private bool canInteract = true;
@@ -78,21 +79,14 @@ namespace Delirium
 						highlightedObject = null;
 
 						if (inventoryItem.Data.Name != "Tongue") { return; }
-
+						
+						AudioManager.Instance.Play("CutTongue");
 						EventCollection.Instance.LoreScrollFoundEvent.Invoke(ResourceManager.Instance.GetLoreScrollByNumber(11), player);
+						player.Health.TakeDamage(player.Health.CurrentHealth - 10);
 					}
 					catch (AddingInventoryItemFailed exception) { EventCollection.Instance.OpenPopupEvent.Invoke(exception.Message, PopupMenu.PopupLevel.Waring); }
 
 					break;
-
-				case WorldCraftingRecipe craftingRecipe:
-					try { player.Inventory.AddCraftingRecipe(craftingRecipe.Data); }
-					catch (AddingCraftingRecipeFailed exception) { EventCollection.Instance.OpenPopupEvent.Invoke(exception.Message, PopupMenu.PopupLevel.Waring); }
-
-					Destroy(craftingRecipe.gameObject);
-					highlightedObject = null;
-					break;
-
 				case WorldLoreScroll loreScroll:
 					EventCollection.Instance.LoreScrollFoundEvent.Invoke(loreScroll.Data, player);
 					break;

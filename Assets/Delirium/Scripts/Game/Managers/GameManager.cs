@@ -1,13 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using Delirium.Tools;
+﻿using Delirium.Tools;
 using UnityEngine;
 
 namespace Delirium
 {
+	/// <summary>
+	///     This class keeps track of the player. Handles when the player has died.
+	///     <para>Made by: Mathias Bevers</para>
+	/// </summary>
 	public class GameManager : Singleton<GameManager>
 	{
+		/// <summary>
+		///     Get the only player that should exist in the scene.
+		/// </summary>
 		public Player Player { get; private set; }
 
 		protected override void Awake()
@@ -28,6 +32,7 @@ namespace Delirium
 
 			Player.IsAlive = false;
 			MenuManager.Instance.CloseAllMenus();
+			MenuManager.Instance.CloseMenu<PlayerHUDMenu>();
 			MenuManager.Instance.OpenMenu<DiedMenu>();
 		}
 	}

@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 namespace Delirium
 {
+	/// <summary>
+	/// This class is used the handle the ending animations, it listens to event markers which are called by the animator.
+	/// <para>Made by: Mathias Bevers</para>
+	/// </summary>
 	public class EndMenu : Menu
 	{
 		private static readonly int _startEnding = Animator.StringToHash("StartEnding");
@@ -30,10 +34,13 @@ namespace Delirium
 
 		private void OnOpened() { animator.SetTrigger(_startEnding); }
 
-		//This is called by the animation event.
-		public void AlertInvokers(string message)
+		/// <summary>
+		/// This method handles the event markers, send by the animator.
+		/// </summary>
+		/// <param name="markerName">The name of the event marker that is called by the animator.</param>
+		public void AlertInvokers(string markerName)
 		{
-			switch (message)
+			switch (markerName)
 			{
 				case "fadeEnd":
 					player.Play();

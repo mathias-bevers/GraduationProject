@@ -27,7 +27,6 @@ namespace Delirium
 
 		private void Start()
 		{
-			EventCollection.Instance.UpdateInventoryEvent?.Invoke(Inventory);
 			ToggleHeldItems(1);
 		}
 
@@ -37,8 +36,16 @@ namespace Delirium
 
 			if (Input.GetKeyUp(KeyCode.Tab))
 			{
-				MenuManager.Instance.ToggleMenu<InventoryMenu>();
-				MenuManager.Instance.ToggleMenu<PlayerHUDMenu>();
+				if (MenuManager.Instance.GetMenu<InventoryMenu>().IsOpen)
+				{
+					MenuManager.Instance.CloseMenu<InventoryMenu>();
+					MenuManager.Instance.OpenMenu<PlayerHUDMenu>();
+					return;
+				}
+				
+				MenuManager.Instance.CloseMenu<PlayerHUDMenu>();
+				var inventoryMenu = MenuManager.Instance.OpenMenu<InventoryMenu>();
+				inventoryMenu.UpdateUI(Inventory);
 			}
 
 			if (Input.GetKeyUp(KeyCode.Escape))

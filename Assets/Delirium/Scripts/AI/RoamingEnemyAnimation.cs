@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Delirium.AI
 {
+	/// <summary>
+	///     This class is used to communicate with the animator which is attached to the <see cref="RoamingEnemy" /> game object.
+	///     <para>Made by Mathias Bevers</para>
+	/// </summary>
 	[RequireComponent(typeof(Animator))]
 	public class RoamingEnemyAnimation : MonoBehaviour
 	{
@@ -20,28 +24,32 @@ namespace Delirium.AI
 			animator = GetComponent<Animator>();
 		}
 
-		private void OnStateChanged(EnemyAIState state)
+		/// <summary>
+		///     Set the correct animation triggers based on the current state of the attached <see cref="RoamingEnemy" />.
+		/// </summary>
+		/// <param name="state">The new state of the attached <see cref="RoamingEnemy" />.</param>
+		private void OnStateChanged(RoamingEnemyState state)
 		{
 			ResetAllTriggers();
 
 			switch (state)
 			{
-				case EnemyAIState.Roaming:
+				case RoamingEnemyState.Roaming:
 					animator.SetTrigger(_roaming);
 					break;
 
-				case EnemyAIState.TargetLock:
+				case RoamingEnemyState.TargetLock:
 					animator.SetTrigger(_hunt);
 					break;
 
-				case EnemyAIState.Search:
+				case RoamingEnemyState.Search:
 					animator.SetTrigger(_searching);
 					break;
 
-				case EnemyAIState.MoveToLastPosition:
+				case RoamingEnemyState.MoveToLastPosition:
 					animator.SetTrigger(_roaming);
 					break;
-				case EnemyAIState.Attack:
+				case RoamingEnemyState.Attack:
 					animator.SetTrigger(_attack);
 					break;
 
@@ -49,6 +57,9 @@ namespace Delirium.AI
 			}
 		}
 
+		/// <summary>
+		///     Reset all the current active triggers to inactive.
+		/// </summary>
 		private void ResetAllTriggers()
 		{
 			animator.ResetTrigger(_attack);

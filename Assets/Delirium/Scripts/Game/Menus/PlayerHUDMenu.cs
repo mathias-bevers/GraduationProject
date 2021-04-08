@@ -76,10 +76,6 @@ namespace Delirium
 					pickupText.SetText(item.Name != "Tongue" ? $"Press <color=red>E</color> to pick up {item.Name}" : "Press <color=red>E</color> to cut out your tongue");
 					break;
 
-				case CraftingRecipeData craftingRecipe:
-					pickupText.SetText($"Press <color=red>E</color> to pick up {craftingRecipe.Result.Name} blueprint");
-					break;
-
 				case LoreScrollData loreScrollData:
 					pickupText.SetText($"Press <color=red>E</color> to pick up note #{loreScrollData.Number}");
 					break;

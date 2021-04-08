@@ -1,18 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Delirium.Lore;
 using Delirium.Tools;
 using UnityEngine;
 
 namespace Delirium
 {
+	/// <summary>
+	///     This class should be initialized first, it loads all of the objects in the Resources folder.
+	///     <para>Made by: Mathias Bevers</para>
+	/// </summary>
 	public class ResourceManager : Singleton<ResourceManager>
 	{
+		/// <summary>
+		///     Get the following enemy prefab, which is loaded from the resources folder.
+		/// </summary>
 		public GameObject FollowingEnemyPrefab { get; private set; }
 
 		private CraftingRecipeData[] craftingRecipes;
-		
+
 		private LoreScrollData[] loreScrolls;
 
 		protected override void Awake()
